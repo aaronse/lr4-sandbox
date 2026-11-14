@@ -1,0 +1,120 @@
+{
+  "about": "The lacing tutorial's cameras, layer opacities and colours, read by web/js/lacing/frame.js frameAt (its copy in web/js/lacing/data.js between the <shots> markers: node tools/lacing_voice.js sync; the live preview reads this file when served). Edit with the live preview's tweak panel (index.html?anim=lacing&play=1&tweak=1) or by hand. Spec: docs/specs/lacing-tutorial.md 'Shots and knots as data'.",
+  "defaults": { "lead": 0.6, "layers": { "ghost": 0.3, "tape": 1, "hose": 1, "cord": 1, "sleeve": 1, "context": 1, "base": 1 } },
+  "colours": { "tape": "#e01b2b", "left": "#7a0812", "end": "#76b900", "tip": "#76b900", "backdrop": null, "blade": "#eef3f7", "trail": "#ffffff" },
+  "tip": { "r": 2.2, "minPx": 40, "slide": 0.2 },
+  "head": { "on": true, "scale": 2, "maxPx": 120, "seed": 7, "moods": { "start": "enthusiastic", "clove": "curious", "square": "thinking", "wrap": "neutral", "tuck": "curious", "tight": "serious", "lock": "happy", "uturn": "thinking", "spacing": "concerned", "close": "serious", "seal": "neutral", "tie": "happy", "done": "happy" } },
+  "rider": { "on": true, "character": "jensen", "pose": "rodeo", "anchor": "seat", "scale": 2, "maxPx": 120, "push": [0.4, 0.7], "onTop": false, "ghost": 0.28, "lod": { "detail": false, "cover": false, "tail": false, "margin": 6, "pad": 0.4, "gap": 1.5, "fade": 0.3 }, "gestures": { "start": [{ "gesture": "point", "callout": "starting-stitch" }], "spacing": [{ "gesture": "facepalm", "from": 0.03, "to": 0.17 }, { "gesture": "point", "callout": "stitch-spacing" }], "tie": [{ "gesture": "cheer", "from": 0.7, "to": 1 }] } },
+  "jensenCam": { "on": true, "corner": "tr", "riderPx": 200, "dist": 40, "el": 12, "behind": 20, "lift": 4, "hz": 1, "fov": 35, "scenes": null, "background": null, "tipMin": 0.5, "onTop": true },
+  "blade": { "keep": 3, "r": 12, "lift": 3, "speed": 5, "from": -1.5, "to": 0.75, "trail": 0.15, "width": 1.5, "fade": 0.6, "fall": 0.6, "sfxLead": 0.25, "cuts": { "square": [{ "w": 0.96, "end": "short" }], "tie": [{ "w": 0.8, "end": "tie-off" }] } },
+  "knots": {
+    "clove": { "detail": "start", "w0": 32, "loose": 15, "draw": [0, 0.7], "steps": [
+      { "op": "start", "a": -4, "w": 16, "h": 0.4, "loose": true },
+      { "op": "to", "pts": [[-2.6, 7], [-2.33, 2], [-6.4, -5.2], [-7, -6]], "loose": true },
+      { "op": "wrap", "turns": -0.875, "loose": true },
+      { "op": "to", "pts": [[-7, "-C+6"], [0, "-C"], [7, "-C-6"]], "loose": true },
+      { "op": "wrap", "turns": -0.875, "loose": true },
+      { "op": "to", "pts": [[7, "-2C+6"], [2.33, "-2C-2"], [2.6, "-2C-7"], [4, "-2C-16", 0.4]], "loose": true, "under": true },
+      { "op": "pull", "from": 0.7, "to": 1 } ] },
+    "closing": { "detail": "close", "from": "tape", "scenes": ["close", "seal", "tie"], "loose": 22, "win": 0.35, "tighten": { "iters": 200, "k": 0.25, "passes": 4 }, "focus": { "close": [-4, 0], "seal": [-15, 2], "tie": [-24, 10] }, "sequence": [
+      { "do": "lockstitch", "n": 8, "what": "lockstitch 8, shown tied as the model left it", "until": 0, "context": true, "steps": [{ "op": "start", "a": -50, "w": 0 }, { "op": "to", "pts": [[-44, 0], [-36.5, 0], [-33.5, 1], [-32, 4], [-31, 9]], "what": "lockstitch 8: the tape on along the bundle to it" }, { "op": "wrap", "to": "C-9", "a": -29, "what": "lockstitch 8: one turn round the bundle" }, { "op": "to", "pts": [[-29, "C-5"], [-32, "C-4.5"], [-36, "C-3"], [-37.5, "C"], [-37, "C+3.5"]], "what": "lockstitch 8: the end over its standing part" }, { "op": "to", "pts": [[-34.5, "C+6.5"], [-32, "C+7"], [-29.5, "C+6"]], "under": true, "what": "lockstitch 8: under the turn's start" }] },
+      { "do": "pull", "what": "lockstitch 8 pulled snug", "from": 0, "to": 0.005 },
+      { "do": "lockstitch", "n": 9, "what": "lockstitch 9, the last: on along H, one turn laid loose, the end over H, then under the turn's start", "steps": [{ "op": "to", "pts": [[-20, "C"], [-10, "C"], [-3, "C"], [0, "C+1"], [1.5, "C+4"], [2.5, "C+9"]], "until": 0.2, "what": "lockstitch 9: the tape on along the bundle (H)", "from": 0.005 }, { "op": "wrap", "to": "2C-9", "a": 4.5, "loose": true, "until": 0.5, "what": "lockstitch 9: one turn round the bundle (loose)" }, { "op": "to", "pts": [[4.5, "2C-5", 0, 0.8], [1.5, "2C-4.5", 0, 0.5], [-2.5, "2C-3", 0, 0.3], [-4, "2C", 0, 0.25], [-3.5, "2C+3.5", 0, 0.1]], "loose": true, "until": 0.6, "what": "lockstitch 9: the end over the standing part" }, { "op": "to", "pts": [[-1, "2C+6.5"], [1.5, "2C+7"], [4, "2C+6"]], "under": true, "until": 0.7, "what": "lockstitch 9: under the turn's start (the lock)" }] },
+      { "do": "pull", "what": "lockstitch 9 pulled snug", "from": 0.72, "to": 0.95 },
+      { "do": "bight", "what": "a bight back over lockstitch 9", "steps": [{ "op": "to", "pts": [[6, "2C+9"], [5.5, "2C+16"], [1, "2C+22"], [-4, "2C+19"], [-6, "2C+12"]], "loose": 5, "from": 1, "until": 1.021, "what": "a bight back over the lockstitch" }] },
+      { "do": "halfHitch", "n": 1, "what": "half hitch 1, tied first, nearer the stitch: down over H, round under H, up over its own leg", "steps": [{ "op": "to", "pts": [[-7, "2C+11", 0, 0.8], [-9.5, "2C+6", 0, 0.5], [-12.5, "2C", 0, 0.3], [-13.5, "2C-7", 0, 0]], "snug": [[-6.8, "2C+6.8"], [-9.1, "2C+3.4"], [-11.3, "2C"], [-11.7, "2C-3"]], "loose": 5, "until": 1.084, "what": "half hitch 1: down over H" }, { "op": "to", "pts": [[-11.5, "2C-10.5"], [-7.5, "2C-8"], [-6.5, "2C"], [-7, "2C+3.5"]], "snug": [[-8.7, "2C-4.5"], [-7.2, "2C-2.6"], [-7, "2C"], [-7.2, "2C+1.5"]], "under": true, "until": 1.179, "what": "half hitch 1: round under H" }, { "op": "to", "pts": [[-7.8, "2C+5.2"], [-9.5, "2C+8.5"], [-13.5, "2C+12"]], "snug": [[-7.6, "2C+2.3"], [-9.1, "2C+3.8"], [-10.9, "2C+6"]], "until": 1.329, "what": "half hitch 1: up over its own leg" }] },
+      { "do": "halfHitch", "n": 2, "what": "half hitch 2, 10 mm further along H", "steps": [{ "op": "to", "pts": [[-16, "2C+14", 0, 0.8], [-18, "2C+10.5", 0, 0.6], [-20, "2C+6", 0, 0.45], [-22.5, "2C", 0, 0.3], [-23.5, "2C-7", 0, 0]], "snug": [[-15.9, "2C+7.5"], [-17.8, "2C+6.4"], [-19.3, "2C+3.4"], [-21.2, "2C"], [-21.6, "2C-3"]], "loose": 5, "from": 1.458, "until": 1.718, "what": "half hitch 2: down over H" }, { "op": "to", "pts": [[-21.5, "2C-10.5"], [-17.5, "2C-8"], [-16.5, "2C"], [-17, "2C+3.5"]], "snug": [[-18.6, "2C-4.5"], [-17.1, "2C-2.6"], [-16.8, "2C"], [-17.1, "2C+1.5"]], "under": true, "until": 1.852, "what": "half hitch 2: round under H" }, { "op": "to", "pts": [[-17.8, "2C+5.2"], [-19.5, "2C+8.5"], [-24, "2C+11.5"]], "snug": [[-17.4, "2C+2.3"], [-18.9, "2C+3.8"], [-21.2, "2C+5.3"]], "until": 1.935, "what": "half hitch 2: up over its own leg" }] },
+      { "do": "tieOff", "what": "the tie-off end", "steps": [{ "op": "to", "pts": [[-25.5, "2C+13.5", 0.5], [-26, "2C+18", 1.5], [-26, "2C+25", 2.5]], "snug": [[-24.5, "2C+10"], [-25, "2C+16"], [-25, "2C+24"]], "loose": 5, "end": "tie-off", "from": 1.963, "until": 1.993, "what": "the tie-off end" }] },
+      { "do": "pull", "what": "the half hitches pulled snug, with the bight", "from": 2.05, "to": 2.55, "out": 3 },
+      { "do": "trim", "what": "the tie-off end trimmed", "end": "tie-off" } ] },
+    "square": { "use": "reef", "detail": "start", "unit": 2.4, "h0": 1.6, "sx": "screen", "strands": [
+      { "steps": [{ "op": "start", "a": -2.4, "w": 0.45 }, { "op": "to", "pts": [[-1.2, 0.56], [-0.3, 0.72], [1, 1]] }, { "op": "arc", "c": [1, 0], "r": 1, "from": 90, "sweep": -180 }, { "op": "to", "pts": [[1, -1], [-0.3, -0.72], [-1.2, -0.56], [-2.4, -0.45]] }] },
+      { "alternate": "under", "steps": [{ "op": "start", "a": 2.4, "w": 0.45 }, { "op": "to", "pts": [[1.2, 0.56], [0.3, 0.72], [-1, 1]] }, { "op": "arc", "c": [-1, 0], "r": 1, "from": 90, "sweep": 180 }, { "op": "to", "pts": [[-1, -1], [0.3, -0.72], [1.2, -0.56], [2.4, -0.45]] }] } ] }
+  },
+  "scenes": {
+    "goal": {
+      "camera": { "clock": "share", "path": "spline", "keys": [
+        { "x": 0, "focus": { "point": [800, 760, 240] }, "frame": "world", "az": 140, "el": 28, "dist": 640 },
+        { "x": 0.25, "focus": { "point": [810, 760, 240] }, "frame": "world", "az": 114, "el": 54, "dist": 620 },
+        { "x": 0.5, "focus": { "point": [800, 760, 245] }, "frame": "world", "az": 96, "el": 50, "dist": 600 },
+        { "x": 0.7, "focus": { "point": [740, 755, 252] }, "frame": "world", "az": 88, "el": 54, "dist": 560 },
+        { "x": 0.88, "focus": { "point": [680, 750, 258] }, "frame": "world", "az": 81, "el": 59, "dist": 510 },
+        { "x": 1, "focus": { "point": [643, 749, 261] }, "frame": "world", "az": 76, "el": 63, "dist": 470 } ] },
+      "layers": { "ghost": 0.7 }
+    },
+    "start": {
+      "camera": { "keys": [
+        { "x": 0, "focus": { "stitch": 0 }, "frame": "world", "az": 74.054604, "el": 69.998216, "dist": 240 } ] },
+      "layers": { "ghost": [[0.6, 0.7], [1.2, 0.3, "out"]] }
+    },
+    "clove": {
+      "camera": { "keys": [
+        { "x": 0, "focus": { "surface": "start", "a": 0, "w": 32, "lift": 3 }, "frame": "surface", "az": 16.699244, "el": 23.317097, "fit": 40 } ] },
+      "layers": { "hose": 0.45 }
+    },
+    "square": {
+      "lead": 1.2,
+      "camera": { "keys": [
+        { "x": 0, "focus": { "surface": "start", "a": 0, "w": 0, "lift": 3 }, "frame": "surface", "az": 0, "el": 0, "fit": 14 } ] },
+      "layers": { "hose": 0.45, "context": [[0, 1], [0.6, 0.3, "out"]], "base": [[0, 1], [0.6, 0.3, "out"]] }
+    },
+    "wrap": {
+      "camera": { "keys": [
+        { "x": 0, "focus": { "detail": "lock", "aim": 0.5 }, "frame": "detail:lock", "az": 24.227745, "el": 26.636366, "fit": 60 } ] }
+    },
+    "tuck": {
+      "camera": { "keys": [
+        { "x": 0, "focus": "cross", "frame": "detail:lock", "az": 24.227745, "el": 26.636366, "fit": 36 } ] }
+    },
+    "tight": {
+      "camera": { "keys": [
+        { "x": 0, "focus": { "detail": "lock", "aim": 0.2 }, "frame": "detail:lock", "az": 26.565051, "el": 56.145485, "fit": 60 } ] }
+    },
+    "lock": {
+      "camera": { "keys": [
+        { "x": 0, "focus": { "tape": 0.6 }, "frame": "world", "az": 74.054604, "el": 69.998216, "dist": 250 } ] },
+      "layers": { "ghost": [[0, 0.3], [0.6, 0.1, "out"]] }
+    },
+    "uturn": {
+      "camera": { "keys": [
+        { "x": 0, "focus": { "tape": 0.6 }, "frame": "world", "az": 74.054604, "el": 69.998216, "dist": 250 } ] },
+      "layers": { "ghost": 0.1 }
+    },
+    "spacing": {
+      "camera": { "keys": [
+        { "x": 0, "focus": "bracket", "frame": "world", "az": 74.054604, "el": 69.998216, "dist": 300 } ] },
+      "layers": { "ghost": [[0, 0.1], [0.6, 0.3, "out"]] }
+    },
+    "close": {
+      "camera": { "clock": "work", "dist": "log", "keys": [
+        { "x": 0, "focus": { "surface": "close", "a": -10, "w": 7, "lift": 3 }, "frame": "surface", "az": 11.309932, "el": 16.392523, "fit": 52 },
+        { "x": 0.3, "focus": { "surface": "close", "a": -2, "w": 7, "lift": 3 }, "frame": "surface", "az": 11.309932, "el": 16.392523, "fit": 52, "ease": "smooth" },
+        { "x": 0.72, "focus": { "surface": "close", "a": -1, "w": 10, "lift": 3 }, "frame": "surface", "az": 11.309932, "el": 16.392523, "fit": 24, "ease": "smooth" } ] }
+    },
+    "seal": {
+      "camera": { "clock": "work", "dist": "log", "keys": [
+        { "x": 0, "focus": { "surface": "close", "a": -10, "w": 9, "lift": 3 }, "frame": "surface", "az": 11.309932, "el": 16.392523, "fit": 34 },
+        { "x": 0.021, "focus": { "surface": "close", "a": -10, "w": 1.5, "lift": 3 }, "frame": "surface", "az": 11.309932, "el": 16.392523, "fit": 21, "ease": "smooth" },
+        { "x": 0.329, "focus": { "surface": "close", "a": -10, "w": 1.5, "lift": 3 }, "frame": "surface", "az": 11.309932, "el": 16.392523, "fit": 21, "ease": "smooth" },
+        { "x": 0.55, "focus": { "surface": "close", "a": -20, "w": 1.5, "lift": 3 }, "frame": "surface", "az": 11.309932, "el": 16.392523, "fit": 21, "ease": "smooth" },
+        { "x": 0.96, "focus": { "surface": "close", "a": -20, "w": 1.5, "lift": 3 }, "frame": "surface", "az": 11.309932, "el": 16.392523, "fit": 21, "ease": "smooth" },
+        { "x": 0.993, "focus": { "surface": "close", "a": -16, "w": 11, "lift": 3 }, "frame": "surface", "az": 11.309932, "el": 16.392523, "fit": 24, "ease": "smooth" } ] },
+      "layers": { "hose": [[0, 1], [0.6, 0.45, "out"]], "context": [[0, 1], [0.6, 0.2, "out"]] }
+    },
+    "tie": {
+      "camera": { "keys": [
+        { "x": 0, "focus": { "surface": "close", "a": -16, "w": 11, "lift": 3 }, "frame": "surface", "az": 11.309932, "el": 16.392523, "fit": 24 } ] },
+      "layers": { "hose": 0.45, "context": 0.2 }
+    },
+    "done": {
+      "camera": { "clock": "share", "time": "smooth", "path": "spline", "keys": [
+        { "x": 0, "focus": { "uturn": { "back": 40, "r": 110 } }, "frame": "world", "az": -60, "el": 38, "fit": 140 },
+        { "x": 0.18, "focus": { "uturn": { "back": 40, "r": 110 } }, "frame": "world", "az": 20, "el": 14, "fit": 120 },
+        { "x": 0.38, "focus": { "uturn": { "back": 40, "r": 110 } }, "frame": "world", "az": 100, "el": 10, "fit": 150 },
+        { "x": 0.55, "focus": { "uturn": { "back": 50, "r": 130 } }, "frame": "world", "az": 180, "el": 8, "fit": 170 },
+        { "x": 0.78, "focus": { "point": [600, 500, -250] }, "frame": "world", "az": 250, "el": 3, "fit": 620 },
+        { "x": 1, "focus": "machine", "frame": "world", "az": 282, "el": 6, "fitFocus": 0.85 } ] },
+      "layers": { "tape": 0, "ghost": 0 }
+    }
+  }
+}

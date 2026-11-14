@@ -405,6 +405,7 @@
     // the clock stopped (a video recording: record_demo.js steps it a frame at a time, LR4Director's record clock): the
     // ticks between its steps have nothing new to draw - redrawing the same frame cost seconds each on SwiftShader
     if (raw === 0) return;
+    if (window.LR4AnimTick) window.LR4AnimTick();   // a tutorial's live preview: its frame at the clock's t (anim_player.js)
     if (shop) LR4Shop.cutaway(shop, camera.getWorldPosition(camPos), vr.active() ? 20000 : camera.far);   // hide walls the camera is outside of (VR's far is in metres: the sky as built)
     jobTick();
     handTick();
@@ -425,6 +426,7 @@
     if (typeof rxTick === "function") rxTick();      // the router's dimensions on the model (router_edit.js)
     lighting();
     renderer.render(scene, camera);
+    if (window.LR4AfterRender) window.LR4AfterRender();   // a second pass over this frame (the lacing tutorial's Jensen Cam inset)
     if (window.LR4StatsTick) window.LR4StatsTick();   // ?stats: renderer.info of this render (js/page/stats.js)
   }
   resize();

@@ -1246,9 +1246,34 @@
 <script src="js/config_model.js" defer></script>
 <script src="js/parts_files.js" defer></script>
 <script src="js/show_tree.js" defer></script>
+<script src="js/hose_route.js" defer></script>
 <script src="js/mesh_stats.js" defer></script>
 <script src="js/vr.js" defer></script>
 <script src="js/workshop.js" defer></script>
+<!-- media-mesh bundles (vendored: tools/sync_media.js; core first): the geometry the lacing modules call (MediaMesh.*) -->
+<script src="js/lib/media-mesh/media-mesh-core.min.js" defer></script>
+<script src="js/lib/media-mesh/media-mesh-knots.min.js" defer></script>
+<!-- media-anim runtime bundle (vendored: tools/sync_media.js; MediaAnim.timeline .camera .reveal ... .tweak), before the lacing modules that call it -->
+<script src="js/lib/media-anim/media-anim-runtime.min.js" defer></script>
+<!-- the lacing tutorial's modules, in their load order (js/lacing_tutorial.js's FILES), then its facade -->
+<script src="js/lacing/data.js" defer></script>
+<script src="js/lacing/vec3.js" defer></script>
+<script src="js/lacing/timeline.js" defer></script>
+<script src="js/lacing/curves.js" defer></script>
+<script src="js/lacing/knot_flat.js" defer></script>
+<script src="js/lacing/core.js" defer></script>
+<script src="js/lacing/opening.js" defer></script>
+<script src="js/lacing/slack.js" defer></script>
+<script src="js/lacing/plan.js" defer></script>
+<script src="js/lacing/knot_gen.js" defer></script>
+<script src="js/lacing/knots.js" defer></script>
+<script src="js/lacing/draw.js" defer></script>
+<script src="js/lacing/shots.js" defer></script>
+<script src="js/lacing/blade.js" defer></script>
+<script src="js/lacing/callouts.js" defer></script>
+<script src="js/lacing/frame.js" defer></script>
+<script src="js/lacing/events.js" defer></script>
+<script src="js/lacing_tutorial.js" defer></script>
 <script src="js/demo_script.js" defer></script>
 <script src="js/page/scene.js" defer></script>
 <script src="js/page/panel.js" defer></script>
@@ -1274,6 +1299,12 @@
 <script src="js/page/scripting.js" defer></script>
 <script src="js/page/director.js" defer></script>
 <script src="js/page/help.js" defer></script>
+<script src="js/lib/media-anim/media-anim-characters.min.js" defer></script>
+<!-- the rider and Jensen Cam (MA-11: off unless shots.rider / shots.jensenCam or ?rider=1 / ?jensencam=1), after the characters bundle it draws with -->
+<script src="js/lacing/rider.js" defer></script>
+<script src="js/page/lacing_anim.js" defer></script>
+<script src="js/page/anim_player.js" defer></script>
+<script src="js/page/anim_tweak.js" defer></script>
 <script src="js/page/stats.js" defer></script>
 </body>
 </html>

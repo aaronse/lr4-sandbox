@@ -153,5 +153,13 @@ ok(DS.parse("( video  shot : view=CORE time=2 )\nG0 X1").intro[0].kv.view === "C
   ok(s.intro.map((c) => c.kind).join() === "clip" && s.at.map((c) => c.kind).join() === "clip", `Clip: ${s.intro.map((c) => c.kind)} / ${s.at.map((c) => c.kind)}`);
   ok(s.warnings.length === 2 && /LEAVE=/.test(s.warnings[0]) && /NOW/.test(s.warnings[1]), `Clip warnings ${JSON.stringify(s.warnings)}`);
 }
+{ // (Video Lacing:) the lacing tutorial: intro only, LOOPS 1 to 5, an intro of its own, its loop's length; no moves
+  const s = DS.parse(["(Video Lacing: LOOPS=2)", "(Video Lacing: X=1)", "(Video Lacing: LOOPS=9)", "G0 X1", "(Video Lacing:)"].join("\n"));
+  ok(s.intro.map((c) => c.kind).join() === "lacing" && !s.at.length, `Lacing: ${s.intro.map((c) => c.kind)} / ${s.at.map((c) => c.kind)}`);
+  ok(s.warnings.length === 3 && /X/.test(s.warnings[0]) && /LOOPS=/.test(s.warnings[1]) && /before the first move/.test(s.warnings[2]), `Lacing warnings ${JSON.stringify(s.warnings)}`);
+  ok(DS.hasOwnIntro(s) && DS.lacingOf(s.intro[0]).loops === 2 && DS.playSecs(s) === Math.round(2 * DS.LACING_SECS), `Lacing intro / loops / secs ${DS.playSecs(s)}`);
+  const e = DS.parse(require("fs").readFileSync(require("path").join(__dirname, "..", "docs", "examples", "lacing_tutorial.gcode"), "utf8"));
+  ok(!e.warnings.length && !e.firstMove && e.intro.map((c) => c.kind).join() === "lacing", `lacing_tutorial.gcode: ${JSON.stringify(e.warnings)} firstMove ${e.firstMove}`);
+}
 console.log(fails ? `demo_script: ${fails} of ${checks} failed` : `demo_script: all ${checks} passed`);
 process.exit(fails ? 1 : 0);

@@ -1,0 +1,132 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512" data-anchor="256 480">
+  <title>Jensen head only (cutout)</title>
+  <desc>
+    Flat cutout head after character-jensen.md and the owner's reference photo, for a textured plane or sprite in
+    three.js. 512 x 512, transparent. Proportions from the photo: face 0.72 as wide as hair-top-to-chin; brows 0.45,
+    eyes 0.51, nose base 0.70, mouth 0.80 of the way down. No neck or shoulders.
+    Anchor (chin bottom, the pivot on the body geometry): 256,480 (data-anchor).
+    Flat fills and strokes only: no gradients, filters, clip paths, masks or text.
+    Swap parts by setting display on these ids, then redraw the texture (face-rig.js does this):
+      #pupils           gaze: translate up to +-7 px x, +-3 px y
+      #lids-open / #lids-closed     blink
+      #brows            raise: translate 0,-6
+      #mouth-rest #mouth-talk #mouth-wide #mouth-o #mouth-e #mouth-smile     visemes, one shown at a time
+  </desc>
+
+  <!-- ears: large, eye to nose height -->
+  <ellipse cx="92" cy="316" rx="21" ry="46" fill="#E8BB93" stroke="#1B1B1D" stroke-width="4"/>
+  <path d="M 90 292 Q 78 316 90 342" fill="none" stroke="#C08B67" stroke-width="3" stroke-linecap="round"/>
+  <ellipse cx="420" cy="316" rx="21" ry="46" fill="#E8BB93" stroke="#1B1B1D" stroke-width="4"/>
+  <path d="M 422 292 Q 434 316 422 342" fill="none" stroke="#C08B67" stroke-width="3" stroke-linecap="round"/>
+
+  <!-- head: tall rounded rectangle, broad cheeks and jaw, rounded chin -->
+  <path id="head" d="M 94 250 C 92 150 160 70 256 70 C 352 70 420 150 418 250 C 418 330 408 380 380 420 C 350 462 300 480 256 480 C 212 480 162 462 132 420 C 104 380 94 330 94 250 Z" fill="#E8BB93" stroke="#1B1B1D" stroke-width="4"/>
+
+  <!-- age lines: forehead, bags, crow's feet, nose sides, deep folds, chin -->
+  <g fill="none" stroke="#C08B67" stroke-width="2.5" stroke-linecap="round">
+    <path d="M 196 160 Q 256 150 316 160"/>
+    <path d="M 206 174 Q 256 166 306 174"/>
+    <path d="M 218 188 Q 256 182 294 188"/>
+    <path d="M 166 280 Q 188 290 212 282"/>
+    <path d="M 300 282 Q 324 290 346 280"/>
+    <path d="M 118 252 L 104 248 M 118 262 L 103 266"/>
+    <path d="M 394 252 L 408 248 M 394 262 L 409 266"/>
+    <path d="M 240 294 Q 234 314 226 328"/>
+    <path d="M 272 294 Q 278 314 286 328"/>
+    <path d="M 214 336 Q 186 372 204 418" stroke-width="3"/>
+    <path d="M 298 336 Q 326 372 308 418" stroke-width="3"/>
+    <path d="M 238 442 Q 256 448 274 442"/>
+  </g>
+  <!-- nose: broad, rounded tip, flared nostrils -->
+  <path id="nose" d="M 220 330 Q 208 348 228 352 Q 242 354 248 346 Q 256 352 264 346 Q 270 354 284 352 Q 304 348 292 330" fill="none" stroke="#1B1B1D" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M 232 345 Q 238 340 244 344 M 268 344 Q 274 340 280 345" fill="none" stroke="#7A4E3A" stroke-width="3" stroke-linecap="round"/>
+
+  <!-- eyes: narrow ovals, inner ends a touch high -->
+  <g fill="#FFFFFF" stroke="#1B1B1D" stroke-width="3">
+    <ellipse cx="0" cy="0" rx="28" ry="18" transform="translate(188 258) rotate(-6)"/>
+    <ellipse cx="0" cy="0" rx="28" ry="18" transform="translate(324 258) rotate(6)"/>
+  </g>
+  <g id="pupils" fill="#24160F">
+    <circle cx="186" cy="260" r="6.5"/>
+    <circle cx="322" cy="260" r="6.5"/>
+  </g>
+  <g id="lids-open" fill="#E8BB93" stroke="#1B1B1D" stroke-width="3" stroke-linejoin="round">
+    <path transform="translate(188 258) rotate(-6)" d="M -25.1 -8 A 28 18 0 0 1 25.1 -8 Q 0 -2 -25.1 -8 Z"/>
+    <path transform="translate(324 258) rotate(6)" d="M -25.1 -8 A 28 18 0 0 1 25.1 -8 Q 0 -2 -25.1 -8 Z"/>
+  </g>
+  <g id="lids-closed" display="none" fill="#E8BB93" stroke="#1B1B1D" stroke-width="3">
+    <g transform="translate(188 258) rotate(-6)">
+      <ellipse cx="0" cy="0" rx="28" ry="18"/>
+      <path d="M -25 4 Q 0 10 25 4" fill="none" stroke-linecap="round"/>
+    </g>
+    <g transform="translate(324 258) rotate(6)">
+      <ellipse cx="0" cy="0" rx="28" ry="18"/>
+      <path d="M -25 4 Q 0 10 25 4" fill="none" stroke-linecap="round"/>
+    </g>
+  </g>
+
+  <!-- mouth visemes; rest (closed, as in the photo) is the default -->
+  <g id="mouth">
+    <g id="mouth-rest">
+      <path d="M 222 392 Q 240 386 256 389 Q 272 386 290 392" fill="none" stroke="#1B1B1D" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="M 232 404 Q 256 412 280 404" fill="none" stroke="#B9806A" stroke-width="3" stroke-linecap="round"/>
+    </g>
+    <g id="mouth-talk" display="none">
+      <path d="M 224 386 Q 256 380 288 386 Q 282 412 256 416 Q 230 412 224 386 Z" fill="#4A1C1F" stroke="#1B1B1D" stroke-width="3.5" stroke-linejoin="round"/>
+      <path d="M 238 408 Q 256 398 274 408 Q 266 415 256 415 Q 246 415 238 408 Z" fill="#C4636A"/>
+      <path d="M 236 424 Q 256 430 276 424" fill="none" stroke="#B9806A" stroke-width="3" stroke-linecap="round"/>
+    </g>
+    <g id="mouth-wide" display="none">
+      <path d="M 220 384 Q 256 378 292 384 Q 288 426 256 430 Q 224 426 220 384 Z" fill="#4A1C1F" stroke="#1B1B1D" stroke-width="3.5" stroke-linejoin="round"/>
+      <path d="M 234 418 Q 256 404 278 418 Q 268 428 256 429 Q 244 428 234 418 Z" fill="#C4636A"/>
+    </g>
+    <g id="mouth-o" display="none">
+      <ellipse cx="256" cy="396" rx="13" ry="17" fill="#4A1C1F" stroke="#1B1B1D" stroke-width="3.5"/>
+      <path d="M 244 424 Q 256 428 268 424" fill="none" stroke="#B9806A" stroke-width="3" stroke-linecap="round"/>
+    </g>
+    <g id="mouth-e" display="none">
+      <path d="M 222 388 Q 256 384 290 388 Q 278 402 256 404 Q 234 402 222 388 Z" fill="#4A1C1F" stroke="#1B1B1D" stroke-width="3.5" stroke-linejoin="round"/>
+      <path d="M 238 414 Q 256 420 274 414" fill="none" stroke="#B9806A" stroke-width="3" stroke-linecap="round"/>
+    </g>
+    <g id="mouth-smile" display="none">
+      <path d="M 224 388 Q 256 404 288 388" fill="none" stroke="#1B1B1D" stroke-width="4" stroke-linecap="round"/>
+      <path d="M 222 382 Q 220 388 226 392 M 290 382 Q 292 388 286 392" fill="none" stroke="#1B1B1D" stroke-width="3" stroke-linecap="round"/>
+      <path d="M 240 410 Q 256 416 272 410" fill="none" stroke="#B9806A" stroke-width="3" stroke-linecap="round"/>
+    </g>
+  </g>
+
+  <!-- brows: dark gray, gently arched, right on the glasses' top bar -->
+  <g id="brows" fill="none" stroke="#55585E" stroke-width="8" stroke-linecap="round">
+    <path d="M 138 222 Q 186 204 238 214"/>
+    <path d="M 274 214 Q 326 204 374 222"/>
+  </g>
+
+  <!-- hair: gray, thick, swept up and back, high in front, darker and short at the sides -->
+  <g id="hair">
+    <path d="M 100 262 C 78 206 74 120 118 76 Q 136 40 178 40 Q 200 12 244 22 Q 284 6 318 30 Q 362 30 392 64 Q 440 104 430 190 Q 428 230 414 262 C 412 220 408 186 396 166 C 372 128 320 118 256 120 C 196 118 148 128 120 166 C 108 186 102 220 100 262 Z" fill="#E2E3E6" stroke="#1B1B1D" stroke-width="4" stroke-linejoin="round"/>
+    <path d="M 100 262 C 90 226 88 190 96 158 C 104 168 112 170 120 166 C 108 186 102 220 100 262 Z" fill="#9EA2A9"/>
+    <path d="M 414 262 C 424 226 426 190 418 158 C 410 168 402 170 396 166 C 408 186 412 220 414 262 Z" fill="#9EA2A9"/>
+    <g fill="none" stroke="#A3A7AF" stroke-width="3" stroke-linecap="round">
+      <path d="M 170 128 Q 166 84 198 50"/>
+      <path d="M 212 121 Q 218 72 256 38"/>
+      <path d="M 256 120 Q 272 74 318 44"/>
+      <path d="M 300 122 Q 330 84 372 64"/>
+      <path d="M 344 132 Q 384 106 412 110"/>
+      <path d="M 132 150 Q 112 114 128 78"/>
+      <path d="M 106 204 Q 92 166 100 128"/>
+      <path d="M 410 206 Q 424 170 420 140"/>
+    </g>
+    <path d="M 100 262 C 78 206 74 120 118 76 Q 136 40 178 40 Q 200 12 244 22 Q 284 6 318 30 Q 362 30 392 64 Q 440 104 430 190 Q 428 230 414 262" fill="none" stroke="#1B1B1D" stroke-width="4" stroke-linejoin="round"/>
+  </g>
+
+  <!-- glasses: half-rim, dark top bar, thin lower rims, wide rectangular lenses -->
+  <g id="glasses" fill="none" stroke-linejoin="round" stroke-linecap="round">
+    <rect x="126" y="228" width="124" height="60" rx="12" stroke="#5A5E66" stroke-width="2.5"/>
+    <rect x="262" y="228" width="124" height="60" rx="12" stroke="#5A5E66" stroke-width="2.5"/>
+    <path d="M 126 242 Q 126 228 140 228 L 236 228 Q 250 228 250 242 M 262 242 Q 262 228 276 228 L 372 228 Q 386 228 386 242" stroke="#26282C" stroke-width="6"/>
+    <path d="M 250 236 Q 256 230 262 236" stroke="#26282C" stroke-width="4"/>
+    <path d="M 126 234 L 80 272" stroke="#26282C" stroke-width="4"/>
+    <path d="M 386 234 L 432 272" stroke="#26282C" stroke-width="4"/>
+    <path d="M 226 238 L 238 250 M 362 238 L 374 250" stroke="#FFFFFF" stroke-width="3"/>
+  </g>
+</svg>

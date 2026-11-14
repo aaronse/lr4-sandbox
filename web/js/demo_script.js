@@ -88,6 +88,9 @@
 //       the viewer's own choice)
 //   (Video TouchPlate: HOLD=1.5)   the touch plate out under the bit (the shoe's bottom, the clip, the plate) and back
 //       after HOLD s (Part 47b, job.js's probing animation), intro only
+//   (Video Lacing: LOOPS=1)   the cable-lacing tutorial (js/lacing_tutorial.js, docs/specs/lacing-tutorial.md): the
+//       cord and sleeve laced to the hose, the lock stitch in close-up, the core moving the laced bundle, its own camera
+//       and cues, LOOPS times through its ~64 s (its voice-over's measured length; 1 to 5), intro only; needs the hose (HOSE=on). A file with no moves ends after its intro (no Home, no job)
 // Learn (Part 47b): a clip in the page's Learn list is a file like this with a header, ONE KEY PER LINE (FluidNC stops
 // on lines over 127 bytes), before the first move (one after it is an error):
 //   (Video Learn: NAME=Changing a bit)   its title (none: the file's name)
@@ -109,13 +112,14 @@ const SETTINGS = { size: "wxh", machine: "wxh", fps: "num", volume: "num", pause
 const MACHINE_KEYS = ["table", "room", "braces", "struts", "base", "peter", "router", "skirt", "hose", "fan", "main", "accent"];
 const PRESETS = ["all", "no-hardware", "printed", "frame"];   // web/js/show_tree.js PRESETS
 const KINDS = ["shot", "home", "zero", "title", "text", "wait", "speed", "pendant", "show", "inspect", "asbuilt", "slip", "heat", "fire", "extinguish", "estop", "clip", "term", "point", "click", "step", "design", "router",
-  "bitchange", "touchplate"];
+  "bitchange", "touchplate", "lacing"];
 const MINE_KINDS = ["bitchange", "touchplate"];         // what a KIND=mine Learn clip plays (Part 47b)
 const LEARN_KEYS = ["name", "group", "kind", "desc"];
 const SHANKS = { "1/8": 3.175, "1/4": 6.35, "3/8": 9.525, "1/2": 12.7 };
 const SLIP_AXES = ["x", "y", "z", "ymin", "ymax", "zmin", "zmax"];
 const UI_ONLY = new Set(["point", "click", "step"]);   // KIND=ui videos (the page on screen) only
-const INTRO_ONLY = new Set(["home", "zero", "bitchange", "touchplate"]);
+const INTRO_ONLY = new Set(["home", "zero", "bitchange", "touchplate", "lacing"]);
+const LACING_SECS = 3614 / 30;                          // = LR4LacingTut.timing().duration: 120.47 s, 3614 frames at 30 fps (tests/test_lacing_tutorial.js)
 const JOB_ONLY = new Set(["estop"]);
 const SHOTS = new Set(["workshop", "machine", "stock", "tool", "toolfront", "core", "iso", "front", "top", "side", "back", "page", "pendant", "ymin", "ymax", "gantry", "gantrytop"]);
 const ASBUILT_NUM = ["rack", "tilt", "exag", "tram", "tramy", "warpx", "warpy", "bow", "rackmax", "tiltmax"];
@@ -243,6 +247,7 @@ function playSecs(sc) {
     if (["title", "text", "wait", "point", "click", "step", "shot", "inspect"].includes(c.kind)) t += num(c.kv.time) ? Number(c.kv.time) : c.kind === "title" ? 3 : c.kind === "shot" ? 1.5 : 1;
     else if (c.kind === "bitchange") t += 22;
     else if (c.kind === "touchplate") t += 6 + (num(c.kv.hold) ? Number(c.kv.hold) : 1.5);
+    else if (c.kind === "lacing") t += LACING_SECS * lacingOf(c).loops;
     else if (c.kind === "home") t += 20;
   }
   return Math.round(t);
@@ -335,6 +340,11 @@ function check(c, intro) {
       if (kv.hold !== undefined && !/^(lock|wrenches)$/i.test(kv.hold)) return "BitChange HOLD= lock or wrenches";
       return kv.nuts === undefined || /^(each|one)$/i.test(kv.nuts) ? null : "BitChange NUTS= each or one";
     }
+    case "lacing": {
+      const bad = Object.keys(kv).filter((q) => q !== "loops");
+      if (bad.length) return `Lacing doesn't know ${bad.map((q) => q.toUpperCase()).join(", ")}`;
+      return kv.loops === undefined || (num(kv.loops) && Number.isInteger(+kv.loops) && +kv.loops >= 1 && +kv.loops <= 5) ? null : "Lacing LOOPS= 1 to 5";
+    }
     case "touchplate": {
       const bad = Object.keys(kv).filter((q) => q !== "hold");
       if (bad.length) return `TouchPlate doesn't know ${bad.map((q) => q.toUpperCase()).join(", ")}`;
@@ -419,7 +429,9 @@ function defaultIntro(o) {
   return [c("shot", { view: "workshop", time: "1", orbit: String(o.orbit) }), ...(o.home ? [c("home", { offset: "30" })] : []),
     c("shot", { view: "machine", time: "2", orbit: String(o.orbit) }), c("shot", { view: "stock", time: "2.5" }), c("wait", { time: "0.5" })];
 }
-const hasOwnIntro = (s) => s.intro.some((c) => ["shot", "home", "title", "text", "wait", "point", "click", "step"].includes(c.kind));
+const hasOwnIntro = (s) => s.intro.some((c) => ["shot", "home", "title", "text", "wait", "point", "click", "step", "lacing"].includes(c.kind));
+// (Video Lacing:) -> { loops }
+const lacingOf = (c) => ({ loops: num(c.kv.loops) ? Math.min(5, Math.max(1, Math.round(+c.kv.loops))) : 1 });
 
 // a video's options before its (Video: ...) settings (record_demo.js's flags win over both; the page's player uses them too)
 const DEFAULTS = { size: [2560, 1440], fps: 30, job: 75, pause: 2, orbit: 10, sound: true, volume: 0.6, home: true, real: 5,
@@ -427,7 +439,7 @@ const DEFAULTS = { size: [2560, 1440], fps: 30, job: 75, pause: 2, orbit: 10, so
   messagetime: 4 };
 
 const api = { DEFAULTS, parse, keyvals, videoOf, shotOf, titleText, secsOf, zeroOf, showOf, inspectOf, asbuiltOf, slipOf, heatOf, estopOf, machineOf, roomOf, defaultIntro, hasOwnIntro, mm,
-  SHOTS, MACHINE_KEYS, learnOf, shankOf, playSecs, MINE_KINDS, LEARN_KEYS, LONG_LINE };
+  SHOTS, MACHINE_KEYS, learnOf, shankOf, playSecs, MINE_KINDS, LEARN_KEYS, LONG_LINE, lacingOf, LACING_SECS };
 if (typeof module !== "undefined" && module.exports) module.exports = api;
 else root.LR4DemoScript = api;
 })(typeof self !== "undefined" ? self : this);

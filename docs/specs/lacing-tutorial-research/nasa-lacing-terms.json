@@ -1,0 +1,470 @@
+{
+ "sources": [
+  {
+   "id": "nasa-std-8739.4a",
+   "title": "NASA-STD-8739.4A, Workmanship Standard for Crimping, Interconnecting Cables, Harnesses, and Wiring",
+   "revision": "Revision A with Change 4 (document date 2016-06-30; change date 2022-04-13 per the NASA page; status ACTIVE when read 2026-11-09). Current revision.",
+   "url": "https://standards.nasa.gov/sites/default/files/standards/NASA/A/4/nasa-std-87394a_w_change_4_0.pdf",
+   "landing": "https://standards.nasa.gov/standard/NASA/NASA-STD-87394",
+   "pages": "printed pp. 34-37 of 113 (9.2 lacing, Figs 9-1..9-6, Tables 9-1, 9-2); p. 18 (3.2 'Breakout'); p. 20 ('Harness'); p. 27 (7.2.1 lacing tape properties); pp. 95-96 (20.5.1.d acceptance); p. 98 (20.5.2 rejection). PDF page index = printed page."
+  },
+  {
+   "id": "nasa-std-8739.4-ch6",
+   "title": "NASA-STD-8739.4 with Change 6 (superseded), chapter 9 excerpt",
+   "revision": "Baseline 1998 with Change 6; superseded by 8739.4A (2016). Same text and identical Figs 9-1..9-6; only the paragraph numbers differ.",
+   "url": "https://www.sandman.com/files/NASAcable%20lacing40-43.pdf",
+   "pages": "pp. 40-43 of 114 (third-party copy, not from standards.nasa.gov)"
+  },
+  {
+   "id": "navships-900171",
+   "title": "NAVSHIPS 900171, Electronic Installation Practices Manual, Chapter 9 Cabling, Section 7 Lacing and Binding",
+   "revision": "Approved 27 June 1951, Change 2 23 May 1952",
+   "url": "https://www.hellschreiber.com/pdf-hell/article-hell-navships.pdf",
+   "pages": "9-98 to 9-109 (paras 4, 8-11; Figs 9-58..9-68)"
+  },
+  {
+   "id": "wirecare",
+   "title": "WireCare, Tying a marline hitch with lacing tape (maker how-to, secondary)",
+   "revision": "web page, read 2026-11-09",
+   "url": "https://www.wirecare.com/help/how_tos/marline-hitch-lacing-tape",
+   "pages": "single page"
+  },
+  {
+   "id": "wikipedia",
+   "title": "Wikipedia, Cable lacing (secondary; its marline-hitch sentences cite Bureau of Naval Weapons 1962, Workmanship and Design Practices for Electronic Equipment, pp. 7-9 to 7-14, not read)",
+   "revision": "read 2026-11-09",
+   "url": "https://en.wikipedia.org/wiki/Cable_lacing",
+   "pages": "n/a"
+  }
+ ],
+ "terms": [
+  {
+   "term": "Harness",
+   "def": "Wires or cables handled as one assembly",
+   "source": "nasa-std-8739.4a",
+   "where": "3.2 Definitions, p. 20",
+   "quote": "so arranged that as a unit it can be assembled and handled as one assembly",
+   "scenes": [
+    "goal"
+   ],
+   "word": "one"
+  },
+  {
+   "term": "Continuous lacing",
+   "def": "One tape run along the bundle in lockstitches",
+   "source": "nasa-std-8739.4a",
+   "where": "9.2.7 (Ch6: 9.2.4), p. 36",
+   "quote": "Continuous lacing shall be achieved using running lockstitches as shown in Figure 9-5.",
+   "scenes": [
+    "goal",
+    "lock"
+   ],
+   "word": "lace"
+  },
+  {
+   "term": "Starting stitch",
+   "def": "First stitch: a spot tie with a running end",
+   "source": "nasa-std-8739.4a",
+   "where": "9.2.4.a-b (Ch6: 9.2.1), Fig. 9-1 View A, pp. 34-35",
+   "quote": "Single-tape starting stitches shall be the same as a spot tie with a running end or as shown in Figure 9-1 View A.",
+   "scenes": [
+    "start"
+   ],
+   "word": "starting"
+  },
+  {
+   "term": "Spot tie",
+   "def": "A clove hitch followed by a square knot",
+   "source": "nasa-std-8739.4a",
+   "where": "9.2.5 (Ch6: 9.2.2), Fig. 9-2, pp. 34-35",
+   "quote": "Spot ties shall consist of a clove hitch followed by a square knot as shown in Figure 9-2 or other non-slip knots.",
+   "scenes": [
+    "start"
+   ],
+   "word": "spot tie"
+  },
+  {
+   "term": "Clove hitch",
+   "def": "Two crossed turns round the bundle",
+   "source": "nasa-std-8739.4a",
+   "where": "9.2.5 (Ch6: 9.2.2), Fig. 9-2 View A 'CLOVE HITCH', p. 35",
+   "quote": "a clove hitch followed by a square knot as shown in Figure 9-2",
+   "scenes": [
+    "clove"
+   ],
+   "word": "clove hitch"
+  },
+  {
+   "term": "Square knot",
+   "def": "Knot over the clove hitch that locks its ends",
+   "source": "nasa-std-8739.4a",
+   "where": "9.2.5 (Ch6: 9.2.2), Fig. 9-2 View B 'CLOVE HITCH AND SQUARE KNOT', p. 35",
+   "quote": "a clove hitch followed by a square knot",
+   "scenes": [
+    "square"
+   ],
+   "word": "square knot"
+  },
+  {
+   "term": "Running end",
+   "def": "The long tape end that carries on lacing",
+   "source": "nasa-std-8739.4a",
+   "where": "Figs 9-1 A, 9-3, 9-4 labels 'RUNNING END', pp. 35-36",
+   "quote": "RUNNING END",
+   "scenes": [
+    "square"
+   ],
+   "word": null
+  },
+  {
+   "term": "Tie-off end",
+   "def": "The short end knotted off, then trimmed",
+   "source": "nasa-std-8739.4a",
+   "where": "Figs 9-1 A, 9-3, 9-4 labels 'TIE-OFF END', pp. 35-36",
+   "quote": "TIE-OFF END",
+   "scenes": [
+    "square",
+    "tie"
+   ],
+   "word": "short end"
+  },
+  {
+   "term": "Trimmed tie-ends",
+   "def": "Cut knot ends off; NASA sets no length",
+   "source": "nasa-std-8739.4a",
+   "where": "9.2.2 (Ch6: 9.2 para 1), p. 34",
+   "quote": "Lacing tie-ends shall be trimmed.",
+   "scenes": [
+    "square",
+    "tie"
+   ],
+   "word": "trim"
+  },
+  {
+   "term": "Running lockstitch",
+   "def": "One turn locked across itself, repeated along the bundle",
+   "source": "nasa-std-8739.4a",
+   "where": "9.2.7 (Ch6: 9.2.4), Fig. 9-5, p. 36",
+   "quote": "Continuous lacing shall be achieved using running lockstitches as shown in Figure 9-5.",
+   "scenes": [
+    "wrap",
+    "tuck",
+    "tight",
+    "lock"
+   ],
+   "word": "lock stitch"
+  },
+  {
+   "term": "Stitch spacing (Table 9-1)",
+   "def": "Bundle over 25.4 mm: ties at most 76.2 mm apart",
+   "source": "nasa-std-8739.4a",
+   "where": "9.2.8.a (Ch6: 9.2.5), Table 9-1 'Spot Tie, Plastic Strap, and Stitch Spacing Dimensions', p. 35",
+   "quote": "Larger than 25.4 (1.00) | 76.2 (3.00)  [Maximum Distance Between Harness Ties mm (Inches)]",
+   "scenes": [
+    "lock",
+    "spacing"
+   ],
+   "word": "76 millimetres"
+  },
+  {
+   "term": "Breakout",
+   "def": "Where wires leave the main bundle",
+   "source": "nasa-std-8739.4a",
+   "where": "3.2 Definitions, p. 18",
+   "quote": "The separation of a conductor or group of conductors from the main body of wires in a harness.",
+   "scenes": [
+    "close"
+   ],
+   "word": "breakout"
+  },
+  {
+   "term": "Major breakout",
+   "def": "A breakout carrying 25-30 % or more of the bundle",
+   "source": "nasa-std-8739.4a",
+   "where": "9.2.6.b (Ch6: 9.2.3), p. 34",
+   "quote": "Major breakouts normally contain a large percentage of the wire volume, such as 25 to 30 percent or more",
+   "scenes": [
+    "close"
+   ],
+   "word": "sleeve"
+  },
+  {
+   "term": "Closing stitch",
+   "def": "Last lockstitch plus two half hitches, ending the tape",
+   "source": "nasa-std-8739.4a",
+   "where": "9.2.6.a (Ch6: 9.2.3), Fig. 9-3 'Closing Stitch and Single Tape', pp. 34, 36",
+   "quote": "Single or double lacing tape shall be terminated with a closing stitch as shown in Figure 9-3.  [Fig. 9-3 label: LOCKSTITCH PLUS TWO HALF HITCHES]",
+   "scenes": [
+    "close",
+    "seal",
+    "tie"
+   ],
+   "word": "Close"
+  },
+  {
+   "term": "Closing stitch placement",
+   "def": "Close next to every major breakout and the harness end",
+   "source": "nasa-std-8739.4a",
+   "where": "9.2.6.b, 9.2.6.d (Ch6: 9.2.3), p. 34",
+   "quote": "Lacing shall be terminated at every major breakout or branch and at the extremity of the harness ... Closing and starting stitches at branches and breakouts shall be next to the breakout.",
+   "scenes": [
+    "close"
+   ],
+   "word": "just before"
+  },
+  {
+   "term": "Stitch at each breakout",
+   "def": "A tie or stitch right before and after every breakout",
+   "source": "nasa-std-8739.4a",
+   "where": "9.2.8.b (Ch6: 9.2.5), p. 37",
+   "quote": "A tie or stitch shall be placed immediately before and immediately after any breakout of the wire or cable from the harness.",
+   "scenes": [
+    "close"
+   ],
+   "word": "just before"
+  },
+  {
+   "term": "Large breakout restart",
+   "def": "Past a large breakout, start anew with a starting stitch",
+   "source": "nasa-std-8739.4a",
+   "where": "9.2.10.a-b (Ch6: 9.2.7), p. 37",
+   "quote": "The lacing shall start anew with a starting stitch on the opposite side of the breakout on each branch.",
+   "scenes": [
+    "close"
+   ],
+   "word": null
+  },
+  {
+   "term": "Half hitches (closing)",
+   "def": "The closing stitch's two hitches after the last lockstitch",
+   "source": "nasa-std-8739.4a",
+   "where": "Fig. 9-3 label, p. 36",
+   "quote": "LOCKSTITCH PLUS TWO HALF HITCHES",
+   "scenes": [
+    "seal"
+   ],
+   "word": null
+  },
+  {
+   "term": "Alternate closing stitch",
+   "def": "Clove hitch with a double loop knot ends the tape",
+   "source": "nasa-std-8739.4a",
+   "where": "9.2.6.d (Ch6: 9.2.3), Fig. 9-4, p. 36",
+   "quote": "An alternate closing stitch method is shown in Figure 9-4.  [Fig. 9-4 label: CLOVE HITCH WITH DOUBLE LOOP KNOT]",
+   "scenes": [
+    "seal"
+   ],
+   "word": null
+  },
+  {
+   "term": "Small breakouts",
+   "def": "Two or three wires: lockstitches each side, no close",
+   "source": "nasa-std-8739.4a",
+   "where": "9.2.6.e (Ch6: 9.2.3), p. 35",
+   "quote": "Single or small multiple breakouts of two or three wires need not have closing and starting stitches, but may have running lockstitches on each side (Figure 9-5).",
+   "scenes": [],
+   "word": null
+  },
+  {
+   "term": "Staking",
+   "def": "Knot compound only as engineering documents specify",
+   "source": "nasa-std-8739.4a",
+   "where": "9.2.3 (Ch6: 9.2 para 1), p. 34",
+   "quote": "When knots are staked (see Figure 9-7), the necessary compounds, as well as any special design requirements, shall be specified.",
+   "scenes": [
+    "tie"
+   ],
+   "word": null
+  },
+  {
+   "term": "Lacing tape properties",
+   "def": "Tape must suit the application: heat, flame, vacuum",
+   "source": "nasa-std-8739.4a",
+   "where": "7.2.1, p. 27",
+   "quote": "Properties of wire insulation, electrical contacts, lacing tape, ... (processibility, flammability, arc tracking resistance, vacuum stability, resistance to heat, cold flow, etc.) shall be appropriate for the application.",
+   "scenes": [
+    "wrap"
+   ],
+   "word": "tape"
+  },
+  {
+   "term": "Lacing inspection",
+   "def": "Pass: closing stitch present and ends trimmed",
+   "source": "nasa-std-8739.4a",
+   "where": "20.5.1.d(4), p. 96",
+   "quote": "Lacing terminated with a closing stitch and ends trimmed.",
+   "scenes": [
+    "tie",
+    "done"
+   ],
+   "word": null
+  },
+  {
+   "term": "Marline hitch",
+   "def": "Lacing turn locked by an overhand knot",
+   "source": "wikipedia",
+   "where": "Cable lacing, continuous-lacing paragraph (cites BuWeps 1962, not read); NOT in NASA-STD-8739.4",
+   "quote": "This style of continuous lacing, also called \"marline hitching\", is based on a series of overhand knots.",
+   "scenes": [
+    "tuck",
+    "seal"
+   ],
+   "word": "marline hitch"
+  },
+  {
+   "term": "Not half hitches (running stitches)",
+   "def": "Running half hitches look alike but are not recommended",
+   "source": "wikipedia",
+   "where": "Cable lacing (cites BuWeps 1962, not read); NOT in NASA",
+   "quote": "A series of half-hitches, while visually similar, is not recommended for this application.",
+   "scenes": [
+    "tuck"
+   ],
+   "word": null
+  },
+  {
+   "term": "Over and under",
+   "def": "Locked crossings: one cut stitch won't unravel all",
+   "source": "navships-900171",
+   "where": "Section 7 para 8 'Lacing', p. 9-103",
+   "quote": "the \"over and under\" form is necessary to prevent unraveling of entire cable lacing, in the event one or more stitches are cut",
+   "scenes": [
+    "tuck"
+   ],
+   "word": "unravel"
+  },
+  {
+   "term": "Waxed lacing cord",
+   "def": "Waxed cord: #6 small or medium cables, #8 larger",
+   "source": "navships-900171",
+   "where": "Section 7 para 4 'Lacing materials', p. 9-98",
+   "quote": "A waxed cord, called lacing cord, is used for binding the conductors. The cord comes in two sizes; #6 is used for small or medium sized cables, #8 is used for larger cables.",
+   "scenes": [
+    "wrap"
+   ],
+   "word": "tape"
+  },
+  {
+   "term": "Bend before lacing",
+   "def": "Make the bend first, then lace it",
+   "source": "navships-900171",
+   "where": "Section 7 para 10 'Bends', p. 9-103 (Fig. 9-65 on p. 9-107)",
+   "quote": "When bends occur in cable runs, always make the bend before lacing, to keep the bend in place (Figure 9-65).",
+   "scenes": [
+    "done"
+   ],
+   "word": "working bend"
+  },
+  {
+   "term": "Flat, untwisted tape",
+   "def": "Keep the tape flat and free of twists",
+   "source": "wirecare",
+   "where": "procedure, step after the starting knot",
+   "quote": "Keeping the lacing tape as flat and free of twists as possible",
+   "scenes": [
+    "uturn",
+    "done"
+   ],
+   "word": "flat"
+  },
+  {
+   "term": "Trimmed start end (1/8 in)",
+   "def": "Trim the start knot's short end to about 3 mm",
+   "source": "wirecare",
+   "where": "procedure, starting knot",
+   "quote": "Snug the knot tight and trim the short end to about 1/8\" or so.",
+   "scenes": [
+    "square"
+   ],
+   "word": "trim"
+  },
+  {
+   "term": "Terminating the lace (NAVSHIPS)",
+   "def": "Turns over a loop, end pulled under, 1 inch left",
+   "source": "navships-900171",
+   "where": "Section 7 para 11 'Termination', Fig. 9-67, p. 9-109",
+   "quote": "The termination of a lacing may be made by 3 or 4 lock stitches together tied down with an overhand knot or as shown in Figure 9-67.  [Fig. 9-67 labels: LAST LOCK STITCH, FOUR TURNS, EIGHT TURNS, END OF LACING CORD EXTENDS 1 INCH]",
+   "scenes": [
+    "close",
+    "tie"
+   ],
+   "word": null
+  }
+ ],
+ "closing_stitch": {
+  "answer": "NASA ends single-tape continuous lacing with the same tape only: after the last running lockstitch the tape makes a final lockstitch and then two half hitches, and the one free 'tie-off end' is trimmed (9.2.2). The closing stitch has no square knot, no second end and no loop or tail laid under the turns. The alternate (Fig. 9-4) is a clove hitch with a 'double loop knot', again one running end in and one tie-off end out. NASA's square knot appears only in the spot tie / starting stitch (clove hitch + square knot, Fig. 9-2 B), where both ends of the clove hitch are free.",
+  "quote": "Single or double lacing tape shall be terminated with a closing stitch as shown in Figure 9-3. [Fig. 9-3 labels: RUNNING END; RUNNING LOCKSTITCH; LOCKSTITCH PLUS TWO HALF HITCHES; TIE-OFF END]  /  Lacing tie-ends shall be trimmed.",
+  "where": "NASA-STD-8739.4A Change 4 9.2.6.a, 9.2.2, Figs 9-3 and 9-4, pp. 34 and 36 (with Change 6: 9.2.3, 9.2 para 1, pp. 40 and 42)",
+  "figure": "Fig. 9-3 'Closing Stitch and Single Tape--Illustration', drawn loose on a round wire bundle: from the left the tape ('RUNNING END') lies along the bundle into a 'RUNNING LOCKSTITCH'; it runs on along the top to a last lockstitch at the right; from there one long bight arcs back over the top and the tape forms two leaning loops (the 'TWO HALF HITCHES') between the two lockstitches, its free end rising as the 'TIE-OFF END'. One tape throughout. Fig. 9-4 'Alternate Closing Stitch': the running end comes in, a clove hitch is tied, and a 'DOUBLE LOOP KNOT' leaves one 'TIE-OFF END'.",
+  "spare_end_verdict": "does not match",
+  "nearest_real_practice": "A separate piece laid under the closing turns is real, but in NAVSHIPS 900171 (1951), not NASA: 7.11 individual bindings 'Wind 10 to 12 turns tightly over a 1 inch loop. At the last turn, push the end of the lacing cord through the loop which extends under the binding. Pull loose end under binding.' and Fig. 9-67 'Method of terminating the lace' (last lock stitch, four turns, eight turns over a loop, 'END OF LACING CORD EXTENDS 1 INCH'). That pulls the working end back under the turns; it ties no square knot with a spare end. WireCare's 'tie the lacing tape off with a square knot' does not say what the second end is."
+ },
+ "scene_notes": [
+  {
+   "scene": "goal",
+   "note": "NASA-STD-8739.4 covers wire harnesses; lacing cables to a vacuum hose is our adaptation. Callouts should cite NASA for the stitches, not for lacing to a hose. 'snag and pull plugs' is uncited (already marked)."
+  },
+  {
+   "scene": "start",
+   "note": "Matches 9.2.4.b (starting stitch = spot tie with a running end) and 9.2.5 (spot tie = clove hitch + square knot). 'the NASA way' overreaches while close / seal / tie do not follow NASA's closing stitch."
+  },
+  {
+   "scene": "clove",
+   "note": "Matches Fig. 9-2 A in shape. 'grips without slipping' is the tutorial's wording; NASA only calls the spot tie's knots 'non-slip' ('or other non-slip knots', 9.2.5)."
+  },
+  {
+   "scene": "square",
+   "note": "Matches Fig. 9-2 B (clove hitch and square knot) and 9.2.2 (trim tie-ends). NASA gives no trimmed length; 1/8 in is WireCare only. Callout terms: running end = the long end that continues, tie-off end = the short end trimmed (Fig. 9-1 A labels)."
+  },
+  {
+   "scene": "wrap",
+   "note": "NASA spells it 'lockstitch' (one word); the video says 'lock stitch'. The transcript cites 'NASA 9.2.4, Fig. 9-5: marline hitches, not half hitches' - NASA's text names neither; that phrase is from Wikipedia (citing BuWeps 1962). Re-attribute it."
+  },
+  {
+   "scene": "tuck",
+   "note": "Drawn as a marline hitch (end once under its own standing part). NASA Fig. 9-5 appears to show the end wrapped round its standing part in a fuller locked crossing (inference from a small line drawing, not text). 'one cut stitch won't unravel' is NAVSHIPS 7.8, correctly cited there; NASA gives no reason."
+  },
+  {
+   "scene": "lock",
+   "note": "68 mm is within Table 9-1 (76.2 mm max for over 25.4 mm). Table 9-1 is keyed on harness diameter; here the 'harness' is hose + cables (~90 mm), our reading."
+  },
+  {
+   "scene": "uturn",
+   "note": "'the tape flat on top' has no NASA source; flat, untwisted tape is WireCare (secondary)."
+  },
+  {
+   "scene": "spacing",
+   "note": "Number matches Table 9-1 (76.2 mm = 3.00 in). 'or the cables sag away from the hose' is the tutorial's reason; NASA states the rule with no reason."
+  },
+  {
+   "scene": "close",
+   "note": "Placement matches 9.2.6.b/d and 9.2.10.a (closing stitch next to a major breakout; the sleeve is about half the cables, over the 25-30 % threshold). 'Close with two turns' does not match: NASA's closing stitch is a lockstitch plus two half hitches (Fig. 9-3), not two plain turns; 'extra turns' is WireCare ('take a couple of extra turns into the lock stitch'). The line also omits 9.2.10.b (start anew with a starting stitch past the breakout), which the model does for the cord's run."
+  },
+  {
+   "scene": "seal",
+   "note": "Disagrees with NASA: the video locks the two turns with a marline hitch; NASA Fig. 9-3 uses a lockstitch plus TWO HALF HITCHES. The transcript cites NASA 9.2.4 for 'marline hitches, not half hitches', but NASA's own closing stitch is made of half hitches; the 'not half hitches' rule (Wikipedia/BuWeps) concerns the running stitches only. 'marline hitch' is not a NASA term."
+  },
+  {
+   "scene": "tie",
+   "note": "Disagrees with NASA: NASA's closing stitch has no square knot and one tie-off end (Fig. 9-3; 9.2.2 'tie-ends shall be trimmed'). The second 'spare end' drawn from under the closing turns has no source; nearest real practice is NAVSHIPS Fig. 9-67 (end pulled back under turns through a loop, 1 inch left), which ties no square knot. WireCare's square-knot finish is secondary and does not name the second end; it says 'Trim the end' (singular), not both."
+  },
+  {
+   "scene": "done",
+   "note": "Tip sources: 'lace with the hose already in its working bend' = NAVSHIPS 7.10 (make the bend before lacing); 'tape flat, never twisted' = WireCare. Neither is NASA. 'held by every stitch' is the picture, not a source (already marked)."
+  },
+  {
+   "scene": "(transcript citations)",
+   "note": "The transcript cites 'NASA-STD-8739.4 (with Change 6) ch. 9, pp. 40-43' with Change-6 paragraph numbers (9.2.1-9.2.7). The current revision is 8739.4A Change 4, pp. 34-37, renumbered: tie-end trim 9.2.2, starting stitch 9.2.4, spot tie 9.2.5, closing stitch 9.2.6, running lockstitch 9.2.7, spacing 9.2.8, large breakouts 9.2.10. Table and figure numbers are unchanged. The Change 6 excerpt is a third-party copy (sandman.com)."
+  }
+ ],
+ "unverified": [
+  "Fig. 9-3 reading: that the two half hitches are tied round the whole bundle rather than round the tape's own standing part - the line drawing does not show it clearly; the text gives no steps.",
+  "Fig. 9-4 'double loop knot' is not defined anywhere in the standard's text.",
+  "NASA's running lockstitch (Fig. 9-5) = marline hitch: NASA never uses 'marline'; the equivalence rests on Wikipedia citing Bureau of Naval Weapons (1962), which I did not read. The figure suggests a fuller locked crossing than a plain marline hitch (inference).",
+  "Trimmed end length: NASA sets none (9.2.2, 20.5.1.d(4) say only 'trimmed'). Only secondary numbers: WireCare about 1/8 in (start end), NAVSHIPS Fig. 9-67 1 inch.",
+  "Waxed tape and flat / untwisted tape: NASA-STD-8739.4A says nothing (only 7.2.1, tape properties suit the application). Waxed cord is NAVSHIPS 7.4; flat tape is WireCare; waxed linen / flat Nomex / polyester tape is Wikipedia.",
+  "IPC/WHMA-A-620 lacing criteria: paywalled; no public text found.",
+  "Approval date of NASA-STD-8739.4 Change 6: the document history log's columns extract out of line (likely 2011-03-29, unconfirmed).",
+  "No local copy of the standard in vendor/, private/ or docs/; downloads kept in the session scratchpad (dl/, dl2/) only."
+ ]
+}

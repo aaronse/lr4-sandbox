@@ -1,0 +1,19 @@
+WEBVTT
+
+NOTE the lacing tutorial's chapters (docs/specs/lacing-tutorial.storyboard.json): node tools/lacing_voice.js chapters
+
+ch-start
+00:00:00.000 --> 00:00:40.500
+Why lace, and the starting stitch
+
+ch-lockstitch
+00:00:40.500 --> 00:01:16.367
+Running lockstitches
+
+ch-close
+00:01:16.367 --> 00:01:33.733
+Closing stitch
+
+ch-result
+00:01:33.733 --> 00:02:00.467
+The laced bundle, and a tip

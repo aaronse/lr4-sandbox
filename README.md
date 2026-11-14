@@ -320,6 +320,7 @@ shots and the FluidTouch pendant's screen in a corner. The comments:
 | `(Video Point: ID=home TIME=3 TEXT=This is Home)` | ui videos: a ring round a control (by its element id) and a caption. |
 | `(Video Design: EXAMPLE=on)` / `(Video Design: FILE=help/plate.svg)` | The front plate design, as if uploaded (Configure > 6 Get the files): the template's own Example, or an SVG next to the page. |
 | `(Video Click: ID=home)` / `(Video Step: ID=t-run)` | ui videos: a pointer moves to the control and clicks it, and the page does what a click does (Home homes, the Start check's ▶ Start runs the job); Step only opens a Design step, tab or menu that isn't open. |
+| `(Video Lacing: LOOPS=1)` | The cable-lacing tutorial: the router cord and cable sleeve laced to the hose, stitch by stitch, the lock stitch taught in close-up, then the core moving the laced bundle, with its own camera and captions (about 113 s a pass, voiced throughout; needs the hose; the voice-over is muxed in after by `tools/lacing_voice.js mux`). A file with no moves, like [`docs/examples/lacing_tutorial.gcode`](docs/examples/lacing_tutorial.gcode), ends after its intro. |
 
 Lines before the first move are the intro and run in order; later ones run when the job reaches their line. `MSG`
 comments show on top as the job reaches them, and M0 pauses show their popup. The full reference is the header of
@@ -328,6 +329,15 @@ comments show on top as the job reaches them, and M0 pauses show their popup. Th
 command-line flags win over the file's settings. `--log events.txt` writes the director's event log (shots, titles,
 captions, Home, jogs, each second's speed); `node tools/video_log_diff.js before.txt after.txt` checks that a change
 left a video as it was.
+
+The cable-lacing tutorial has two faster paths for iterating on its script and picture: a live preview with the
+voice-over, `web/index.html?anim=lacing&play=1` (play / pause, a scrubber, the scene id; the wavs from
+`tools/lacing_voice.js tts` in the git-ignored `exports/lacing_voice/`), and a real-time draft,
+`node tools/lacing_voice.js draft .exports/lacing_drafts/lacing_draft.mp4` (about the video's length to make; it holds a
+frame where the capture missed one and says how many; it needs the private sibling repo media-anim,
+`capture/draft.ts`). Publish with `tools/record_demo.js`, which is exact. To watch on a phone or
+another computer: `python tools/serve.py sandbox --lan` prints the network URLs for the live preview and for
+`exports/` (videos seek: the server answers HTTP Range requests).
 
 ## Running the FreeCAD model
 

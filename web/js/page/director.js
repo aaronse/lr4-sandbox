@@ -152,7 +152,8 @@ window.LR4Director = (() => {
       if (!await D.pendant()) say("pendant: FluidTouch didn't connect (is the page cross-origin isolated? serve it with tools/serve.py)");
       else { await sleep(2500); D.pip({ on: true }); say("pendant: on, its screen at the bottom right"); }
     }
-    const job = RUN.job = await D.ncFile(name, text);
+    // no moves (a Lacing video): nothing for FluidNC to run (the SD card refuses it), and direct() ends after the intro
+    const job = RUN.job = script.firstMove ? await D.ncFile(name, text) : { total: 0, stock: null, at: [0, 0, 0], pauses: 0 };
     say(`job: ${(job.total / 60).toFixed(1)} min of moves, ${job.pauses} M0 pauses; script: ${script.intro.length} intro + ${script.at.length} later (Video) lines`);
     const mb = D.machineBox(), c = mb.getCenter(new THREE.Vector3()), s = mb.getSize(new THREE.Vector3());
     RUN.g = { c: c.toArray(), s: s.toArray(), floor: D.floorZ(), fov: camera.fov, aspect: camera.aspect,
@@ -199,11 +200,13 @@ window.LR4Director = (() => {
     RUN.logOn = true;
     const dt = 1000 / o.fps;
     let evBadge = "-", last = null, captionEnd = 0;  // captionEnd: the caption comes off at this frame (0 = none showing)
+    let ncOff = false;                               // FluidNC not topped up a frame at a time (the Lacing tutorial: the
+                                                     // machine idle; topping it up there costs seconds a frame on SwiftShader)
     const frame = async (cam) => {
-      ncM += ncS * dt;
+      if (!ncOff) ncM += ncS * dt;
       uiPlace();
       if (cam) camTween = null;                      // a shot has the camera: the page's probe close-up would zoom in again
-      const st = await clock.frame(cam || null, dt, [ncM, ncS * dt, o.kmax]);
+      const st = await clock.frame(cam || null, dt, ncOff ? null : [ncM, ncS * dt, o.kmax]);
       if (RUN.frames % o.fps === 0) {
         ev(`sec rate=${+ncS.toPrecision(3)} line=${st.line} t=${st.t.toFixed(1)} badge=${evBadge}`);
         const ab = LR4AsBuilt.get();                 // Part 44: the slips / heat each second (only videos that turn them on)
@@ -403,6 +406,26 @@ window.LR4Director = (() => {
       return to;
     };
 
+    // (Video Lacing:) the cable-lacing tutorial (js/page/lacing_anim.js): LOOPS times through its loop, a frame at
+    // t = frame / fps, its own camera and cue; the machine back where it was after -> the camera at the end
+    const lacingCmd = async (cmd, start) => {
+      if (!window.LR4LacingAnim || !meta.hose || !meta.hose.cord || !hoseMesh) { say(`(Video): line ${cmd.line}: Lacing needs the hose (HOSE=on)`); return start; }
+      await LR4LacingAnim.ready();                   // (its shots: docs/specs/lacing-tutorial.shots.json when served)
+      const A = LR4LacingAnim.on(), loops = DS.lacingOf(cmd).loops;
+      say(`lacing tutorial: ${loops} x ${A.duration.toFixed(2)} s`);
+      let end = start, scene = "";
+      ncOff = true;
+      for (let f = 0, m = Math.round(A.duration * loops * o.fps); f < m; f++) {
+        const F = A.setT(f / o.fps);
+        if (F.scene !== scene) { scene = F.scene; ev(`lacing ${scene}`); }
+        end = F.cam;
+        await frame(end);
+      }
+      ncOff = false;
+      A.off();
+      return end;
+    };
+
     // the job's pace
     const fit = (secs) => Math.max(1, Math.round(job.total / secs));
     const pace = { base: fit(o.job), real: o.real, badge: true, temp: null, wait: 0 };
@@ -491,6 +514,7 @@ window.LR4Director = (() => {
       else if (cmd.kind === "inspect") cam = await inspectCmd(cmd, cam);
       else if (cmd.kind === "wait") await hold(DS.secsOf(cmd, 1), cam);
       else if (cmd.kind === "bitchange" || cmd.kind === "touchplate") await LR4Help.playCmd(cmd);   // Part 47b (help.js)
+      else if (cmd.kind === "lacing") cam = await lacingCmd(cmd, cam);
       else if (cmd.kind === "point") {
         const e = uiEl(cmd);
         if (e) { await readWait(cam); point(cmd, e); await hold(cmd.kv.text ? (readUntil - RUN.frames) / o.fps : DS.secsOf(cmd, 3), cam); ringOff(); }
@@ -514,6 +538,14 @@ window.LR4Director = (() => {
       else paceCmd(cmd);
     }
 
+    if (!script.firstMove && !byClick) {             // no moves (a Lacing video): the intro is the video - no Home, no job
+      say("no moves: the video ends after its intro");
+      ncOff = true;                                  // nothing for FluidNC to do
+      await hold(o.hold, cam);
+      call("term", 0);
+      uiDone();
+      return;
+    }
     if (!homed && !byClick) {                        // FluidNC runs nothing till it has homed
       say("homing (FluidNC must, before a job)");
       call("home", true);

@@ -1,0 +1,5 @@
+# Lacing tutorial research (2026-11-09)
+
+`nasa-lacing-terms.json`: the sources, 31 lacing terms with section, page and quote, and per-scene notes, checked against NASA-STD-8739.4A with Change 4. `nasa-fig-readings.md`: the tutorial's half-hitch history and where the research crops and scripts are; the readings of NASA Figs 9-3, 9-4 and 9-5 themselves, and every source's quotes, are in media-mesh's knot catalog (`knots/lockstitch.md`, `closing-stitch.md`, `sources.md`).
+The storyboard's `references` and `sources` (`../lacing-tutorial.storyboard.json`) cite from these. Corrected on copying: NAVSHIPS paras 8 and 10 are on p. 9-103, not 9-102.
+The PDFs and figure crops are not committed (their paths are marked ".cache/lacing-tutorial/research (git-ignored)"). Download the standard from https://standards.nasa.gov/sites/default/files/standards/NASA/A/4/nasa-std-87394a_w_change_4_0.pdf (lacing: printed pp. 34-37) and NAVSHIPS 900171 from https://www.hellschreiber.com/pdf-hell/article-hell-navships.pdf.

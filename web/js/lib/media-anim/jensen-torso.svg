@@ -1,0 +1,63 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 1024" width="512" height="1024" data-anchor="256 480">
+  <title>Jensen torso (cutout)</title>
+  <desc>
+    Jensen's torso and hips for the cutout body (characters/cast/jensen.ts), in the cutout-biped's 512 x 1024 bind box:
+    the head-only art (512 x 512, chin at 256,480) sits on top unmoved, so this art has no head and no neck. South Park
+    proportions: about one head of body below the chin. Transparent; flat fills and strokes only: no gradients, filters,
+    clip paths, masks or text, as jensen-head-only.svg.
+    Colours are the outfit's slots, so recolour() swaps the palette by text: jacket #141416, sheen #2A2C31, shirt
+    #0B0B0C, trim #B9BCC2, pants #1F2C48, seam #2C3B5C; lines in the outline slot's light colour #1B1B1D (INK.line),
+    swapped for the dark one on a dark backdrop.
+    Top-level groups ride a bone (data-bone) and are drawn in these bind coordinates with that bone's matrix:
+      #hips    the jeans' top and crotch (hips: turns about the seat, 256,808); the thighs start at 206/306,800
+      #torso   the jacket (torso: 256,760 to 492); the sleeves are drawn limbs from the shoulders, 146/366,524
+    Details inside them: #pants #fly, #jacket #sheen #seams, #shirt (the crew-neck), #zipper, #collar.
+  </desc>
+
+  <!-- hips: dark blue jeans, the jacket's hem laps over their top -->
+  <g id="hips" data-bone="hips">
+    <g id="pants">
+      <path d="M 150 744 L 362 744 L 354 834 Q 324 848 292 840 L 266 822 Q 256 814 246 822 L 220 840 Q 188 848 158 834 Z" fill="#1F2C48" stroke="#1B1B1D" stroke-width="6" stroke-linejoin="round"/>
+    </g>
+    <g id="fly" fill="none" stroke="#2C3B5C" stroke-width="4" stroke-linecap="round">
+      <path d="M 256 776 L 256 812"/>
+      <path d="M 256 784 Q 276 788 280 806"/>
+      <path d="M 166 790 Q 176 812 172 832 M 346 790 Q 336 812 340 832"/>
+    </g>
+  </g>
+
+  <!-- torso: black leather jacket, zipped to the chest, pointed collar open over a black crew-neck -->
+  <g id="torso" data-bone="torso">
+    <g id="jacket">
+      <path d="M 212 486 Q 168 488 136 500 Q 108 512 108 548 L 120 660 L 128 772 Q 256 790 384 772 L 392 660 L 404 548 Q 404 512 376 500 Q 344 488 300 486 Z" fill="#141416" stroke="#1B1B1D" stroke-width="6" stroke-linejoin="round"/>
+      <path d="M 128 748 Q 256 766 384 748" fill="none" stroke="#1B1B1D" stroke-width="4" stroke-linecap="round"/>
+    </g>
+    <!-- the leather's sheen, lit from the viewer's left: a crescent on that shoulder, streaks down the chest -->
+    <g id="sheen" fill="#2A2C31">
+      <path d="M 118 528 Q 128 508 168 498 Q 140 518 134 556 L 132 620 Q 120 586 118 528 Z"/>
+      <path d="M 172 584 Q 166 650 176 722 Q 162 660 172 584 Z"/>
+      <path d="M 352 500 Q 380 506 392 526 Q 372 512 352 500 Z"/>
+      <path d="M 346 600 Q 352 640 348 690 Q 342 640 346 600 Z"/>
+    </g>
+    <g id="seams" fill="none" stroke="#2A2C31" stroke-width="3" stroke-linecap="round">
+      <path d="M 150 560 Q 196 572 214 620 M 362 560 Q 316 572 298 620"/>
+      <path d="M 150 696 L 188 728 M 362 696 L 324 728"/>
+    </g>
+    <!-- the shirt in the collar's opening; no visible neck, the chin covers its top -->
+    <g id="shirt">
+      <path d="M 210 486 Q 256 474 302 486 L 256 568 Z" fill="#0B0B0C" stroke="#1B1B1D" stroke-width="4" stroke-linejoin="round"/>
+      <path d="M 212 484 Q 256 500 300 484 L 296 498 Q 256 518 216 498 Z" fill="#0B0B0C" stroke="#1B1B1D" stroke-width="3" stroke-linejoin="round"/>
+    </g>
+    <g id="zipper">
+      <path d="M 256 568 L 256 778" fill="none" stroke="#B9BCC2" stroke-width="5" stroke-linecap="round"/>
+      <path d="M 256 600 L 256 772" fill="none" stroke="#B9BCC2" stroke-width="11" stroke-dasharray="3 5"/>
+      <rect x="249" y="570" width="14" height="28" rx="4" fill="#B9BCC2" stroke="#1B1B1D" stroke-width="3"/>
+    </g>
+    <!-- pointed collar: two flaps lying open on the chest, points down and out -->
+    <g id="collar" stroke="#1B1B1D" stroke-width="5" stroke-linejoin="round">
+      <path d="M 210 484 Q 182 486 158 500 L 190 592 L 240 536 Z" fill="#141416"/>
+      <path d="M 302 484 Q 330 486 354 500 L 322 592 L 272 536 Z" fill="#141416"/>
+      <path d="M 170 512 L 192 572" fill="none" stroke="#2A2C31" stroke-width="4" stroke-linecap="round"/>
+    </g>
+  </g>
+</svg>

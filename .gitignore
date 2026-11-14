@@ -1,6 +1,12 @@
 # Generated output (/build/: the root's only - web/vendor/three/r<N>/build/ is three.js itself)
 /build/
 exports/
+# Drafts and contact sheets for review (.exports/lacing_drafts), and every intermediate file of the pipeline: research
+# downloads, stills rounds, notes, measuring scripts (.cache/<pipeline>/). Kept in the repo folder so the maintainer
+# and the agents see the same files, not in a tool's temp directory.
+.exports/
+.cache/
+.logs/
 __pycache__/
 *.pyc
 *.FCBak

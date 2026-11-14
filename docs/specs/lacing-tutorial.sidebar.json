@@ -1,0 +1,872 @@
+{
+  "title": "Lacing the cables to the hose (LR4 Sandbox)",
+  "generated_by": "node tools/lacing_voice.js sidebar",
+  "storyboard": "docs/specs/lacing-tutorial.storyboard.json",
+  "duration_s": 120.467,
+  "note": "times are seconds of the video, the transcript's (a scene's own line spans its scene; a later line sits in its hold); terms: the scene's callouts, t_in / t_out from its callout events when it has them",
+  "references": [
+    {
+      "id": "nasa-8739.4a",
+      "title": "NASA-STD-8739.4A, Workmanship Standard for Crimping, Interconnecting Cables, Harnesses, and Wiring",
+      "revision": "Revision A with Change 4",
+      "date": "2022-04-13",
+      "url": "https://standards.nasa.gov/sites/default/files/standards/NASA/A/4/nasa-std-87394a_w_change_4_0.pdf",
+      "pages": "pp. 34-37 (9.2 Lacing, Figs 9-1 to 9-5, Table 9-1); p. 18, p. 20 (3.2 Definitions); pp. 27-28 (7.2.11, 7.2.28); p. 96 (20.5.1.d)",
+      "kind": "standard"
+    },
+    {
+      "id": "navships-900171",
+      "title": "NAVSHIPS 900171, Electronic Installation Practices Manual, Chapter 9 Cabling, Section 7 Lacing and Binding",
+      "revision": "Change 2",
+      "date": "1952-05-23",
+      "url": "https://www.hellschreiber.com/pdf-hell/article-hell-navships.pdf",
+      "pages": "pp. 9-98 to 9-110 (paras 2, 4, 8-11; Figs 9-58 to 9-68)",
+      "kind": "manual"
+    },
+    {
+      "id": "navy-14160",
+      "title": "US Navy rate-training manual 14160 (title not checked), marline hitch",
+      "revision": "tpub.com copy",
+      "date": "2026-11-09 (read)",
+      "url": "https://engineeringtraining.tpub.com/14160/Blackwall-Hitch-92.html",
+      "pages": "p. 92",
+      "kind": "manual"
+    },
+    {
+      "id": "wirecare",
+      "title": "WireCare, Tying a marline hitch with lacing tape",
+      "revision": "web page",
+      "date": "2026-11-09 (read)",
+      "url": "https://www.wirecare.com/help/how_tos/marline-hitch-lacing-tape",
+      "pages": "single page",
+      "kind": "guide"
+    },
+    {
+      "id": "wikipedia",
+      "title": "Wikipedia, Cable lacing",
+      "revision": "web page",
+      "date": "2026-11-09 (read)",
+      "url": "https://en.wikipedia.org/wiki/Cable_lacing",
+      "pages": "n/a",
+      "kind": "wiki"
+    }
+  ],
+  "glossary": [
+    {
+      "id": "nasa-standard",
+      "term": "NASA-STD-8739.4A",
+      "def": "NASA's workmanship standard for cables, harnesses and wiring; lacing is §9.2",
+      "ref": "nasa-8739.4a",
+      "title": "NASA-STD-8739.4A, Workmanship Standard for Crimping, Interconnecting Cables, Harnesses, and Wiring",
+      "where": "§9.2 Lacing for Trunk, Branches, and Breakouts",
+      "page": "33-37",
+      "quote": "9.2 Lacing for Trunk, Branches, and Breakouts. 9.2.1 When engineering documents specify the use and type of lacing, the following requirements shall apply.",
+      "url": "https://standards.nasa.gov/sites/default/files/standards/NASA/A/4/nasa-std-87394a_w_change_4_0.pdf"
+    },
+    {
+      "id": "starting-stitch",
+      "term": "Starting stitch",
+      "def": "The first stitch: a spot tie with a running end",
+      "ref": "nasa-8739.4a",
+      "title": "NASA-STD-8739.4A, Workmanship Standard for Crimping, Interconnecting Cables, Harnesses, and Wiring",
+      "where": "§9.2.4.b, Fig. 9-1 A",
+      "page": "34-35",
+      "quote": "Single-tape starting stitches shall be the same as a spot tie with a running end or as shown in Figure 9-1 View A.",
+      "url": "https://standards.nasa.gov/sites/default/files/standards/NASA/A/4/nasa-std-87394a_w_change_4_0.pdf"
+    },
+    {
+      "id": "spot-tie",
+      "term": "Spot tie",
+      "def": "A clove hitch followed by a square knot",
+      "ref": "nasa-8739.4a",
+      "title": "NASA-STD-8739.4A, Workmanship Standard for Crimping, Interconnecting Cables, Harnesses, and Wiring",
+      "where": "§9.2.5, Fig. 9-2",
+      "page": "34-35",
+      "quote": "Spot ties shall consist of a clove hitch followed by a square knot as shown in Figure 9-2 or other non-slip knots.",
+      "url": "https://standards.nasa.gov/sites/default/files/standards/NASA/A/4/nasa-std-87394a_w_change_4_0.pdf"
+    },
+    {
+      "id": "clove-hitch",
+      "term": "Clove hitch",
+      "def": "Two crossed turns round the bundle",
+      "ref": "nasa-8739.4a",
+      "title": "NASA-STD-8739.4A, Workmanship Standard for Crimping, Interconnecting Cables, Harnesses, and Wiring",
+      "where": "§9.2.5, Fig. 9-2 A",
+      "page": "35",
+      "quote": "a clove hitch followed by a square knot as shown in Figure 9-2",
+      "url": "https://standards.nasa.gov/sites/default/files/standards/NASA/A/4/nasa-std-87394a_w_change_4_0.pdf"
+    },
+    {
+      "id": "square-knot",
+      "term": "Square knot",
+      "def": "Ties the clove hitch's two ends off",
+      "ref": "nasa-8739.4a",
+      "title": "NASA-STD-8739.4A, Workmanship Standard for Crimping, Interconnecting Cables, Harnesses, and Wiring",
+      "where": "§9.2.5, Fig. 9-2 B",
+      "page": "35",
+      "quote": "a clove hitch followed by a square knot",
+      "url": "https://standards.nasa.gov/sites/default/files/standards/NASA/A/4/nasa-std-87394a_w_change_4_0.pdf"
+    },
+    {
+      "id": "running-end",
+      "term": "Running end",
+      "def": "The long end that laces on",
+      "ref": "nasa-8739.4a",
+      "title": "NASA-STD-8739.4A, Workmanship Standard for Crimping, Interconnecting Cables, Harnesses, and Wiring",
+      "where": "Fig. 9-1 A (label)",
+      "page": "35",
+      "quote": "RUNNING END",
+      "url": "https://standards.nasa.gov/sites/default/files/standards/NASA/A/4/nasa-std-87394a_w_change_4_0.pdf"
+    },
+    {
+      "id": "continuous-lacing",
+      "term": "Continuous lacing",
+      "def": "One tape along the bundle in running lockstitches",
+      "ref": "nasa-8739.4a",
+      "title": "NASA-STD-8739.4A, Workmanship Standard for Crimping, Interconnecting Cables, Harnesses, and Wiring",
+      "where": "§9.2.7, Fig. 9-5",
+      "page": "36",
+      "quote": "Continuous lacing shall be achieved using running lockstitches as shown in Figure 9-5.",
+      "url": "https://standards.nasa.gov/sites/default/files/standards/NASA/A/4/nasa-std-87394a_w_change_4_0.pdf"
+    },
+    {
+      "id": "lockstitch",
+      "term": "Lockstitch",
+      "def": "One turn; the end over, then under: locked",
+      "ref": "nasa-8739.4a",
+      "title": "NASA-STD-8739.4A, Workmanship Standard for Crimping, Interconnecting Cables, Harnesses, and Wiring",
+      "where": "§9.2.7, Fig. 9-5 (read from the figure)",
+      "page": "36",
+      "quote": "Continuous lacing shall be achieved using running lockstitches as shown in Figure 9-5.",
+      "url": "https://standards.nasa.gov/sites/default/files/standards/NASA/A/4/nasa-std-87394a_w_change_4_0.pdf"
+    },
+    {
+      "id": "over-and-under",
+      "term": "Over and under",
+      "def": "Why one cut stitch won't unravel the rest",
+      "ref": "navships-900171",
+      "title": "NAVSHIPS 900171, Electronic Installation Practices Manual, Chapter 9 Cabling, Section 7 Lacing and Binding",
+      "where": "§7.8 Lacing",
+      "page": "9-103",
+      "quote": "the \"over and under\" form is necessary to prevent unraveling of entire cable lacing, in the event one or more stitches are cut",
+      "url": "https://www.hellschreiber.com/pdf-hell/article-hell-navships.pdf"
+    },
+    {
+      "id": "stitch-spacing",
+      "term": "Stitch spacing",
+      "def": "Bundle over 25.4 mm (1\"): at most 76.2 mm (3\") apart",
+      "ref": "nasa-8739.4a",
+      "title": "NASA-STD-8739.4A, Workmanship Standard for Crimping, Interconnecting Cables, Harnesses, and Wiring",
+      "where": "§9.2.8.a, Table 9-1",
+      "page": "35",
+      "quote": "Larger than 25.4 (1.00): 76.2 (3.00) maximum distance between harness ties, mm (in)",
+      "url": "https://standards.nasa.gov/sites/default/files/standards/NASA/A/4/nasa-std-87394a_w_change_4_0.pdf"
+    },
+    {
+      "id": "breakout",
+      "term": "Breakout",
+      "def": "Where wires leave the main bundle",
+      "ref": "nasa-8739.4a",
+      "title": "NASA-STD-8739.4A, Workmanship Standard for Crimping, Interconnecting Cables, Harnesses, and Wiring",
+      "where": "§3.2 Definitions",
+      "page": "18",
+      "quote": "The separation of a conductor or group of conductors from the main body of wires in a harness.",
+      "url": "https://standards.nasa.gov/sites/default/files/standards/NASA/A/4/nasa-std-87394a_w_change_4_0.pdf"
+    },
+    {
+      "id": "closing-stitch",
+      "term": "Closing stitch",
+      "def": "Last lockstitch plus two half hitches",
+      "ref": "nasa-8739.4a",
+      "title": "NASA-STD-8739.4A, Workmanship Standard for Crimping, Interconnecting Cables, Harnesses, and Wiring",
+      "where": "§9.2.6.a, Fig. 9-3",
+      "page": "34, 36",
+      "quote": "Single or double lacing tape shall be terminated with a closing stitch as shown in Figure 9-3.",
+      "url": "https://standards.nasa.gov/sites/default/files/standards/NASA/A/4/nasa-std-87394a_w_change_4_0.pdf"
+    },
+    {
+      "id": "half-hitches",
+      "term": "Two half hitches",
+      "def": "Round the tape itself, they lock the end",
+      "ref": "nasa-8739.4a",
+      "title": "NASA-STD-8739.4A, Workmanship Standard for Crimping, Interconnecting Cables, Harnesses, and Wiring",
+      "where": "Fig. 9-3 (label; read from the figure)",
+      "page": "36",
+      "quote": "LOCKSTITCH PLUS TWO HALF HITCHES",
+      "url": "https://standards.nasa.gov/sites/default/files/standards/NASA/A/4/nasa-std-87394a_w_change_4_0.pdf"
+    },
+    {
+      "id": "tie-off-end",
+      "term": "Tie-off end",
+      "def": "The one short end left, trimmed",
+      "ref": "nasa-8739.4a",
+      "title": "NASA-STD-8739.4A, Workmanship Standard for Crimping, Interconnecting Cables, Harnesses, and Wiring",
+      "where": "§9.2.2, Fig. 9-3 (label)",
+      "page": "34, 36",
+      "quote": "Lacing tie-ends shall be trimmed.",
+      "url": "https://standards.nasa.gov/sites/default/files/standards/NASA/A/4/nasa-std-87394a_w_change_4_0.pdf"
+    },
+    {
+      "id": "restart",
+      "term": "Past the breakout",
+      "def": "Start anew with a starting stitch",
+      "ref": "nasa-8739.4a",
+      "title": "NASA-STD-8739.4A, Workmanship Standard for Crimping, Interconnecting Cables, Harnesses, and Wiring",
+      "where": "§9.2.10.b",
+      "page": "37",
+      "quote": "The lacing shall start anew with a starting stitch on the opposite side of the breakout on each branch.",
+      "url": "https://standards.nasa.gov/sites/default/files/standards/NASA/A/4/nasa-std-87394a_w_change_4_0.pdf"
+    },
+    {
+      "id": "harness",
+      "term": "Harness",
+      "def": "Wires handled as one assembly",
+      "ref": "nasa-8739.4a",
+      "title": "NASA-STD-8739.4A, Workmanship Standard for Crimping, Interconnecting Cables, Harnesses, and Wiring",
+      "where": "§3.2 Definitions",
+      "page": "20",
+      "quote": "so arranged that as a unit it can be assembled and handled as one assembly",
+      "url": "https://standards.nasa.gov/sites/default/files/standards/NASA/A/4/nasa-std-87394a_w_change_4_0.pdf"
+    }
+  ],
+  "chapters": [
+    {
+      "id": "ch-start",
+      "title": "Why lace, and the starting stitch",
+      "t_start": 0,
+      "t_end": 40.5,
+      "lines": [
+        {
+          "id": "goal",
+          "t_start": 0,
+          "t_end": 18.867,
+          "caption": "Lace the cables to the hose",
+          "spoken": "Loose cables on a LowRider flap, snag and chafe, and can yank a plug mid-cut.",
+          "sources": [
+            {
+              "ref": "nasa-8739.4a",
+              "title": "NASA-STD-8739.4A, Workmanship Standard for Crimping, Interconnecting Cables, Harnesses, and Wiring",
+              "where": "§7.2.11",
+              "page": "27",
+              "says": "\"Harness designs and routing shall provide support and protection to harnesses and cables so that they are protected from abrasion, cold flow, cut through, vibration, chafing, flexing, and sharp edges.\"",
+              "url": "https://standards.nasa.gov/sites/default/files/standards/NASA/A/4/nasa-std-87394a_w_change_4_0.pdf"
+            },
+            {
+              "ref": "nasa-8739.4a",
+              "title": "NASA-STD-8739.4A, Workmanship Standard for Crimping, Interconnecting Cables, Harnesses, and Wiring",
+              "where": "§7.2.28",
+              "page": "28",
+              "says": "\"Provision shall be made for stress relief in wires entering connectors from harnesses\"",
+              "url": "https://standards.nasa.gov/sites/default/files/standards/NASA/A/4/nasa-std-87394a_w_change_4_0.pdf"
+            }
+          ],
+          "uncited": "\"flap\" and \"snag\" are the tutorial's own (the picture shows the loose cables swaying); \"yank a plug\" is the tutorial's reading of NASA §7.2.28's stress relief at connectors; which cables ride with the core is shown, not said (d19: the problem in one line, the reveal sooner)",
+          "terms": [
+            {
+              "id": "nasa-standard",
+              "t_in": 8.049,
+              "t_out": 11.349
+            }
+          ]
+        },
+        {
+          "id": "goal_fix",
+          "t_start": 5.809,
+          "t_end": 10.451,
+          "caption": null,
+          "spoken": "The fix? Cable lacing: the method NASA specifies for its mission hardware.",
+          "sources": [
+            {
+              "ref": "nasa-8739.4a",
+              "title": "NASA-STD-8739.4A, Workmanship Standard for Crimping, Interconnecting Cables, Harnesses, and Wiring",
+              "where": "§1.2.2 Applicability",
+              "page": "14",
+              "says": "\"This standard applies to production and processing of mission hardware\"",
+              "url": "https://standards.nasa.gov/sites/default/files/standards/NASA/A/4/nasa-std-87394a_w_change_4_0.pdf"
+            },
+            {
+              "ref": "nasa-8739.4a",
+              "title": "NASA-STD-8739.4A, Workmanship Standard for Crimping, Interconnecting Cables, Harnesses, and Wiring",
+              "where": "§9.2.7, Fig. 9-5",
+              "page": "36",
+              "says": "\"Continuous lacing shall be achieved using running lockstitches as shown in Figure 9-5.\"",
+              "url": "https://standards.nasa.gov/sites/default/files/standards/NASA/A/4/nasa-std-87394a_w_change_4_0.pdf"
+            },
+            {
+              "ref": "wikipedia",
+              "title": "Wikipedia, Cable lacing",
+              "where": "Cable lacing (the article's lead)",
+              "page": null,
+              "says": "\"Cable lacing is a method for tying wiring harnesses and cable looms, traditionally used in telecommunication, naval, and aerospace applications.\"",
+              "url": "https://en.wikipedia.org/wiki/Cable_lacing"
+            },
+            {
+              "ref": "wikipedia",
+              "title": "Wikipedia, Cable lacing",
+              "where": "Cable lacing, Styles",
+              "page": null,
+              "says": "\"Some organizations have in-house standards to which cable lacing must conform, for example NASA specifies its cable lacing techniques in chapter 9 of NASA-STD-8739.4.\"",
+              "url": "https://en.wikipedia.org/wiki/Cable_lacing"
+            }
+          ],
+          "terms": []
+        },
+        {
+          "id": "goal_why",
+          "t_start": 10.601,
+          "t_end": 16.977,
+          "caption": null,
+          "spoken": "Tight, tidy, tough: one tape, no sharp zip-tie tails, and one cut stitch won't unravel the rest.",
+          "sources": [
+            {
+              "ref": "navships-900171",
+              "title": "NAVSHIPS 900171, Electronic Installation Practices Manual, Chapter 9 Cabling, Section 7 Lacing and Binding",
+              "where": "§7.8 Lacing",
+              "page": "9-103",
+              "says": "\"the \\\"over and under\\\" form is necessary to prevent unraveling of entire cable lacing, in the event one or more stitches are cut\"",
+              "url": "https://www.hellschreiber.com/pdf-hell/article-hell-navships.pdf"
+            }
+          ],
+          "uncited": "\"tight, tidy, tough\" and \"no sharp zip-tie tails\" are the tutorial's own",
+          "terms": []
+        },
+        {
+          "id": "start",
+          "t_start": 18.867,
+          "t_end": 25.333,
+          "caption": "Start by the last zip tie",
+          "spoken": "Following NASA's lacing standard, start beside the core's last zip tie with a spot tie round all three.",
+          "sources": [
+            {
+              "ref": "nasa-8739.4a",
+              "title": "NASA-STD-8739.4A, Workmanship Standard for Crimping, Interconnecting Cables, Harnesses, and Wiring",
+              "where": "§9.2.4.a-b",
+              "page": "34",
+              "says": "\"Harnesses laced with single tape shall initially be tied with a starting stitch.\" \"Single-tape starting stitches shall be the same as a spot tie with a running end or as shown in Figure 9-1 View A.\"",
+              "url": "https://standards.nasa.gov/sites/default/files/standards/NASA/A/4/nasa-std-87394a_w_change_4_0.pdf"
+            },
+            {
+              "ref": "nasa-8739.4a",
+              "title": "NASA-STD-8739.4A, Workmanship Standard for Crimping, Interconnecting Cables, Harnesses, and Wiring",
+              "where": "§9.2.5",
+              "page": "34",
+              "says": "\"Spot ties shall consist of a clove hitch followed by a square knot as shown in Figure 9-2 or other non-slip knots.\"",
+              "url": "https://standards.nasa.gov/sites/default/files/standards/NASA/A/4/nasa-std-87394a_w_change_4_0.pdf"
+            },
+            {
+              "ref": "wikipedia",
+              "title": "Wikipedia, Cable lacing",
+              "where": "Cable lacing, Styles",
+              "page": null,
+              "says": "\"Some organizations have in-house standards to which cable lacing must conform, for example NASA specifies its cable lacing techniques in chapter 9 of NASA-STD-8739.4.\"",
+              "url": "https://en.wikipedia.org/wiki/Cable_lacing"
+            }
+          ],
+          "terms": [
+            {
+              "id": "nasa-standard",
+              "t_in": 19.227,
+              "t_out": 21.727
+            },
+            {
+              "id": "starting-stitch",
+              "t_in": 23.427,
+              "t_out": 25.146
+            }
+          ]
+        },
+        {
+          "id": "clove",
+          "t_start": 25.333,
+          "t_end": 32.7,
+          "caption": "Clove hitch: two crossed turns",
+          "spoken": "Two turns, the second crossing over the first, ends tucked under the cross: a clove hitch grips without slipping.",
+          "sources": [
+            {
+              "ref": "nasa-8739.4a",
+              "title": "NASA-STD-8739.4A, Workmanship Standard for Crimping, Interconnecting Cables, Harnesses, and Wiring",
+              "where": "§9.2.5",
+              "page": "34",
+              "says": "\"Spot ties shall consist of a clove hitch followed by a square knot as shown in Figure 9-2 or other non-slip knots.\"",
+              "url": "https://standards.nasa.gov/sites/default/files/standards/NASA/A/4/nasa-std-87394a_w_change_4_0.pdf"
+            },
+            {
+              "ref": "nasa-8739.4a",
+              "title": "NASA-STD-8739.4A, Workmanship Standard for Crimping, Interconnecting Cables, Harnesses, and Wiring",
+              "where": "Fig. 9-2 View A (read from the figure)",
+              "page": "35",
+              "says": "\"CLOVE HITCH\": two crossed turns round the bundle",
+              "url": "https://standards.nasa.gov/sites/default/files/standards/NASA/A/4/nasa-std-87394a_w_change_4_0.pdf"
+            }
+          ],
+          "uncited": "\"Grips without slipping\" is the tutorial's wording; NASA §9.2.5 only calls the spot tie's knots non-slip (\"or other non-slip knots\").",
+          "terms": [
+            {
+              "id": "clove-hitch",
+              "t_in": 30.473,
+              "t_out": 32.7
+            }
+          ]
+        },
+        {
+          "id": "square",
+          "t_start": 32.7,
+          "t_end": 40.5,
+          "caption": "Right over left, left over right",
+          "spoken": "Secure it with a square knot: right over left, then left over right, pull snug, and trim the short end.",
+          "sources": [
+            {
+              "ref": "nasa-8739.4a",
+              "title": "NASA-STD-8739.4A, Workmanship Standard for Crimping, Interconnecting Cables, Harnesses, and Wiring",
+              "where": "§9.2.5",
+              "page": "34",
+              "says": "\"Spot ties shall consist of a clove hitch followed by a square knot as shown in Figure 9-2 or other non-slip knots.\"",
+              "url": "https://standards.nasa.gov/sites/default/files/standards/NASA/A/4/nasa-std-87394a_w_change_4_0.pdf"
+            },
+            {
+              "ref": "nasa-8739.4a",
+              "title": "NASA-STD-8739.4A, Workmanship Standard for Crimping, Interconnecting Cables, Harnesses, and Wiring",
+              "where": "Fig. 9-2 View B (label)",
+              "page": "35",
+              "says": "\"CLOVE HITCH AND SQUARE KNOT\"",
+              "url": "https://standards.nasa.gov/sites/default/files/standards/NASA/A/4/nasa-std-87394a_w_change_4_0.pdf"
+            },
+            {
+              "ref": "nasa-8739.4a",
+              "title": "NASA-STD-8739.4A, Workmanship Standard for Crimping, Interconnecting Cables, Harnesses, and Wiring",
+              "where": "§9.2.2",
+              "page": "34",
+              "says": "\"Lacing tie-ends shall be trimmed.\"",
+              "url": "https://standards.nasa.gov/sites/default/files/standards/NASA/A/4/nasa-std-87394a_w_change_4_0.pdf"
+            },
+            {
+              "ref": "wirecare",
+              "title": "WireCare, Tying a marline hitch with lacing tape",
+              "where": "procedure, starting knot",
+              "page": null,
+              "says": "\"Snug the knot tight and trim the short end to about 1/8\" or so.\"",
+              "url": "https://www.wirecare.com/help/how_tos/marline-hitch-lacing-tape"
+            }
+          ],
+          "uncited": "\"Right over left, then left over right\" is the common way to tie a square knot; no surveyed source spells it out.",
+          "terms": [
+            {
+              "id": "square-knot",
+              "t_in": 37.575,
+              "t_out": 39.275
+            },
+            {
+              "id": "running-end",
+              "t_in": 39.275,
+              "t_out": 40.313
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "ch-lockstitch",
+      "title": "Running lockstitches",
+      "t_start": 40.5,
+      "t_end": 76.367,
+      "lines": [
+        {
+          "id": "wrap",
+          "t_start": 40.5,
+          "t_end": 45.9,
+          "caption": "Wrap once, loosely",
+          "spoken": "Each lockstitch begins with one loose turn of tape round the hose and both cables.",
+          "sources": [
+            {
+              "ref": "nasa-8739.4a",
+              "title": "NASA-STD-8739.4A, Workmanship Standard for Crimping, Interconnecting Cables, Harnesses, and Wiring",
+              "where": "§9.2.7, Fig. 9-5",
+              "page": "36",
+              "says": "\"Continuous lacing shall be achieved using running lockstitches as shown in Figure 9-5.\"",
+              "url": "https://standards.nasa.gov/sites/default/files/standards/NASA/A/4/nasa-std-87394a_w_change_4_0.pdf"
+            },
+            {
+              "ref": "nasa-8739.4a",
+              "title": "NASA-STD-8739.4A, Workmanship Standard for Crimping, Interconnecting Cables, Harnesses, and Wiring",
+              "where": "Fig. 9-5 (read from the figure)",
+              "page": "36",
+              "says": "each running lockstitch is one turn round the bundle",
+              "url": "https://standards.nasa.gov/sites/default/files/standards/NASA/A/4/nasa-std-87394a_w_change_4_0.pdf"
+            }
+          ],
+          "terms": []
+        },
+        {
+          "id": "tuck",
+          "t_start": 45.9,
+          "t_end": 52.233,
+          "caption": "Over, then under the turn",
+          "spoken": "Bring the end back over its standing part, then under the turn; one cut stitch won't unravel the rest.",
+          "sources": [
+            {
+              "ref": "nasa-8739.4a",
+              "title": "NASA-STD-8739.4A, Workmanship Standard for Crimping, Interconnecting Cables, Harnesses, and Wiring",
+              "where": "Fig. 9-5; Fig. 9-3's running lockstitch (read from the figure)",
+              "page": "36",
+              "says": "the end crosses over the standing part, then under the turn's start",
+              "url": "https://standards.nasa.gov/sites/default/files/standards/NASA/A/4/nasa-std-87394a_w_change_4_0.pdf"
+            },
+            {
+              "ref": "navy-14160",
+              "title": "US Navy rate-training manual 14160 (title not checked), marline hitch",
+              "where": "marline hitch",
+              "page": "92",
+              "says": "\"Just remember that the end of the line goes over the standing part and under the round turn so that it binds itself.\"",
+              "url": "https://engineeringtraining.tpub.com/14160/Blackwall-Hitch-92.html"
+            },
+            {
+              "ref": "navships-900171",
+              "title": "NAVSHIPS 900171, Electronic Installation Practices Manual, Chapter 9 Cabling, Section 7 Lacing and Binding",
+              "where": "§7.8 Lacing",
+              "page": "9-103",
+              "says": "\"the manner in which the lock stitch is made may vary, but the \"over and under\" form is necessary to prevent unraveling of entire cable lacing, in the event one or more stitches are cut\"",
+              "url": "https://www.hellschreiber.com/pdf-hell/article-hell-navships.pdf"
+            },
+            {
+              "ref": "wikipedia",
+              "title": "Wikipedia, Cable lacing",
+              "where": "Cable lacing, continuous lacing (cites Bureau of Naval Weapons 1962, pp. 7-9 to 7-14, not read)",
+              "page": null,
+              "says": "\"A series of half-hitches, while visually similar, is not recommended for this application.\"",
+              "url": "https://en.wikipedia.org/wiki/Cable_lacing"
+            }
+          ],
+          "terms": [
+            {
+              "id": "lockstitch",
+              "t_in": 46.7,
+              "t_out": 49.8
+            }
+          ]
+        },
+        {
+          "id": "tight",
+          "t_start": 52.233,
+          "t_end": 57.167,
+          "caption": "Pull it tight",
+          "spoken": "Pull the end along the hose; the loop closes down and grips the bundle.",
+          "sources": [
+            {
+              "ref": "nasa-8739.4a",
+              "title": "NASA-STD-8739.4A, Workmanship Standard for Crimping, Interconnecting Cables, Harnesses, and Wiring",
+              "where": "§9.2.7, Fig. 9-5",
+              "page": "36",
+              "says": "\"Continuous lacing shall be achieved using running lockstitches as shown in Figure 9-5.\"",
+              "url": "https://standards.nasa.gov/sites/default/files/standards/NASA/A/4/nasa-std-87394a_w_change_4_0.pdf"
+            },
+            {
+              "ref": "navships-900171",
+              "title": "NAVSHIPS 900171, Electronic Installation Practices Manual, Chapter 9 Cabling, Section 7 Lacing and Binding",
+              "where": "§7.8 Lacing",
+              "page": "9-103",
+              "says": "\"The stitch used in keeping the conductors together under pressure is the lock stitch.\"",
+              "url": "https://www.hellschreiber.com/pdf-hell/article-hell-navships.pdf"
+            }
+          ],
+          "terms": []
+        },
+        {
+          "id": "lock",
+          "t_start": 57.167,
+          "t_end": 64.2,
+          "caption": "Lockstitch every 68 mm (2.7\")",
+          "spoken": "Repeat along the hose: one lockstitch every 68 millimetres, each pulled snug before the next.",
+          "sources": [
+            {
+              "ref": "nasa-8739.4a",
+              "title": "NASA-STD-8739.4A, Workmanship Standard for Crimping, Interconnecting Cables, Harnesses, and Wiring",
+              "where": "§9.2.7, Fig. 9-5",
+              "page": "36",
+              "says": "\"Continuous lacing shall be achieved using running lockstitches as shown in Figure 9-5.\"",
+              "url": "https://standards.nasa.gov/sites/default/files/standards/NASA/A/4/nasa-std-87394a_w_change_4_0.pdf"
+            },
+            {
+              "ref": "nasa-8739.4a",
+              "title": "NASA-STD-8739.4A, Workmanship Standard for Crimping, Interconnecting Cables, Harnesses, and Wiring",
+              "where": "§9.2.8.a",
+              "page": "37",
+              "says": "\"Lacing stitches and spot ties shall be placed as detailed in Table 9-1.\"",
+              "url": "https://standards.nasa.gov/sites/default/files/standards/NASA/A/4/nasa-std-87394a_w_change_4_0.pdf"
+            },
+            {
+              "ref": "nasa-8739.4a",
+              "title": "NASA-STD-8739.4A, Workmanship Standard for Crimping, Interconnecting Cables, Harnesses, and Wiring",
+              "where": "Table 9-1",
+              "page": "35",
+              "says": "harness larger than 25.4 mm (1.00 in): maximum distance between harness ties 76.2 mm (3.00 in)",
+              "url": "https://standards.nasa.gov/sites/default/files/standards/NASA/A/4/nasa-std-87394a_w_change_4_0.pdf"
+            }
+          ],
+          "terms": []
+        },
+        {
+          "id": "uturn",
+          "t_start": 64.2,
+          "t_end": 70.467,
+          "caption": "Round the U-turn and back",
+          "spoken": "Keep the same spacing round the U-turn and back along the lower run, the tape flat on top.",
+          "sources": [
+            {
+              "ref": "nasa-8739.4a",
+              "title": "NASA-STD-8739.4A, Workmanship Standard for Crimping, Interconnecting Cables, Harnesses, and Wiring",
+              "where": "§9.2.8.a",
+              "page": "37",
+              "says": "\"Lacing stitches and spot ties shall be placed as detailed in Table 9-1.\"",
+              "url": "https://standards.nasa.gov/sites/default/files/standards/NASA/A/4/nasa-std-87394a_w_change_4_0.pdf"
+            },
+            {
+              "ref": "nasa-8739.4a",
+              "title": "NASA-STD-8739.4A, Workmanship Standard for Crimping, Interconnecting Cables, Harnesses, and Wiring",
+              "where": "Table 9-1",
+              "page": "35",
+              "says": "harness larger than 25.4 mm (1.00 in): maximum distance between harness ties 76.2 mm (3.00 in)",
+              "url": "https://standards.nasa.gov/sites/default/files/standards/NASA/A/4/nasa-std-87394a_w_change_4_0.pdf"
+            },
+            {
+              "ref": "wirecare",
+              "title": "WireCare, Tying a marline hitch with lacing tape",
+              "where": "procedure, after the starting knot",
+              "page": null,
+              "says": "\"Keeping the lacing tape as flat and free of twists as possible\"",
+              "url": "https://www.wirecare.com/help/how_tos/marline-hitch-lacing-tape"
+            }
+          ],
+          "terms": []
+        },
+        {
+          "id": "spacing",
+          "t_start": 70.467,
+          "t_end": 76.367,
+          "caption": "Never over 76 mm (3\") apart",
+          "spoken": "Never leave more than 76 millimetres between stitches, or the cables sag away from the hose.",
+          "sources": [
+            {
+              "ref": "nasa-8739.4a",
+              "title": "NASA-STD-8739.4A, Workmanship Standard for Crimping, Interconnecting Cables, Harnesses, and Wiring",
+              "where": "Table 9-1",
+              "page": "35",
+              "says": "harness larger than 25.4 mm (1.00 in): maximum distance between harness ties 76.2 mm (3.00 in)",
+              "url": "https://standards.nasa.gov/sites/default/files/standards/NASA/A/4/nasa-std-87394a_w_change_4_0.pdf"
+            },
+            {
+              "ref": "nasa-8739.4a",
+              "title": "NASA-STD-8739.4A, Workmanship Standard for Crimping, Interconnecting Cables, Harnesses, and Wiring",
+              "where": "§9.2.8.a",
+              "page": "37",
+              "says": "\"Lacing stitches and spot ties shall be placed as detailed in Table 9-1.\"",
+              "url": "https://standards.nasa.gov/sites/default/files/standards/NASA/A/4/nasa-std-87394a_w_change_4_0.pdf"
+            }
+          ],
+          "uncited": "\"Or the cables sag away from the hose\" is the tutorial's reason; NASA states the spacing with no reason.",
+          "terms": [
+            {
+              "id": "stitch-spacing",
+              "t_in": 71.407,
+              "t_out": 74.707
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "ch-close",
+      "title": "Closing stitch",
+      "t_start": 76.367,
+      "t_end": 93.733,
+      "lines": [
+        {
+          "id": "close",
+          "t_start": 76.367,
+          "t_end": 83.167,
+          "caption": "Last lockstitch at the breakout",
+          "spoken": "Just before the sleeve leaves the hose, the breakout, tie one last lockstitch.",
+          "sources": [
+            {
+              "ref": "nasa-8739.4a",
+              "title": "NASA-STD-8739.4A, Workmanship Standard for Crimping, Interconnecting Cables, Harnesses, and Wiring",
+              "where": "§3.2 Definitions, Breakout",
+              "page": "18",
+              "says": "\"The separation of a conductor or group of conductors from the main body of wires in a harness.\"",
+              "url": "https://standards.nasa.gov/sites/default/files/standards/NASA/A/4/nasa-std-87394a_w_change_4_0.pdf"
+            },
+            {
+              "ref": "nasa-8739.4a",
+              "title": "NASA-STD-8739.4A, Workmanship Standard for Crimping, Interconnecting Cables, Harnesses, and Wiring",
+              "where": "§9.2.6.b, d",
+              "page": "34",
+              "says": "\"Lacing shall be terminated at every major breakout or branch\" (25 to 30 percent or more of the wire volume); \"Closing and starting stitches at branches and breakouts shall be next to the breakout.\"",
+              "url": "https://standards.nasa.gov/sites/default/files/standards/NASA/A/4/nasa-std-87394a_w_change_4_0.pdf"
+            },
+            {
+              "ref": "nasa-8739.4a",
+              "title": "NASA-STD-8739.4A, Workmanship Standard for Crimping, Interconnecting Cables, Harnesses, and Wiring",
+              "where": "§9.2.10.a",
+              "page": "37",
+              "says": "\"Lockstitching shall terminate with a closing stitch before each large breakout or branch of the harness.\"",
+              "url": "https://standards.nasa.gov/sites/default/files/standards/NASA/A/4/nasa-std-87394a_w_change_4_0.pdf"
+            },
+            {
+              "ref": "nasa-8739.4a",
+              "title": "NASA-STD-8739.4A, Workmanship Standard for Crimping, Interconnecting Cables, Harnesses, and Wiring",
+              "where": "Fig. 9-3 (label)",
+              "page": "36",
+              "says": "the closing stitch: \"LOCKSTITCH PLUS TWO HALF HITCHES\"",
+              "url": "https://standards.nasa.gov/sites/default/files/standards/NASA/A/4/nasa-std-87394a_w_change_4_0.pdf"
+            }
+          ],
+          "terms": [
+            {
+              "id": "breakout",
+              "t_in": 81.263,
+              "t_out": 83.163
+            }
+          ]
+        },
+        {
+          "id": "seal",
+          "t_start": 83.167,
+          "t_end": 88.867,
+          "caption": "Two half hitches lock the end",
+          "spoken": "Then two half hitches round the tape behind it lock the end, so the lacing can't work loose.",
+          "sources": [
+            {
+              "ref": "nasa-8739.4a",
+              "title": "NASA-STD-8739.4A, Workmanship Standard for Crimping, Interconnecting Cables, Harnesses, and Wiring",
+              "where": "§9.2.6.a",
+              "page": "34",
+              "says": "\"Single or double lacing tape shall be terminated with a closing stitch as shown in Figure 9-3.\"",
+              "url": "https://standards.nasa.gov/sites/default/files/standards/NASA/A/4/nasa-std-87394a_w_change_4_0.pdf"
+            },
+            {
+              "ref": "nasa-8739.4a",
+              "title": "NASA-STD-8739.4A, Workmanship Standard for Crimping, Interconnecting Cables, Harnesses, and Wiring",
+              "where": "Fig. 9-3 (label)",
+              "page": "36",
+              "says": "the closing stitch: \"LOCKSTITCH PLUS TWO HALF HITCHES\"",
+              "url": "https://standards.nasa.gov/sites/default/files/standards/NASA/A/4/nasa-std-87394a_w_change_4_0.pdf"
+            },
+            {
+              "ref": "nasa-8739.4a",
+              "title": "NASA-STD-8739.4A, Workmanship Standard for Crimping, Interconnecting Cables, Harnesses, and Wiring",
+              "where": "Fig. 9-3 (read from the figure)",
+              "page": "36",
+              "says": "the two half hitches are tied round the tape's own standing part between the running lockstitch and the last lockstitch",
+              "url": "https://standards.nasa.gov/sites/default/files/standards/NASA/A/4/nasa-std-87394a_w_change_4_0.pdf"
+            }
+          ],
+          "uncited": "\"So the lacing can't work loose\" is the tutorial's reason; NASA gives the closing stitch's form (Fig. 9-3), not its purpose.",
+          "terms": [
+            {
+              "id": "half-hitches",
+              "t_in": 87.1,
+              "t_out": 88.867
+            }
+          ]
+        },
+        {
+          "id": "tie",
+          "t_start": 88.867,
+          "t_end": 93.733,
+          "caption": "Pull snug, trim the end",
+          "spoken": "Pull them snug and trim the single tie-off end short.",
+          "sources": [
+            {
+              "ref": "nasa-8739.4a",
+              "title": "NASA-STD-8739.4A, Workmanship Standard for Crimping, Interconnecting Cables, Harnesses, and Wiring",
+              "where": "§9.2.2",
+              "page": "34",
+              "says": "\"Lacing tie-ends shall be trimmed.\"",
+              "url": "https://standards.nasa.gov/sites/default/files/standards/NASA/A/4/nasa-std-87394a_w_change_4_0.pdf"
+            },
+            {
+              "ref": "nasa-8739.4a",
+              "title": "NASA-STD-8739.4A, Workmanship Standard for Crimping, Interconnecting Cables, Harnesses, and Wiring",
+              "where": "Fig. 9-3 (read from the figure)",
+              "page": "36",
+              "says": "one tape throughout; its one free end is labelled \"TIE-OFF END\"",
+              "url": "https://standards.nasa.gov/sites/default/files/standards/NASA/A/4/nasa-std-87394a_w_change_4_0.pdf"
+            },
+            {
+              "ref": "nasa-8739.4a",
+              "title": "NASA-STD-8739.4A, Workmanship Standard for Crimping, Interconnecting Cables, Harnesses, and Wiring",
+              "where": "§20.5.1.d(4)",
+              "page": "96",
+              "says": "acceptance: \"Lacing terminated with a closing stitch and ends trimmed.\"",
+              "url": "https://standards.nasa.gov/sites/default/files/standards/NASA/A/4/nasa-std-87394a_w_change_4_0.pdf"
+            }
+          ],
+          "terms": [
+            {
+              "id": "tie-off-end",
+              "t_in": 90.667,
+              "t_out": 92.467
+            },
+            {
+              "id": "closing-stitch",
+              "t_in": 92.565,
+              "t_out": 93.546
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "ch-result",
+      "title": "The laced bundle, and a tip",
+      "t_start": 93.733,
+      "t_end": 120.467,
+      "lines": [
+        {
+          "id": "done",
+          "t_start": 93.733,
+          "t_end": 120.467,
+          "caption": "One bundle, moving together",
+          "spoken": "Now watch the core travel: the hose, cord and sleeve flex together, held by every stitch along the run.",
+          "sources": [
+            {
+              "ref": "navships-900171",
+              "title": "NAVSHIPS 900171, Electronic Installation Practices Manual, Chapter 9 Cabling, Section 7 Lacing and Binding",
+              "where": "§7.2 Purpose of lacing and binding",
+              "page": "9-98",
+              "says": "\"When the conductors are properly laced, they support each other and make a single, neat cable.\"",
+              "url": "https://www.hellschreiber.com/pdf-hell/article-hell-navships.pdf"
+            }
+          ],
+          "uncited": "\"Held by every stitch\" describes the picture; no source states it.",
+          "terms": []
+        },
+        {
+          "id": "done_tip",
+          "t_start": 101.148,
+          "t_end": 107.568,
+          "caption": null,
+          "spoken": "One last tip: lace with the hose already in its working bend, and keep the tape flat, never twisted.",
+          "sources": [
+            {
+              "ref": "navships-900171",
+              "title": "NAVSHIPS 900171, Electronic Installation Practices Manual, Chapter 9 Cabling, Section 7 Lacing and Binding",
+              "where": "§7.10 Bends",
+              "page": "9-103",
+              "says": "\"When bends occur in cable runs, always make the bend before lacing, to keep the bend in place (Figure 9-65).\"",
+              "url": "https://www.hellschreiber.com/pdf-hell/article-hell-navships.pdf"
+            },
+            {
+              "ref": "wirecare",
+              "title": "WireCare, Tying a marline hitch with lacing tape",
+              "where": "procedure, after the starting knot",
+              "page": null,
+              "says": "\"Keeping the lacing tape as flat and free of twists as possible\"",
+              "url": "https://www.wirecare.com/help/how_tos/marline-hitch-lacing-tape"
+            }
+          ],
+          "terms": []
+        }
+      ]
+    }
+  ]
+}

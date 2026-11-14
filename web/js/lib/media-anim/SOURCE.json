@@ -1,0 +1,171 @@
+{
+  "name": "media-anim",
+  "version": "0.1.0",
+  "commit": "b7d5298f8e053767e484be25d52973be1d9b643b",
+  "dirty": false,
+  "node": "v24.14.1",
+  "esbuild": "0.28.2",
+  "typescript": "7.0.2",
+  "files": {
+    "assets/jensen-head-only.svg": {
+      "bytes": 8684,
+      "sha256": "f2adb80138625d9e81744c53f30a224b605bbae8fd57f235f1134de6ece9a5e5"
+    },
+    "assets/jensen-torso.svg": {
+      "bytes": 4296,
+      "sha256": "80e673bc1ac03317534efcb16034861313d966667081aeb2ca47c93d80ada889"
+    },
+    "esm/browser/index.js": {
+      "bytes": 9374,
+      "sha256": "1f43dc2ac97d3cecb67d64a3dab6030d49d44de3179dc4f73bb956cf133275b9"
+    },
+    "esm/characters/index.js": {
+      "bytes": 49905,
+      "sha256": "69b719a5179b78cde88b33242375cdc7a0337c29c3a476e920924a4d9bbeb811"
+    },
+    "esm/runtime/index.js": {
+      "bytes": 51170,
+      "sha256": "2cb74eaa9d466e84e8c85064fc000c32d50ad0c1a670bc590a850b5b466269b9"
+    },
+    "LICENSE-BUNDLE.md": {
+      "bytes": 727,
+      "sha256": "95d68bb960bc0c2a739563745ba1a102a6698a33b065ee4cf2ead4eb5a03cd48"
+    },
+    "types/browser/index.d.ts": {
+      "bytes": 294,
+      "sha256": "931f8b91e823843ca76f18908f4f8c74880da309ab0c48791859566210812db4"
+    },
+    "types/browser/lock.d.ts": {
+      "bytes": 2215,
+      "sha256": "d5db9be8c41cce5012541d99ba535262c70dc9fd07029f341ed30dc4fafa1e50"
+    },
+    "types/characters/body/draw.d.ts": {
+      "bytes": 3831,
+      "sha256": "5ff6df80d9b3a379aa35786dc3234d8cab2f99f19d548eb98ca6413d4f6ef27f"
+    },
+    "types/characters/body/dynamics.d.ts": {
+      "bytes": 7825,
+      "sha256": "556899012d14b77fa1c66ab18b05320b94beb14a85ac0df2c9c9e061f03b7705"
+    },
+    "types/characters/body/gestures.d.ts": {
+      "bytes": 6872,
+      "sha256": "cbb5238b503aaee329b358c533f06903cd2f9f987020107cf8b1af33a576b0b6"
+    },
+    "types/characters/body/index.d.ts": {
+      "bytes": 445,
+      "sha256": "14db4a396b386a655fa869c8216091678e94663815d39e720562547e37f59290"
+    },
+    "types/characters/body/pose.d.ts": {
+      "bytes": 1716,
+      "sha256": "c3d3b310328db5024d36e44012c9cad514e84ce5d91f0774798eb80f1614c3b2"
+    },
+    "types/characters/body/skeleton.d.ts": {
+      "bytes": 3319,
+      "sha256": "8d2307a2f85d70e77d8e0fdf8bd09f5275d910613795688153505e85bc6f5374"
+    },
+    "types/characters/body/track.d.ts": {
+      "bytes": 3182,
+      "sha256": "6ae7a4c27b90e492fba9081a8c14ec51a264de7f536ec6cbb8108599c9ed4a67"
+    },
+    "types/characters/body-overlay.d.ts": {
+      "bytes": 4181,
+      "sha256": "84dc6b6cdbd71f38e8eb92e42ad68e11929f50ea640845115bc66af271b41739"
+    },
+    "types/characters/cast/cast.d.ts": {
+      "bytes": 3933,
+      "sha256": "5e5e67dd1b00e7823389c6087187763c8b67d2108b96a654246e301dfb34c5ac"
+    },
+    "types/characters/cast/index.d.ts": {
+      "bytes": 343,
+      "sha256": "9ab70895682a804923f340a770bc1c9f0aefa56ab5b1c9523943cbeed7f1813d"
+    },
+    "types/characters/cast/jensen.d.ts": {
+      "bytes": 405,
+      "sha256": "b075ca686554bce30eb8929f23e953f1f0ac180e45292c0e7d319f6d95cf00c8"
+    },
+    "types/characters/face-overlay.d.ts": {
+      "bytes": 2983,
+      "sha256": "e5a1a0b0f9398cf10a50a85c151d82cab8e1b7834caac89d6e541d8f30cf91f3"
+    },
+    "types/characters/face-rig.d.ts": {
+      "bytes": 5829,
+      "sha256": "82155bb6b9e75237e9f6ef52f6f210b68231c59bb853dded910eb256e8375797"
+    },
+    "types/characters/index.d.ts": {
+      "bytes": 1281,
+      "sha256": "53f53b6b7930628ea6ddaa226a7765f6739f9b64de09713702ead371a976380b"
+    },
+    "types/runtime/callout.d.ts": {
+      "bytes": 7588,
+      "sha256": "0bf2f9eadeabd27dcaae43a463a1f01eda5d8f2ecb3fc1061b56a47ceb0e0d98"
+    },
+    "types/runtime/camera.d.ts": {
+      "bytes": 3950,
+      "sha256": "38c1830fd2e123d96437191312971d26b1b8982d0dc8f58e03573d18f210b4b9"
+    },
+    "types/runtime/chase.d.ts": {
+      "bytes": 4866,
+      "sha256": "0f05c7e3a53dc97de724b63a886f810380be39a683b950e5a436283e8622b5f7"
+    },
+    "types/runtime/credits.d.ts": {
+      "bytes": 3740,
+      "sha256": "7d52a1b5e1318d5b1cd5a1a8d215ed2da5036d60449f3c57e7a42d7894c5df8a"
+    },
+    "types/runtime/halo.d.ts": {
+      "bytes": 801,
+      "sha256": "f5cb187bbaec02fac67dfe5aa5c5253ac3a8bf4b2cdd8e48f88ac9f448ef8f30"
+    },
+    "types/runtime/index.d.ts": {
+      "bytes": 2410,
+      "sha256": "c3cbd732399927da7cd2b46e93b68932dd726d31911aafa75bde9126cc32bb21"
+    },
+    "types/runtime/inset.d.ts": {
+      "bytes": 4156,
+      "sha256": "e64e1107602140dd83be44039ab4939f33582d7029fd778e0e986e25298d42b6"
+    },
+    "types/runtime/occluder.d.ts": {
+      "bytes": 892,
+      "sha256": "2a5c46d794c90e5e96145fc8da783e29075271cd77c712a2b6111f5858114208"
+    },
+    "types/runtime/player.d.ts": {
+      "bytes": 1992,
+      "sha256": "4aa16dbf1c72cb3c3cf6586d65ed2984d7ff70f0ca1c0b9566f4a9d6be86eb8f"
+    },
+    "types/runtime/reveal.d.ts": {
+      "bytes": 1021,
+      "sha256": "210cd27aebd59f1f96397ce5365fd5fccecbe20f2004a3fc055dbcf423659856"
+    },
+    "types/runtime/swing.d.ts": {
+      "bytes": 1000,
+      "sha256": "b075db4e28394ff4aea6a0de3a200c3e47688942174a05c4765b9aaa93b00121"
+    },
+    "types/runtime/timeline.d.ts": {
+      "bytes": 4658,
+      "sha256": "a4ac782ede24e34bd89831dde3f1b939ddf49b2c29a7bbdedbed2da2906dc124"
+    },
+    "types/runtime/tube.d.ts": {
+      "bytes": 1256,
+      "sha256": "70494f4357c74ba160e46bc7078a3998eb1e26e4f6437f2bbb291d55a8c42ea4"
+    },
+    "types/runtime/tweak.d.ts": {
+      "bytes": 1871,
+      "sha256": "f8d0e631dc99fe5d5f5a309168796468422c16b3b9ce21ac561fa04fc1be168e"
+    },
+    "umd/media-anim-browser.min.js": {
+      "bytes": 10581,
+      "sha256": "53982ef1b8fc22f26f39b4f828bdf57de9816f0b96912d7f643c4d98c0c6f4e0"
+    },
+    "umd/media-anim-characters.min.js": {
+      "bytes": 50574,
+      "sha256": "b859cac922b15f702f844e51f0f401d5814070e003cecf7eaee584dfbcdcdbe7"
+    },
+    "umd/media-anim-runtime.min.js": {
+      "bytes": 51846,
+      "sha256": "b1283a6e89d16a3e518094c7a3c3a612d37e918f28f698ad09bce1677fcc52e9"
+    },
+    "umd/package.json": {
+      "bytes": 23,
+      "sha256": "d18f120db5a99372058690f86a1332484253e3cdbdbddbc0f5effa6a392b26e0"
+    }
+  }
+}

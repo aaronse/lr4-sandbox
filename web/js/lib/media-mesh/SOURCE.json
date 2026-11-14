@@ -1,0 +1,75 @@
+{
+  "name": "media-mesh",
+  "version": "0.1.0",
+  "commit": "98c9fdc63b7907a1992db22e997dfcc04e059e84",
+  "dirty": false,
+  "node": "v24.14.1",
+  "esbuild": "0.28.2",
+  "typescript": "7.0.2",
+  "files": {
+    "esm/core/index.js": {
+      "bytes": 3371,
+      "sha256": "148850b7430ecbe1c56e8f207c55e8fc2a3d9d04d7944d53c14fba24a3dff5e1"
+    },
+    "esm/knots/index.js": {
+      "bytes": 37529,
+      "sha256": "5947744d5df3ed0008bddb45f2df93f062463d6decdc0cd00c149c8bffa53d2c"
+    },
+    "LICENSE-BUNDLE.md": {
+      "bytes": 617,
+      "sha256": "ff6e932c018954a3749c0df556a386dc1d9d0e408c54608544db720cff08b27d"
+    },
+    "types/core/index.d.ts": {
+      "bytes": 455,
+      "sha256": "a180b89582128ddb4097a6bc6c9e56202b46e39fe3ad0aab93dad168879cda38"
+    },
+    "types/core/lib/curve.d.ts": {
+      "bytes": 1296,
+      "sha256": "8dade4a9f998e15438a4f9f8f880a3dc5fd7f9b4b00b961c163796b2c56ce1b4"
+    },
+    "types/core/lib/vec3.d.ts": {
+      "bytes": 1280,
+      "sha256": "ebf800326136c0031fd8995a95a657bf6600885f3624b16ef5a373df37d1508c"
+    },
+    "types/knots/index.d.ts": {
+      "bytes": 1157,
+      "sha256": "376dc1eb455b7ccb5715f923b0eab32d147f2709ed65552577e6beab0299f126"
+    },
+    "types/knots/lib/body.d.ts": {
+      "bytes": 1679,
+      "sha256": "db84e7442238a553cf238f2dfd1fdb269655d7a4c0f9c1743d1dd6f4cd766b30"
+    },
+    "types/knots/lib/bundle.d.ts": {
+      "bytes": 1665,
+      "sha256": "41d3050f61a27bfc886f56bf76a8ca85bdb89a96ee22866bd6a65a1b96f11013"
+    },
+    "types/knots/lib/clearance.d.ts": {
+      "bytes": 1215,
+      "sha256": "e8704fa7987137f6af7c7333279fc3cebd474746b22369fae539ece060c3a346"
+    },
+    "types/knots/lib/knot.d.ts": {
+      "bytes": 1282,
+      "sha256": "46a9170abd2d286cb5c844ccaa93b53648c0836153c727087756233346f8034c"
+    },
+    "types/knots/lib/knotdet.d.ts": {
+      "bytes": 864,
+      "sha256": "c01f191e34054059400a2f2b83c0138f543af72b87b8b2491f5187c4dd746881"
+    },
+    "types/knots/lib/rope.d.ts": {
+      "bytes": 7059,
+      "sha256": "bf6c49a0d785bacd42aa1fd17b8743b4808a7bbb071b7e43fa26ff7f9e3ffd64"
+    },
+    "umd/media-mesh-core.min.js": {
+      "bytes": 4046,
+      "sha256": "e739a46eb236493c3a3ad1b9e9b79e1934228f0588b6bb52cfb1e0eb87f60d20"
+    },
+    "umd/media-mesh-knots.min.js": {
+      "bytes": 38342,
+      "sha256": "d200bbbbcb0ddcf3d339b0c9b80e04c7662f37753526a65f372639e94ff21ffa"
+    },
+    "umd/package.json": {
+      "bytes": 23,
+      "sha256": "d18f120db5a99372058690f86a1332484253e3cdbdbddbc0f5effa6a392b26e0"
+    }
+  }
+}

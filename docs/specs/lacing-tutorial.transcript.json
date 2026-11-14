@@ -1,0 +1,2273 @@
+{
+  "title": "Lacing the cables to the hose (LR4 Sandbox)",
+  "spec": "docs/specs/lacing-tutorial.md",
+  "storyboard": "docs/specs/lacing-tutorial.storyboard.json",
+  "survey": "docs/PLAN.md, Cable lacing (survey, 2026-11-08)",
+  "generated_by": "node tools/lacing_voice.js transcript",
+  "duration_s": 120.467,
+  "note": "t_start / t_end are seconds of the video (the director records (Video Lacing:) from t = 0; HOLD= adds a still tail after the last entry)",
+  "events_note": "each entry's events (LR4LacingTut.eventsOf: the shots' keys and layer tracks, the knots' phases, the blade's cuts, sfxAt, the voice's lines): at_rel = the share of the scene, t = s into the video; kinds camera, layer, knot, draw, pose (the core's travel: the opening's legs, the finale's out and back), cut, sfx, voice, callout, reveal (the opening's flash as the voice first says \"cable lacing\", the music's hit on it; the loose cables neat), credits (in, out). Where each is authored: docs/specs/lacing-tutorial.md 'Where the events come from'",
+  "entries": [
+    {
+      "index": 0,
+      "id": "goal",
+      "purpose": "preview-goal",
+      "t_start": 0,
+      "t_end": 18.867,
+      "caption": "Lace the cables to the hose",
+      "spoken": "Loose cables on a LowRider flap, snag and chafe, and can yank a plug mid-cut.",
+      "audio_s": 5.159,
+      "more": [
+        {
+          "id": "goal_fix",
+          "t_start": 5.809,
+          "t_end": 10.451,
+          "spoken": "The fix? Cable lacing: the method NASA specifies for its mission hardware.",
+          "audio_s": 4.642,
+          "sources": [
+            {
+              "source": "NASA-STD-8739.4A, Workmanship Standard for Crimping, Interconnecting Cables, Harnesses, and Wiring, Revision A with Change 4",
+              "ref": "nasa-8739.4a",
+              "where": "§1.2.2 Applicability",
+              "page": "14",
+              "says": "\"This standard applies to production and processing of mission hardware\"",
+              "url": "https://standards.nasa.gov/sites/default/files/standards/NASA/A/4/nasa-std-87394a_w_change_4_0.pdf"
+            },
+            {
+              "source": "NASA-STD-8739.4A, Workmanship Standard for Crimping, Interconnecting Cables, Harnesses, and Wiring, Revision A with Change 4",
+              "ref": "nasa-8739.4a",
+              "where": "§9.2.7, Fig. 9-5",
+              "page": "36",
+              "says": "\"Continuous lacing shall be achieved using running lockstitches as shown in Figure 9-5.\"",
+              "url": "https://standards.nasa.gov/sites/default/files/standards/NASA/A/4/nasa-std-87394a_w_change_4_0.pdf"
+            },
+            {
+              "source": "Wikipedia, Cable lacing, web page",
+              "ref": "wikipedia",
+              "where": "Cable lacing (the article's lead)",
+              "page": null,
+              "says": "\"Cable lacing is a method for tying wiring harnesses and cable looms, traditionally used in telecommunication, naval, and aerospace applications.\"",
+              "url": "https://en.wikipedia.org/wiki/Cable_lacing"
+            },
+            {
+              "source": "Wikipedia, Cable lacing, web page",
+              "ref": "wikipedia",
+              "where": "Cable lacing, Styles",
+              "page": null,
+              "says": "\"Some organizations have in-house standards to which cable lacing must conform, for example NASA specifies its cable lacing techniques in chapter 9 of NASA-STD-8739.4.\"",
+              "url": "https://en.wikipedia.org/wiki/Cable_lacing"
+            }
+          ]
+        },
+        {
+          "id": "goal_why",
+          "t_start": 10.601,
+          "t_end": 16.977,
+          "spoken": "Tight, tidy, tough: one tape, no sharp zip-tie tails, and one cut stitch won't unravel the rest.",
+          "audio_s": 6.376,
+          "sources": [
+            {
+              "source": "NAVSHIPS 900171, Electronic Installation Practices Manual, Chapter 9 Cabling, Section 7 Lacing and Binding, Change 2",
+              "ref": "navships-900171",
+              "where": "§7.8 Lacing",
+              "page": "9-103",
+              "says": "\"the \\\"over and under\\\" form is necessary to prevent unraveling of entire cable lacing, in the event one or more stitches are cut\"",
+              "url": "https://www.hellschreiber.com/pdf-hell/article-hell-navships.pdf"
+            }
+          ],
+          "uncited": "\"tight, tidy, tough\" and \"no sharp zip-tie tails\" are the tutorial's own"
+        }
+      ],
+      "numbers": [],
+      "sources": [
+        {
+          "source": "NASA-STD-8739.4A, Workmanship Standard for Crimping, Interconnecting Cables, Harnesses, and Wiring, Revision A with Change 4",
+          "ref": "nasa-8739.4a",
+          "where": "§7.2.11",
+          "page": "27",
+          "says": "\"Harness designs and routing shall provide support and protection to harnesses and cables so that they are protected from abrasion, cold flow, cut through, vibration, chafing, flexing, and sharp edges.\"",
+          "url": "https://standards.nasa.gov/sites/default/files/standards/NASA/A/4/nasa-std-87394a_w_change_4_0.pdf"
+        },
+        {
+          "source": "NASA-STD-8739.4A, Workmanship Standard for Crimping, Interconnecting Cables, Harnesses, and Wiring, Revision A with Change 4",
+          "ref": "nasa-8739.4a",
+          "where": "§7.2.28",
+          "page": "28",
+          "says": "\"Provision shall be made for stress relief in wires entering connectors from harnesses\"",
+          "url": "https://standards.nasa.gov/sites/default/files/standards/NASA/A/4/nasa-std-87394a_w_change_4_0.pdf"
+        }
+      ],
+      "cues": [],
+      "uncited": "\"flap\" and \"snag\" are the tutorial's own (the picture shows the loose cables swaying); \"yank a plug\" is the tutorial's reading of NASA §7.2.28's stress relief at connectors; which cables ride with the core is shown, not said (d19: the problem in one line, the reveal sooner)",
+      "events": [
+        {
+          "at_rel": 0,
+          "t": 0,
+          "kind": "camera",
+          "what": "key 1/6: focus {\"point\":[800,760,240]}, world az 140 el 28, dist 640 mm",
+          "key": 0,
+          "x": 0
+        },
+        {
+          "at_rel": 0,
+          "t": 0,
+          "kind": "layer",
+          "what": "ghost 0.7 (default 0.3)",
+          "layer": "ghost",
+          "value": 0.7
+        },
+        {
+          "at_rel": 0,
+          "t": 0,
+          "kind": "pose",
+          "what": "the core sets off out along X (1 of 3: to 280 mm in 2.03 s)",
+          "edge": "out"
+        },
+        {
+          "at_rel": 0.027,
+          "t": 0.5,
+          "kind": "voice",
+          "what": "goal starts: \"Loose cables on a LowRider flap, snag and chafe, and can yank a plug mid-cut.\"",
+          "line": "goal",
+          "edge": "start"
+        },
+        {
+          "at_rel": 0.161,
+          "t": 3.044,
+          "kind": "pose",
+          "what": "the core sets off back home (1 of 3)",
+          "edge": "back"
+        },
+        {
+          "at_rel": 0.25,
+          "t": 4.717,
+          "kind": "camera",
+          "what": "key 2/6: focus {\"point\":[810,760,240]}, world az 114 el 54, dist 620 mm",
+          "key": 1,
+          "x": 0.25
+        },
+        {
+          "at_rel": 0.3,
+          "t": 5.659,
+          "kind": "voice",
+          "what": "goal ends",
+          "line": "goal",
+          "edge": "end"
+        },
+        {
+          "at_rel": 0.308,
+          "t": 5.809,
+          "kind": "voice",
+          "what": "goal_fix starts: \"The fix? Cable lacing: the method NASA specifies for its mission hardware.\"",
+          "line": "goal_fix",
+          "edge": "start"
+        },
+        {
+          "at_rel": 0.323,
+          "t": 6.089,
+          "kind": "pose",
+          "what": "the core sets off out along X (2 of 3: to 280 mm in 2.03 s)",
+          "edge": "out"
+        },
+        {
+          "at_rel": 0.359,
+          "t": 6.769,
+          "kind": "reveal",
+          "what": "the lacing flashes in as the voice first says \"Cable lacing\" (goal_fix + 0.96 s, measured; the music's hit), from 0: a warm-white core (#fff4d6) and a halo; the loose cord and sleeve start to draw in to the hose",
+          "edge": "flash"
+        },
+        {
+          "at_rel": 0.396,
+          "t": 7.469,
+          "kind": "reveal",
+          "what": "the cord and sleeve neat on the hose (drawn in over 0.7 s), the core still travelling",
+          "edge": "neat"
+        },
+        {
+          "at_rel": 0.427,
+          "t": 8.049,
+          "kind": "callout",
+          "what": "NASA-STD-8739.4A in (on \"NASA\"): \"NASA's workmanship standard for cables, harnesses and wiring; lacing is §9.2\" - NASA-STD-8739.4A §9.2, pp. 33-37",
+          "term": "nasa-standard",
+          "edge": "in",
+          "anchor": "ghost_close"
+        },
+        {
+          "at_rel": 0.438,
+          "t": 8.269,
+          "kind": "reveal",
+          "what": "the lacing settled to the tape's colour, opacity 0.7; the halo gone 0.1 s later",
+          "edge": "settled"
+        },
+        {
+          "at_rel": 0.484,
+          "t": 9.133,
+          "kind": "pose",
+          "what": "the core sets off back home (2 of 3)",
+          "edge": "back"
+        },
+        {
+          "at_rel": 0.5,
+          "t": 9.433,
+          "kind": "camera",
+          "what": "key 3/6: focus {\"point\":[800,760,245]}, world az 96 el 50, dist 600 mm",
+          "key": 2,
+          "x": 0.5
+        },
+        {
+          "at_rel": 0.554,
+          "t": 10.451,
+          "kind": "voice",
+          "what": "goal_fix ends",
+          "line": "goal_fix",
+          "edge": "end"
+        },
+        {
+          "at_rel": 0.562,
+          "t": 10.601,
+          "kind": "voice",
+          "what": "goal_why starts: \"Tight, tidy, tough: one tape, no sharp zip-tie tails, and one cut stitch won't unravel the rest.\"",
+          "line": "goal_why",
+          "edge": "start"
+        },
+        {
+          "at_rel": 0.602,
+          "t": 11.349,
+          "kind": "callout",
+          "what": "NASA-STD-8739.4A out (held 3 s)",
+          "term": "nasa-standard",
+          "edge": "out",
+          "anchor": "ghost_close"
+        },
+        {
+          "at_rel": 0.645,
+          "t": 12.178,
+          "kind": "pose",
+          "what": "the core sets off out along X (3 of 3: to 280 mm in 2.03 s)",
+          "edge": "out"
+        },
+        {
+          "at_rel": 0.7,
+          "t": 13.207,
+          "kind": "camera",
+          "what": "key 4/6: focus {\"point\":[740,755,252]}, world az 88 el 54, dist 560 mm",
+          "key": 3,
+          "x": 0.7
+        },
+        {
+          "at_rel": 0.807,
+          "t": 15.222,
+          "kind": "pose",
+          "what": "the core sets off back home (3 of 3)",
+          "edge": "back"
+        },
+        {
+          "at_rel": 0.88,
+          "t": 16.603,
+          "kind": "camera",
+          "what": "key 5/6: focus {\"point\":[680,750,258]}, world az 81 el 59, dist 510 mm",
+          "key": 4,
+          "x": 0.88
+        },
+        {
+          "at_rel": 0.9,
+          "t": 16.977,
+          "kind": "voice",
+          "what": "goal_why ends",
+          "line": "goal_why",
+          "edge": "end"
+        },
+        {
+          "at_rel": 0.968,
+          "t": 18.267,
+          "kind": "pose",
+          "what": "the core parked at home",
+          "edge": "parked"
+        },
+        {
+          "at_rel": 1,
+          "t": 18.867,
+          "kind": "camera",
+          "what": "key 6/6: focus {\"point\":[643,749,261]}, world az 76 el 63, dist 470 mm",
+          "key": 5,
+          "x": 1
+        }
+      ]
+    },
+    {
+      "index": 1,
+      "id": "start",
+      "purpose": "step",
+      "t_start": 18.867,
+      "t_end": 25.333,
+      "caption": "Start by the last zip tie",
+      "spoken": "Following NASA's lacing standard, start beside the core's last zip tie with a spot tie round all three.",
+      "audio_s": 6.08,
+      "numbers": [
+        {
+          "value": 2,
+          "unit": "turns",
+          "what": "turns in the starting stitch",
+          "source": "web/js/hose_route.js LACING (twin: freecad/lr4.py LACING).wraps[0]"
+        },
+        {
+          "value": 15,
+          "unit": "mm",
+          "in": 0.59,
+          "what": "the starting stitch past the core's last zip tie (the core's +X end)",
+          "source": "web/js/hose_route.js LACING (twin: freecad/lr4.py LACING).start"
+        }
+      ],
+      "sources": [
+        {
+          "source": "NASA-STD-8739.4A, Workmanship Standard for Crimping, Interconnecting Cables, Harnesses, and Wiring, Revision A with Change 4",
+          "ref": "nasa-8739.4a",
+          "where": "§9.2.4.a-b",
+          "page": "34",
+          "says": "\"Harnesses laced with single tape shall initially be tied with a starting stitch.\" \"Single-tape starting stitches shall be the same as a spot tie with a running end or as shown in Figure 9-1 View A.\"",
+          "url": "https://standards.nasa.gov/sites/default/files/standards/NASA/A/4/nasa-std-87394a_w_change_4_0.pdf"
+        },
+        {
+          "source": "NASA-STD-8739.4A, Workmanship Standard for Crimping, Interconnecting Cables, Harnesses, and Wiring, Revision A with Change 4",
+          "ref": "nasa-8739.4a",
+          "where": "§9.2.5",
+          "page": "34",
+          "says": "\"Spot ties shall consist of a clove hitch followed by a square knot as shown in Figure 9-2 or other non-slip knots.\"",
+          "url": "https://standards.nasa.gov/sites/default/files/standards/NASA/A/4/nasa-std-87394a_w_change_4_0.pdf"
+        },
+        {
+          "source": "Wikipedia, Cable lacing, web page",
+          "ref": "wikipedia",
+          "where": "Cable lacing, Styles",
+          "page": null,
+          "says": "\"Some organizations have in-house standards to which cable lacing must conform, for example NASA specifies its cable lacing techniques in chapter 9 of NASA-STD-8739.4.\"",
+          "url": "https://en.wikipedia.org/wiki/Cable_lacing"
+        }
+      ],
+      "cues": [],
+      "not_drawn": "the model's lacing draws a stitch as its turns (docs/PLAN.md, Cable lacing: \"Not modelled: the knot itself\"); the knots are drawn in the close-ups that follow",
+      "events": [
+        {
+          "at_rel": 0,
+          "t": 18.867,
+          "kind": "camera",
+          "what": "key 1/1: focus {\"stitch\":0}, world az 74.05 el 70, dist 240 mm (moved to over 0.6 s either side of the scene's start)",
+          "key": 0,
+          "x": 0
+        },
+        {
+          "at_rel": 0,
+          "t": 18.867,
+          "kind": "voice",
+          "what": "start starts: \"Following NASA's lacing standard, start beside the core's last zip tie with a spot tie round all three.\"",
+          "line": "start",
+          "edge": "start"
+        },
+        {
+          "at_rel": 0.056,
+          "t": 19.227,
+          "kind": "callout",
+          "what": "NASA-STD-8739.4A in (on \"NASA's\"): \"NASA's workmanship standard for cables, harnesses and wiring; lacing is §9.2\" - NASA-STD-8739.4A §9.2, pp. 33-37",
+          "term": "nasa-standard",
+          "edge": "in",
+          "anchor": "stitch0"
+        },
+        {
+          "at_rel": 0.093,
+          "t": 19.467,
+          "kind": "layer",
+          "what": "ghost 0.7",
+          "layer": "ghost",
+          "value": 0.7
+        },
+        {
+          "at_rel": 0.093,
+          "t": 19.467,
+          "kind": "draw",
+          "what": "the starting stitch drawn on: starts",
+          "w": 0,
+          "edge": "start"
+        },
+        {
+          "at_rel": 0.186,
+          "t": 20.067,
+          "kind": "layer",
+          "what": "ghost reaches 0.3 (from 0.7, out over 0.6 s)",
+          "layer": "ghost",
+          "value": 0.3
+        },
+        {
+          "at_rel": 0.442,
+          "t": 21.727,
+          "kind": "callout",
+          "what": "NASA-STD-8739.4A out (held 2.2 s)",
+          "term": "nasa-standard",
+          "edge": "out",
+          "anchor": "stitch0"
+        },
+        {
+          "at_rel": 0.705,
+          "t": 23.427,
+          "kind": "callout",
+          "what": "Starting stitch in (on \"spot tie\"): \"The first stitch: a spot tie with a running end\" - NASA-STD-8739.4A §9.2.4.b, pp. 34-35",
+          "term": "starting-stitch",
+          "edge": "in",
+          "anchor": "stitch0"
+        },
+        {
+          "at_rel": 0.94,
+          "t": 24.947,
+          "kind": "voice",
+          "what": "start ends",
+          "line": "start",
+          "edge": "end"
+        },
+        {
+          "at_rel": 0.946,
+          "t": 24.983,
+          "kind": "draw",
+          "what": "the starting stitch drawn on: ends",
+          "w": 1,
+          "edge": "end"
+        },
+        {
+          "at_rel": 0.971,
+          "t": 25.146,
+          "kind": "callout",
+          "what": "Starting stitch out (held 1.42 s, 0.68 s short to end in the scene)",
+          "term": "starting-stitch",
+          "edge": "out",
+          "anchor": "stitch0"
+        }
+      ]
+    },
+    {
+      "index": 2,
+      "id": "clove",
+      "purpose": "step",
+      "t_start": 25.333,
+      "t_end": 32.7,
+      "caption": "Clove hitch: two crossed turns",
+      "spoken": "Two turns, the second crossing over the first, ends tucked under the cross: a clove hitch grips without slipping.",
+      "audio_s": 7.086,
+      "numbers": [
+        {
+          "value": 2,
+          "unit": "turns",
+          "what": "turns in the starting stitch (the clove hitch)",
+          "source": "web/js/hose_route.js LACING (twin: freecad/lr4.py LACING).wraps[0]"
+        }
+      ],
+      "sources": [
+        {
+          "source": "NASA-STD-8739.4A, Workmanship Standard for Crimping, Interconnecting Cables, Harnesses, and Wiring, Revision A with Change 4",
+          "ref": "nasa-8739.4a",
+          "where": "§9.2.5",
+          "page": "34",
+          "says": "\"Spot ties shall consist of a clove hitch followed by a square knot as shown in Figure 9-2 or other non-slip knots.\"",
+          "url": "https://standards.nasa.gov/sites/default/files/standards/NASA/A/4/nasa-std-87394a_w_change_4_0.pdf"
+        },
+        {
+          "source": "NASA-STD-8739.4A, Workmanship Standard for Crimping, Interconnecting Cables, Harnesses, and Wiring, Revision A with Change 4",
+          "ref": "nasa-8739.4a",
+          "where": "Fig. 9-2 View A (read from the figure)",
+          "page": "35",
+          "says": "\"CLOVE HITCH\": two crossed turns round the bundle",
+          "url": "https://standards.nasa.gov/sites/default/files/standards/NASA/A/4/nasa-std-87394a_w_change_4_0.pdf"
+        }
+      ],
+      "cues": [],
+      "not_drawn": "the knot's shape is drawn by the tutorial (web/js/lacing_tutorial.js, the shots' knots), not traced: NASA's figures are small line drawings and its text gives no steps",
+      "uncited": "\"Grips without slipping\" is the tutorial's wording; NASA §9.2.5 only calls the spot tie's knots non-slip (\"or other non-slip knots\").",
+      "events": [
+        {
+          "at_rel": 0,
+          "t": 25.333,
+          "kind": "camera",
+          "what": "key 1/1: focus {\"surface\":\"start\",\"a\":0,\"w\":32,\"lift\":3}, surface az 16.7 el 23.32, fit 40 mm (cut to, under the dip)",
+          "key": 0,
+          "x": 0
+        },
+        {
+          "at_rel": 0,
+          "t": 25.333,
+          "kind": "layer",
+          "what": "hose 0.45 (default 1)",
+          "layer": "hose",
+          "value": 0.45
+        },
+        {
+          "at_rel": 0,
+          "t": 25.333,
+          "kind": "voice",
+          "what": "clove starts: \"Two turns, the second crossing over the first, ends tucked under the cross: a clove hitch grips without slipping.\"",
+          "line": "clove",
+          "edge": "start"
+        },
+        {
+          "at_rel": 0.081,
+          "t": 25.933,
+          "kind": "knot",
+          "what": "lay, wrap (loose), tuck under: starts",
+          "w": 0,
+          "edge": "start"
+        },
+        {
+          "at_rel": 0.585,
+          "t": 29.644,
+          "kind": "knot",
+          "what": "lay, wrap (loose), tuck under: ends",
+          "w": 0.7,
+          "edge": "end"
+        },
+        {
+          "at_rel": 0.585,
+          "t": 29.644,
+          "kind": "knot",
+          "what": "pull snug: starts",
+          "w": 0.7,
+          "edge": "start"
+        },
+        {
+          "at_rel": 0.698,
+          "t": 30.473,
+          "kind": "callout",
+          "what": "Clove hitch in (on \"clove hitch\"): \"Two crossed turns round the bundle\" - NASA-STD-8739.4A §9.2.5, p. 35",
+          "term": "clove-hitch",
+          "edge": "in",
+          "anchor": "clove"
+        },
+        {
+          "at_rel": 0.952,
+          "t": 32.35,
+          "kind": "knot",
+          "what": "pull snug: ends",
+          "w": 1,
+          "edge": "end"
+        },
+        {
+          "at_rel": 0.962,
+          "t": 32.419,
+          "kind": "voice",
+          "what": "clove ends",
+          "line": "clove",
+          "edge": "end"
+        },
+        {
+          "at_rel": 1,
+          "t": 32.7,
+          "kind": "callout",
+          "what": "Clove hitch out (held 1.93 s, 0.67 s short to end in the scene)",
+          "term": "clove-hitch",
+          "edge": "out",
+          "anchor": "clove"
+        }
+      ]
+    },
+    {
+      "index": 3,
+      "id": "square",
+      "purpose": "step",
+      "t_start": 32.7,
+      "t_end": 40.5,
+      "caption": "Right over left, left over right",
+      "spoken": "Secure it with a square knot: right over left, then left over right, pull snug, and trim the short end.",
+      "audio_s": 6.8,
+      "numbers": [
+        {
+          "value": 150,
+          "unit": "mm",
+          "in": 5.91,
+          "what": "tape allowed per knot (tails trimmed) in the BOM's length",
+          "source": "web/js/hose_route.js LACING (twin: freecad/lr4.py LACING).tail"
+        }
+      ],
+      "sources": [
+        {
+          "source": "NASA-STD-8739.4A, Workmanship Standard for Crimping, Interconnecting Cables, Harnesses, and Wiring, Revision A with Change 4",
+          "ref": "nasa-8739.4a",
+          "where": "§9.2.5",
+          "page": "34",
+          "says": "\"Spot ties shall consist of a clove hitch followed by a square knot as shown in Figure 9-2 or other non-slip knots.\"",
+          "url": "https://standards.nasa.gov/sites/default/files/standards/NASA/A/4/nasa-std-87394a_w_change_4_0.pdf"
+        },
+        {
+          "source": "NASA-STD-8739.4A, Workmanship Standard for Crimping, Interconnecting Cables, Harnesses, and Wiring, Revision A with Change 4",
+          "ref": "nasa-8739.4a",
+          "where": "Fig. 9-2 View B (label)",
+          "page": "35",
+          "says": "\"CLOVE HITCH AND SQUARE KNOT\"",
+          "url": "https://standards.nasa.gov/sites/default/files/standards/NASA/A/4/nasa-std-87394a_w_change_4_0.pdf"
+        },
+        {
+          "source": "NASA-STD-8739.4A, Workmanship Standard for Crimping, Interconnecting Cables, Harnesses, and Wiring, Revision A with Change 4",
+          "ref": "nasa-8739.4a",
+          "where": "§9.2.2",
+          "page": "34",
+          "says": "\"Lacing tie-ends shall be trimmed.\"",
+          "url": "https://standards.nasa.gov/sites/default/files/standards/NASA/A/4/nasa-std-87394a_w_change_4_0.pdf"
+        },
+        {
+          "source": "WireCare, Tying a marline hitch with lacing tape, web page",
+          "ref": "wirecare",
+          "where": "procedure, starting knot",
+          "page": null,
+          "says": "\"Snug the knot tight and trim the short end to about 1/8\" or so.\"",
+          "url": "https://www.wirecare.com/help/how_tos/marline-hitch-lacing-tape"
+        }
+      ],
+      "cues": [
+        {
+          "sfx": "swipe",
+          "t": 39.537,
+          "spoken": false,
+          "what": "the blade cuts an end (the wav starts 0.25 s before)"
+        }
+      ],
+      "not_drawn": "the knot's shape is drawn by the tutorial (web/js/lacing_tutorial.js, the shots' knots), not traced: NASA's figures are small line drawings and its text gives no steps; the square knot's crossings alternate over and under along each end (a reef knot)",
+      "uncited": "\"Right over left, then left over right\" is the common way to tie a square knot; no surveyed source spells it out.",
+      "events": [
+        {
+          "at_rel": 0,
+          "t": 32.7,
+          "kind": "camera",
+          "what": "key 1/1: focus {\"surface\":\"start\",\"a\":0,\"w\":0,\"lift\":3}, surface az 0 el 0, fit 14 mm (moved to over 1.2 s either side of the scene's start)",
+          "key": 0,
+          "x": 0
+        },
+        {
+          "at_rel": 0,
+          "t": 32.7,
+          "kind": "layer",
+          "what": "hose 0.45 (default 1)",
+          "layer": "hose",
+          "value": 0.45
+        },
+        {
+          "at_rel": 0,
+          "t": 32.7,
+          "kind": "layer",
+          "what": "context 1",
+          "layer": "context",
+          "value": 1
+        },
+        {
+          "at_rel": 0,
+          "t": 32.7,
+          "kind": "layer",
+          "what": "base 1",
+          "layer": "base",
+          "value": 1
+        },
+        {
+          "at_rel": 0,
+          "t": 32.7,
+          "kind": "voice",
+          "what": "square starts: \"Secure it with a square knot: right over left, then left over right, pull snug, and trim the short end.\"",
+          "line": "square",
+          "edge": "start"
+        },
+        {
+          "at_rel": 0.077,
+          "t": 33.3,
+          "kind": "layer",
+          "what": "context reaches 0.3 (from 1, out over 0.6 s)",
+          "layer": "context",
+          "value": 0.3
+        },
+        {
+          "at_rel": 0.077,
+          "t": 33.3,
+          "kind": "layer",
+          "what": "base reaches 0.3 (from 1, out over 0.6 s)",
+          "layer": "base",
+          "value": 0.3
+        },
+        {
+          "at_rel": 0.077,
+          "t": 33.3,
+          "kind": "knot",
+          "what": "lay both ends: starts",
+          "w": 0,
+          "edge": "start"
+        },
+        {
+          "at_rel": 0.394,
+          "t": 35.77,
+          "kind": "knot",
+          "what": "lay both ends: ends",
+          "w": 0.12,
+          "edge": "end"
+        },
+        {
+          "at_rel": 0.394,
+          "t": 35.77,
+          "kind": "knot",
+          "what": "first half knot: right over left (right end over and under the left): starts",
+          "w": 0.12,
+          "edge": "start"
+        },
+        {
+          "at_rel": 0.542,
+          "t": 36.928,
+          "kind": "knot",
+          "what": "first half knot: right over left (right end over and under the left): ends",
+          "w": 0.38,
+          "edge": "end"
+        },
+        {
+          "at_rel": 0.542,
+          "t": 36.928,
+          "kind": "knot",
+          "what": "left end round and back: starts",
+          "w": 0.38,
+          "edge": "start"
+        },
+        {
+          "at_rel": 0.587,
+          "t": 37.275,
+          "kind": "knot",
+          "what": "left end round and back: ends",
+          "w": 0.5,
+          "edge": "end"
+        },
+        {
+          "at_rel": 0.587,
+          "t": 37.275,
+          "kind": "knot",
+          "what": "second half knot: left over right: starts",
+          "w": 0.5,
+          "edge": "start"
+        },
+        {
+          "at_rel": 0.625,
+          "t": 37.575,
+          "kind": "callout",
+          "what": "Square knot in (at 0.63 of the scene): \"Ties the clove hitch's two ends off\" - NASA-STD-8739.4A §9.2.5, p. 35",
+          "term": "square-knot",
+          "edge": "in",
+          "anchor": "square_knot"
+        },
+        {
+          "at_rel": 0.666,
+          "t": 37.897,
+          "kind": "knot",
+          "what": "second half knot: left over right: ends",
+          "w": 0.7,
+          "edge": "end"
+        },
+        {
+          "at_rel": 0.666,
+          "t": 37.897,
+          "kind": "knot",
+          "what": "pull snug: starts",
+          "w": 0.7,
+          "edge": "start"
+        },
+        {
+          "at_rel": 0.779,
+          "t": 38.78,
+          "kind": "knot",
+          "what": "pull snug: ends",
+          "w": 0.88,
+          "edge": "end"
+        },
+        {
+          "at_rel": 0.843,
+          "t": 39.275,
+          "kind": "callout",
+          "what": "Square knot out (held 1.4 s)",
+          "term": "square-knot",
+          "edge": "out",
+          "anchor": "square_knot"
+        },
+        {
+          "at_rel": 0.843,
+          "t": 39.275,
+          "kind": "callout",
+          "what": "Running end in (at 0.8 of the scene, waited 0.31 s): \"The long end that laces on\" - NASA-STD-8739.4A Fig. 9-1 A, p. 35",
+          "term": "running-end",
+          "edge": "in",
+          "anchor": "running_end"
+        },
+        {
+          "at_rel": 0.845,
+          "t": 39.287,
+          "kind": "sfx",
+          "what": "swipe (the cut 0.25 s later)",
+          "sfx": "swipe",
+          "cut_t": 39.537
+        },
+        {
+          "at_rel": 0.872,
+          "t": 39.5,
+          "kind": "voice",
+          "what": "square ends",
+          "line": "square",
+          "edge": "end"
+        },
+        {
+          "at_rel": 0.877,
+          "t": 39.537,
+          "kind": "cut",
+          "what": "the blade cuts the short end",
+          "w": 0.96
+        },
+        {
+          "at_rel": 0.976,
+          "t": 40.313,
+          "kind": "callout",
+          "what": "Running end out (held 0.74 s, 0.76 s short to end in the scene)",
+          "term": "running-end",
+          "edge": "out",
+          "anchor": "running_end"
+        }
+      ]
+    },
+    {
+      "index": 4,
+      "id": "wrap",
+      "purpose": "step",
+      "t_start": 40.5,
+      "t_end": 45.9,
+      "caption": "Wrap once, loosely",
+      "spoken": "Each lockstitch begins with one loose turn of tape round the hose and both cables.",
+      "audio_s": 5.158,
+      "numbers": [
+        {
+          "value": 1,
+          "unit": "turns",
+          "what": "turns in a lock stitch",
+          "source": "web/js/hose_route.js LACING (twin: freecad/lr4.py LACING).wraps[1]"
+        }
+      ],
+      "sources": [
+        {
+          "source": "NASA-STD-8739.4A, Workmanship Standard for Crimping, Interconnecting Cables, Harnesses, and Wiring, Revision A with Change 4",
+          "ref": "nasa-8739.4a",
+          "where": "§9.2.7, Fig. 9-5",
+          "page": "36",
+          "says": "\"Continuous lacing shall be achieved using running lockstitches as shown in Figure 9-5.\"",
+          "url": "https://standards.nasa.gov/sites/default/files/standards/NASA/A/4/nasa-std-87394a_w_change_4_0.pdf"
+        },
+        {
+          "source": "NASA-STD-8739.4A, Workmanship Standard for Crimping, Interconnecting Cables, Harnesses, and Wiring, Revision A with Change 4",
+          "ref": "nasa-8739.4a",
+          "where": "Fig. 9-5 (read from the figure)",
+          "page": "36",
+          "says": "each running lockstitch is one turn round the bundle",
+          "url": "https://standards.nasa.gov/sites/default/files/standards/NASA/A/4/nasa-std-87394a_w_change_4_0.pdf"
+        }
+      ],
+      "cues": [],
+      "not_drawn": "the lock stitch is taught on its own, enlarged and with the tuck drawn; the model's stitches are drawn as one wrap each",
+      "events": [
+        {
+          "at_rel": 0,
+          "t": 40.5,
+          "kind": "camera",
+          "what": "key 1/1: focus {\"detail\":\"lock\",\"aim\":0.5}, detail:lock az 24.23 el 26.64, fit 60 mm (cut to, under the dip)",
+          "key": 0,
+          "x": 0
+        },
+        {
+          "at_rel": 0,
+          "t": 40.5,
+          "kind": "voice",
+          "what": "wrap starts: \"Each lockstitch begins with one loose turn of tape round the hose and both cables.\"",
+          "line": "wrap",
+          "edge": "start"
+        },
+        {
+          "at_rel": 0.111,
+          "t": 41.1,
+          "kind": "knot",
+          "what": "one loose turn round the bundle: starts",
+          "w": 0,
+          "edge": "start"
+        },
+        {
+          "at_rel": 0.935,
+          "t": 45.55,
+          "kind": "knot",
+          "what": "one loose turn round the bundle: ends",
+          "w": 1,
+          "edge": "end"
+        },
+        {
+          "at_rel": 0.955,
+          "t": 45.658,
+          "kind": "voice",
+          "what": "wrap ends",
+          "line": "wrap",
+          "edge": "end"
+        }
+      ]
+    },
+    {
+      "index": 5,
+      "id": "tuck",
+      "purpose": "step",
+      "t_start": 45.9,
+      "t_end": 52.233,
+      "caption": "Over, then under the turn",
+      "spoken": "Bring the end back over its standing part, then under the turn; one cut stitch won't unravel the rest.",
+      "audio_s": 6.08,
+      "numbers": [
+        {
+          "value": 1,
+          "unit": "turns",
+          "what": "turns in a lock stitch",
+          "source": "web/js/hose_route.js LACING (twin: freecad/lr4.py LACING).wraps[1]"
+        }
+      ],
+      "sources": [
+        {
+          "source": "NASA-STD-8739.4A, Workmanship Standard for Crimping, Interconnecting Cables, Harnesses, and Wiring, Revision A with Change 4",
+          "ref": "nasa-8739.4a",
+          "where": "Fig. 9-5; Fig. 9-3's running lockstitch (read from the figure)",
+          "page": "36",
+          "says": "the end crosses over the standing part, then under the turn's start",
+          "url": "https://standards.nasa.gov/sites/default/files/standards/NASA/A/4/nasa-std-87394a_w_change_4_0.pdf"
+        },
+        {
+          "source": "US Navy rate-training manual 14160 (title not checked), marline hitch, tpub.com copy",
+          "ref": "navy-14160",
+          "where": "marline hitch",
+          "page": "92",
+          "says": "\"Just remember that the end of the line goes over the standing part and under the round turn so that it binds itself.\"",
+          "url": "https://engineeringtraining.tpub.com/14160/Blackwall-Hitch-92.html"
+        },
+        {
+          "source": "NAVSHIPS 900171, Electronic Installation Practices Manual, Chapter 9 Cabling, Section 7 Lacing and Binding, Change 2",
+          "ref": "navships-900171",
+          "where": "§7.8 Lacing",
+          "page": "9-103",
+          "says": "\"the manner in which the lock stitch is made may vary, but the \"over and under\" form is necessary to prevent unraveling of entire cable lacing, in the event one or more stitches are cut\"",
+          "url": "https://www.hellschreiber.com/pdf-hell/article-hell-navships.pdf"
+        },
+        {
+          "source": "Wikipedia, Cable lacing, web page",
+          "ref": "wikipedia",
+          "where": "Cable lacing, continuous lacing (cites Bureau of Naval Weapons 1962, pp. 7-9 to 7-14, not read)",
+          "page": null,
+          "says": "\"A series of half-hitches, while visually similar, is not recommended for this application.\"",
+          "url": "https://en.wikipedia.org/wiki/Cable_lacing"
+        }
+      ],
+      "cues": [],
+      "not_drawn": "as wrap; the tuck is drawn over the standing part, then under the turn's start, read from NASA Fig. 9-5 (draft 9; before, the reverse, which slid off as a half hitch)",
+      "events": [
+        {
+          "at_rel": 0,
+          "t": 45.9,
+          "kind": "camera",
+          "what": "key 1/1: focus \"cross\", detail:lock az 24.23 el 26.64, fit 36 mm (moved to over 0.6 s either side of the scene's start)",
+          "key": 0,
+          "x": 0
+        },
+        {
+          "at_rel": 0,
+          "t": 45.9,
+          "kind": "voice",
+          "what": "tuck starts: \"Bring the end back over its standing part, then under the turn; one cut stitch won't unravel the rest.\"",
+          "line": "tuck",
+          "edge": "start"
+        },
+        {
+          "at_rel": 0.095,
+          "t": 46.5,
+          "kind": "knot",
+          "what": "the end over its standing part, then under the turn's start (the lock): starts",
+          "w": 0,
+          "edge": "start"
+        },
+        {
+          "at_rel": 0.126,
+          "t": 46.7,
+          "kind": "callout",
+          "what": "Lockstitch in (on \"over\"): \"One turn; the end over, then under: locked\" - NASA-STD-8739.4A §9.2.7, p. 36",
+          "term": "lockstitch",
+          "edge": "in",
+          "anchor": "lock_cross"
+        },
+        {
+          "at_rel": 0.616,
+          "t": 49.8,
+          "kind": "callout",
+          "what": "Lockstitch out (held 2.8 s)",
+          "term": "lockstitch",
+          "edge": "out",
+          "anchor": "lock_cross"
+        },
+        {
+          "at_rel": 0.945,
+          "t": 51.883,
+          "kind": "knot",
+          "what": "the end over its standing part, then under the turn's start (the lock): ends",
+          "w": 1,
+          "edge": "end"
+        },
+        {
+          "at_rel": 0.96,
+          "t": 51.98,
+          "kind": "voice",
+          "what": "tuck ends",
+          "line": "tuck",
+          "edge": "end"
+        }
+      ]
+    },
+    {
+      "index": 6,
+      "id": "tight",
+      "purpose": "step",
+      "t_start": 52.233,
+      "t_end": 57.167,
+      "caption": "Pull it tight",
+      "spoken": "Pull the end along the hose; the loop closes down and grips the bundle.",
+      "audio_s": 4.55,
+      "numbers": [
+        {
+          "value": 1.2,
+          "unit": "mm",
+          "in": 0.05,
+          "what": "the tape's thickness as modelled",
+          "source": "web/js/hose_route.js LACING (twin: freecad/lr4.py LACING).tape"
+        }
+      ],
+      "sources": [
+        {
+          "source": "NASA-STD-8739.4A, Workmanship Standard for Crimping, Interconnecting Cables, Harnesses, and Wiring, Revision A with Change 4",
+          "ref": "nasa-8739.4a",
+          "where": "§9.2.7, Fig. 9-5",
+          "page": "36",
+          "says": "\"Continuous lacing shall be achieved using running lockstitches as shown in Figure 9-5.\"",
+          "url": "https://standards.nasa.gov/sites/default/files/standards/NASA/A/4/nasa-std-87394a_w_change_4_0.pdf"
+        },
+        {
+          "source": "NAVSHIPS 900171, Electronic Installation Practices Manual, Chapter 9 Cabling, Section 7 Lacing and Binding, Change 2",
+          "ref": "navships-900171",
+          "where": "§7.8 Lacing",
+          "page": "9-103",
+          "says": "\"The stitch used in keeping the conductors together under pressure is the lock stitch.\"",
+          "url": "https://www.hellschreiber.com/pdf-hell/article-hell-navships.pdf"
+        }
+      ],
+      "cues": [],
+      "not_drawn": "the tape's tension (docs/PLAN.md: not modelled); the loop is drawn shrinking from 1.45 x the bundle's radius to it",
+      "events": [
+        {
+          "at_rel": 0,
+          "t": 52.233,
+          "kind": "camera",
+          "what": "key 1/1: focus {\"detail\":\"lock\",\"aim\":0.2}, detail:lock az 26.57 el 56.15, fit 60 mm (moved to over 0.6 s either side of the scene's start)",
+          "key": 0,
+          "x": 0
+        },
+        {
+          "at_rel": 0,
+          "t": 52.233,
+          "kind": "voice",
+          "what": "tight starts: \"Pull the end along the hose; the loop closes down and grips the bundle.\"",
+          "line": "tight",
+          "edge": "start"
+        },
+        {
+          "at_rel": 0.122,
+          "t": 52.833,
+          "kind": "knot",
+          "what": "pulled: the loop shrinks onto the bundle (1.45 x -> 1 x its radius): starts",
+          "w": 0,
+          "edge": "start"
+        },
+        {
+          "at_rel": 0.545,
+          "t": 54.92,
+          "kind": "knot",
+          "what": "pulled: the loop shrinks onto the bundle (1.45 x -> 1 x its radius): ends",
+          "w": 0.55,
+          "edge": "end"
+        },
+        {
+          "at_rel": 0.922,
+          "t": 56.783,
+          "kind": "voice",
+          "what": "tight ends",
+          "line": "tight",
+          "edge": "end"
+        }
+      ]
+    },
+    {
+      "index": 7,
+      "id": "lock",
+      "purpose": "step",
+      "t_start": 57.167,
+      "t_end": 64.2,
+      "caption": "Lockstitch every 68 mm (2.7\")",
+      "spoken": "Repeat along the hose: one lockstitch every 68 millimetres, each pulled snug before the next.",
+      "audio_s": 6.181,
+      "numbers": [
+        {
+          "value": 68,
+          "unit": "mm",
+          "in": 2.68,
+          "what": "lock stitch pitch (shown: 68 mm (2.7\"))",
+          "source": "web/js/hose_route.js LACING (twin: freecad/lr4.py LACING).pitch"
+        },
+        {
+          "value": 10,
+          "unit": "stitches",
+          "what": "stitches on the cord + sleeve run at the reference size (26 x 50 in)",
+          "source": "web/js/lacing_tutorial.js referencePlan (web/data/lr4_config.json hose)"
+        }
+      ],
+      "sources": [
+        {
+          "source": "NASA-STD-8739.4A, Workmanship Standard for Crimping, Interconnecting Cables, Harnesses, and Wiring, Revision A with Change 4",
+          "ref": "nasa-8739.4a",
+          "where": "§9.2.7, Fig. 9-5",
+          "page": "36",
+          "says": "\"Continuous lacing shall be achieved using running lockstitches as shown in Figure 9-5.\"",
+          "url": "https://standards.nasa.gov/sites/default/files/standards/NASA/A/4/nasa-std-87394a_w_change_4_0.pdf"
+        },
+        {
+          "source": "NASA-STD-8739.4A, Workmanship Standard for Crimping, Interconnecting Cables, Harnesses, and Wiring, Revision A with Change 4",
+          "ref": "nasa-8739.4a",
+          "where": "§9.2.8.a",
+          "page": "37",
+          "says": "\"Lacing stitches and spot ties shall be placed as detailed in Table 9-1.\"",
+          "url": "https://standards.nasa.gov/sites/default/files/standards/NASA/A/4/nasa-std-87394a_w_change_4_0.pdf"
+        },
+        {
+          "source": "NASA-STD-8739.4A, Workmanship Standard for Crimping, Interconnecting Cables, Harnesses, and Wiring, Revision A with Change 4",
+          "ref": "nasa-8739.4a",
+          "where": "Table 9-1",
+          "page": "35",
+          "says": "harness larger than 25.4 mm (1.00 in): maximum distance between harness ties 76.2 mm (3.00 in)",
+          "url": "https://standards.nasa.gov/sites/default/files/standards/NASA/A/4/nasa-std-87394a_w_change_4_0.pdf"
+        }
+      ],
+      "cues": [],
+      "events": [
+        {
+          "at_rel": 0,
+          "t": 57.167,
+          "kind": "camera",
+          "what": "key 1/1: focus {\"tape\":0.6}, world az 74.05 el 70, dist 250 mm (cut to, under the dip)",
+          "key": 0,
+          "x": 0
+        },
+        {
+          "at_rel": 0,
+          "t": 57.167,
+          "kind": "layer",
+          "what": "ghost 0.3",
+          "layer": "ghost",
+          "value": 0.3
+        },
+        {
+          "at_rel": 0,
+          "t": 57.167,
+          "kind": "voice",
+          "what": "lock starts: \"Repeat along the hose: one lockstitch every 68 millimetres, each pulled snug before the next.\"",
+          "line": "lock",
+          "edge": "start"
+        },
+        {
+          "at_rel": 0.085,
+          "t": 57.767,
+          "kind": "layer",
+          "what": "ghost reaches 0.1 (from 0.3, out over 0.6 s)",
+          "layer": "ghost",
+          "value": 0.1
+        },
+        {
+          "at_rel": 0.085,
+          "t": 57.767,
+          "kind": "draw",
+          "what": "the lock stitches to the U-turn: starts",
+          "w": 0,
+          "edge": "start"
+        },
+        {
+          "at_rel": 0.879,
+          "t": 63.348,
+          "kind": "voice",
+          "what": "lock ends",
+          "line": "lock",
+          "edge": "end"
+        },
+        {
+          "at_rel": 1,
+          "t": 64.2,
+          "kind": "draw",
+          "what": "the lock stitches to the U-turn: ends",
+          "w": 1,
+          "edge": "end"
+        }
+      ]
+    },
+    {
+      "index": 8,
+      "id": "uturn",
+      "purpose": "step",
+      "t_start": 64.2,
+      "t_end": 70.467,
+      "caption": "Round the U-turn and back",
+      "spoken": "Keep the same spacing round the U-turn and back along the lower run, the tape flat on top.",
+      "audio_s": 6.03,
+      "numbers": [
+        {
+          "value": 68,
+          "unit": "mm",
+          "in": 2.68,
+          "what": "lock stitch pitch, the same round the U-turn",
+          "source": "web/js/hose_route.js LACING (twin: freecad/lr4.py LACING).pitch"
+        }
+      ],
+      "sources": [
+        {
+          "source": "NASA-STD-8739.4A, Workmanship Standard for Crimping, Interconnecting Cables, Harnesses, and Wiring, Revision A with Change 4",
+          "ref": "nasa-8739.4a",
+          "where": "§9.2.8.a",
+          "page": "37",
+          "says": "\"Lacing stitches and spot ties shall be placed as detailed in Table 9-1.\"",
+          "url": "https://standards.nasa.gov/sites/default/files/standards/NASA/A/4/nasa-std-87394a_w_change_4_0.pdf"
+        },
+        {
+          "source": "NASA-STD-8739.4A, Workmanship Standard for Crimping, Interconnecting Cables, Harnesses, and Wiring, Revision A with Change 4",
+          "ref": "nasa-8739.4a",
+          "where": "Table 9-1",
+          "page": "35",
+          "says": "harness larger than 25.4 mm (1.00 in): maximum distance between harness ties 76.2 mm (3.00 in)",
+          "url": "https://standards.nasa.gov/sites/default/files/standards/NASA/A/4/nasa-std-87394a_w_change_4_0.pdf"
+        },
+        {
+          "source": "WireCare, Tying a marline hitch with lacing tape, web page",
+          "ref": "wirecare",
+          "where": "procedure, after the starting knot",
+          "page": null,
+          "says": "\"Keeping the lacing tape as flat and free of twists as possible\"",
+          "url": "https://www.wirecare.com/help/how_tos/marline-hitch-lacing-tape"
+        }
+      ],
+      "cues": [],
+      "events": [
+        {
+          "at_rel": 0,
+          "t": 64.2,
+          "kind": "camera",
+          "what": "key 1/1: focus {\"tape\":0.6}, world az 74.05 el 70, dist 250 mm (moved to over 0.6 s either side of the scene's start)",
+          "key": 0,
+          "x": 0
+        },
+        {
+          "at_rel": 0,
+          "t": 64.2,
+          "kind": "layer",
+          "what": "ghost 0.1 (default 0.3)",
+          "layer": "ghost",
+          "value": 0.1
+        },
+        {
+          "at_rel": 0,
+          "t": 64.2,
+          "kind": "draw",
+          "what": "the lock stitches round the U-turn and back, on from the lock scene at one pace: starts",
+          "w": 0,
+          "edge": "start"
+        },
+        {
+          "at_rel": 0,
+          "t": 64.2,
+          "kind": "voice",
+          "what": "uturn starts: \"Keep the same spacing round the U-turn and back along the lower run, the tape flat on top.\"",
+          "line": "uturn",
+          "edge": "start"
+        },
+        {
+          "at_rel": 0.944,
+          "t": 70.117,
+          "kind": "draw",
+          "what": "the lock stitches round the U-turn and back, on from the lock scene at one pace: ends",
+          "w": 1,
+          "edge": "end"
+        },
+        {
+          "at_rel": 0.962,
+          "t": 70.23,
+          "kind": "voice",
+          "what": "uturn ends",
+          "line": "uturn",
+          "edge": "end"
+        }
+      ]
+    },
+    {
+      "index": 9,
+      "id": "spacing",
+      "purpose": "pitfall",
+      "t_start": 70.467,
+      "t_end": 76.367,
+      "caption": "Never over 76 mm (3\") apart",
+      "spoken": "Never leave more than 76 millimetres between stitches, or the cables sag away from the hose.",
+      "audio_s": 5.492,
+      "numbers": [
+        {
+          "value": 76.2,
+          "unit": "mm",
+          "in": 3,
+          "what": "the most between stitches (shown: 76 mm (3\")): NASA-STD-8739.4A Table 9-1, harness over 25.4 mm",
+          "source": "web/js/lacing_tutorial.js MAX_GAP"
+        },
+        {
+          "value": 68,
+          "unit": "mm",
+          "in": 2.68,
+          "what": "the widest gap in the model",
+          "source": "web/js/lacing_tutorial.js plan (stitch s)"
+        },
+        {
+          "value": 8,
+          "unit": "mm",
+          "in": 0.31,
+          "what": "the least between the last lock stitch and the closing stitch",
+          "source": "web/js/hose_route.js LACING (twin: freecad/lr4.py LACING).close"
+        }
+      ],
+      "sources": [
+        {
+          "source": "NASA-STD-8739.4A, Workmanship Standard for Crimping, Interconnecting Cables, Harnesses, and Wiring, Revision A with Change 4",
+          "ref": "nasa-8739.4a",
+          "where": "Table 9-1",
+          "page": "35",
+          "says": "harness larger than 25.4 mm (1.00 in): maximum distance between harness ties 76.2 mm (3.00 in)",
+          "url": "https://standards.nasa.gov/sites/default/files/standards/NASA/A/4/nasa-std-87394a_w_change_4_0.pdf"
+        },
+        {
+          "source": "NASA-STD-8739.4A, Workmanship Standard for Crimping, Interconnecting Cables, Harnesses, and Wiring, Revision A with Change 4",
+          "ref": "nasa-8739.4a",
+          "where": "§9.2.8.a",
+          "page": "37",
+          "says": "\"Lacing stitches and spot ties shall be placed as detailed in Table 9-1.\"",
+          "url": "https://standards.nasa.gov/sites/default/files/standards/NASA/A/4/nasa-std-87394a_w_change_4_0.pdf"
+        }
+      ],
+      "cues": [],
+      "uncited": "\"Or the cables sag away from the hose\" is the tutorial's reason; NASA states the spacing with no reason.",
+      "events": [
+        {
+          "at_rel": 0,
+          "t": 70.467,
+          "kind": "camera",
+          "what": "key 1/1: focus \"bracket\", world az 74.05 el 70, dist 300 mm (moved to over 0.6 s either side of the scene's start)",
+          "key": 0,
+          "x": 0
+        },
+        {
+          "at_rel": 0,
+          "t": 70.467,
+          "kind": "layer",
+          "what": "ghost 0.1",
+          "layer": "ghost",
+          "value": 0.1
+        },
+        {
+          "at_rel": 0,
+          "t": 70.467,
+          "kind": "voice",
+          "what": "spacing starts: \"Never leave more than 76 millimetres between stitches, or the cables sag away from the hose.\"",
+          "line": "spacing",
+          "edge": "start"
+        },
+        {
+          "at_rel": 0.102,
+          "t": 71.067,
+          "kind": "layer",
+          "what": "ghost reaches 0.3 (from 0.1, out over 0.6 s)",
+          "layer": "ghost",
+          "value": 0.3
+        },
+        {
+          "at_rel": 0.159,
+          "t": 71.407,
+          "kind": "callout",
+          "what": "Stitch spacing in (on \"76\"): \"Bundle over 25.4 mm (1\"): at most 76.2 mm (3\") apart\" - NASA-STD-8739.4A §9.2.8.a, p. 35",
+          "term": "stitch-spacing",
+          "edge": "in",
+          "anchor": "bracket"
+        },
+        {
+          "at_rel": 0.719,
+          "t": 74.707,
+          "kind": "callout",
+          "what": "Stitch spacing out (held 3 s)",
+          "term": "stitch-spacing",
+          "edge": "out",
+          "anchor": "bracket"
+        },
+        {
+          "at_rel": 0.931,
+          "t": 75.959,
+          "kind": "voice",
+          "what": "spacing ends",
+          "line": "spacing",
+          "edge": "end"
+        }
+      ]
+    },
+    {
+      "index": 10,
+      "id": "close",
+      "purpose": "step",
+      "t_start": 76.367,
+      "t_end": 83.167,
+      "caption": "Last lockstitch at the breakout",
+      "spoken": "Just before the sleeve leaves the hose, the breakout, tie one last lockstitch.",
+      "audio_s": 4.467,
+      "numbers": [
+        {
+          "value": 2,
+          "unit": "turns",
+          "what": "turns in the closing stitch",
+          "source": "web/js/hose_route.js LACING (twin: freecad/lr4.py LACING).wraps[2]"
+        },
+        {
+          "value": 12,
+          "unit": "mm",
+          "in": 0.47,
+          "what": "the closing stitch before the sleeve's breakout",
+          "source": "web/js/hose_route.js LACING (twin: freecad/lr4.py LACING).gap"
+        }
+      ],
+      "sources": [
+        {
+          "source": "NASA-STD-8739.4A, Workmanship Standard for Crimping, Interconnecting Cables, Harnesses, and Wiring, Revision A with Change 4",
+          "ref": "nasa-8739.4a",
+          "where": "§3.2 Definitions, Breakout",
+          "page": "18",
+          "says": "\"The separation of a conductor or group of conductors from the main body of wires in a harness.\"",
+          "url": "https://standards.nasa.gov/sites/default/files/standards/NASA/A/4/nasa-std-87394a_w_change_4_0.pdf"
+        },
+        {
+          "source": "NASA-STD-8739.4A, Workmanship Standard for Crimping, Interconnecting Cables, Harnesses, and Wiring, Revision A with Change 4",
+          "ref": "nasa-8739.4a",
+          "where": "§9.2.6.b, d",
+          "page": "34",
+          "says": "\"Lacing shall be terminated at every major breakout or branch\" (25 to 30 percent or more of the wire volume); \"Closing and starting stitches at branches and breakouts shall be next to the breakout.\"",
+          "url": "https://standards.nasa.gov/sites/default/files/standards/NASA/A/4/nasa-std-87394a_w_change_4_0.pdf"
+        },
+        {
+          "source": "NASA-STD-8739.4A, Workmanship Standard for Crimping, Interconnecting Cables, Harnesses, and Wiring, Revision A with Change 4",
+          "ref": "nasa-8739.4a",
+          "where": "§9.2.10.a",
+          "page": "37",
+          "says": "\"Lockstitching shall terminate with a closing stitch before each large breakout or branch of the harness.\"",
+          "url": "https://standards.nasa.gov/sites/default/files/standards/NASA/A/4/nasa-std-87394a_w_change_4_0.pdf"
+        },
+        {
+          "source": "NASA-STD-8739.4A, Workmanship Standard for Crimping, Interconnecting Cables, Harnesses, and Wiring, Revision A with Change 4",
+          "ref": "nasa-8739.4a",
+          "where": "Fig. 9-3 (label)",
+          "page": "36",
+          "says": "the closing stitch: \"LOCKSTITCH PLUS TWO HALF HITCHES\"",
+          "url": "https://standards.nasa.gov/sites/default/files/standards/NASA/A/4/nasa-std-87394a_w_change_4_0.pdf"
+        }
+      ],
+      "cues": [],
+      "not_drawn": "the model's lacing draws a stitch as its turns (docs/PLAN.md, Cable lacing: \"Not modelled: the knot itself\"); the knots are drawn in the close-ups that follow",
+      "events": [
+        {
+          "at_rel": 0,
+          "t": 76.367,
+          "kind": "voice",
+          "what": "close starts: \"Just before the sleeve leaves the hose, the breakout, tie one last lockstitch.\"",
+          "line": "close",
+          "edge": "start"
+        },
+        {
+          "at_rel": 0.088,
+          "t": 76.967,
+          "kind": "camera",
+          "what": "key 1/3: focus {\"surface\":\"close\",\"a\":-10,\"w\":7,\"lift\":3}, surface az 11.31 el 16.39, fit 52 mm (cut to, under the dip)",
+          "key": 0,
+          "x": 0
+        },
+        {
+          "at_rel": 0.088,
+          "t": 76.967,
+          "kind": "knot",
+          "what": "lockstitch 8, shown tied as the model left it: starts",
+          "w": 0,
+          "edge": "start",
+          "macro": "lockstitch",
+          "parts": [
+            "lockstitch 8: the tape on along the bundle to it (w 0 - 0, 0.6 - 0.6 s)",
+            "lockstitch 8: one turn round the bundle (w 0 - 0, 0.6 - 0.6 s)",
+            "lockstitch 8: the end over its standing part (w 0 - 0, 0.6 - 0.6 s)",
+            "lockstitch 8: under the turn's start (w 0 - 0, 0.6 - 0.6 s)"
+          ]
+        },
+        {
+          "at_rel": 0.088,
+          "t": 76.967,
+          "kind": "knot",
+          "what": "lockstitch 8, shown tied as the model left it: ends",
+          "w": 0,
+          "edge": "end"
+        },
+        {
+          "at_rel": 0.088,
+          "t": 76.967,
+          "kind": "knot",
+          "what": "lockstitch 8 pulled snug: starts",
+          "w": 0,
+          "edge": "start",
+          "macro": "pull"
+        },
+        {
+          "at_rel": 0.181,
+          "t": 77.597,
+          "kind": "knot",
+          "what": "lockstitch 8 pulled snug: ends",
+          "w": 0.005,
+          "edge": "end"
+        },
+        {
+          "at_rel": 0.181,
+          "t": 77.597,
+          "kind": "knot",
+          "what": "lockstitch 9, the last: on along H, one turn laid loose, the end over H, then under the turn's start: starts",
+          "w": 0.005,
+          "edge": "start",
+          "macro": "lockstitch",
+          "parts": [
+            "lockstitch 9: the tape on along the bundle (H) (w 0.005 - 0.2, 1.23 - 2.755 s)",
+            "lockstitch 9: one turn round the bundle (loose) (w 0.2 - 0.5, 2.755 - 3.525 s)",
+            "lockstitch 9: the end over the standing part (w 0.5 - 0.6, 3.525 - 3.735 s)",
+            "lockstitch 9: under the turn's start (the lock) (w 0.6 - 0.7, 3.735 - 3.983 s)"
+          ]
+        },
+        {
+          "at_rel": 0.451,
+          "t": 79.434,
+          "kind": "camera",
+          "what": "key 2/3: focus {\"surface\":\"close\",\"a\":-2,\"w\":7,\"lift\":3}, surface az 11.31 el 16.39, fit 52 mm, eased smooth",
+          "key": 1,
+          "x": 0.3
+        },
+        {
+          "at_rel": 0.586,
+          "t": 80.35,
+          "kind": "knot",
+          "what": "lockstitch 9, the last: on along H, one turn laid loose, the end over H, then under the turn's start: ends",
+          "w": 0.7,
+          "edge": "end"
+        },
+        {
+          "at_rel": 0.594,
+          "t": 80.406,
+          "kind": "camera",
+          "what": "key 3/3: focus {\"surface\":\"close\",\"a\":-1,\"w\":10,\"lift\":3}, surface az 11.31 el 16.39, fit 24 mm, eased smooth",
+          "key": 2,
+          "x": 0.72
+        },
+        {
+          "at_rel": 0.594,
+          "t": 80.406,
+          "kind": "knot",
+          "what": "lockstitch 9 pulled snug: starts",
+          "w": 0.72,
+          "edge": "start",
+          "macro": "pull"
+        },
+        {
+          "at_rel": 0.657,
+          "t": 80.834,
+          "kind": "voice",
+          "what": "close ends",
+          "line": "close",
+          "edge": "end"
+        },
+        {
+          "at_rel": 0.72,
+          "t": 81.263,
+          "kind": "callout",
+          "what": "Breakout in (at 0.72 of the scene): \"Where wires leave the main bundle\" - NASA-STD-8739.4A §3.2, p. 18",
+          "term": "breakout",
+          "edge": "in",
+          "anchor": "breakout"
+        },
+        {
+          "at_rel": 0.749,
+          "t": 81.459,
+          "kind": "knot",
+          "what": "lockstitch 9 pulled snug: ends",
+          "w": 0.95,
+          "edge": "end"
+        },
+        {
+          "at_rel": 0.999,
+          "t": 83.163,
+          "kind": "callout",
+          "what": "Breakout out (held 1.6 s)",
+          "term": "breakout",
+          "edge": "out",
+          "anchor": "breakout"
+        }
+      ]
+    },
+    {
+      "index": 11,
+      "id": "seal",
+      "purpose": "step",
+      "t_start": 83.167,
+      "t_end": 88.867,
+      "caption": "Two half hitches lock the end",
+      "spoken": "Then two half hitches round the tape behind it lock the end, so the lacing can't work loose.",
+      "audio_s": 4.9,
+      "numbers": [
+        {
+          "value": 2,
+          "unit": "turns",
+          "what": "turns the marline hitch locks",
+          "source": "web/js/hose_route.js LACING (twin: freecad/lr4.py LACING).wraps[2]"
+        }
+      ],
+      "sources": [
+        {
+          "source": "NASA-STD-8739.4A, Workmanship Standard for Crimping, Interconnecting Cables, Harnesses, and Wiring, Revision A with Change 4",
+          "ref": "nasa-8739.4a",
+          "where": "§9.2.6.a",
+          "page": "34",
+          "says": "\"Single or double lacing tape shall be terminated with a closing stitch as shown in Figure 9-3.\"",
+          "url": "https://standards.nasa.gov/sites/default/files/standards/NASA/A/4/nasa-std-87394a_w_change_4_0.pdf"
+        },
+        {
+          "source": "NASA-STD-8739.4A, Workmanship Standard for Crimping, Interconnecting Cables, Harnesses, and Wiring, Revision A with Change 4",
+          "ref": "nasa-8739.4a",
+          "where": "Fig. 9-3 (label)",
+          "page": "36",
+          "says": "the closing stitch: \"LOCKSTITCH PLUS TWO HALF HITCHES\"",
+          "url": "https://standards.nasa.gov/sites/default/files/standards/NASA/A/4/nasa-std-87394a_w_change_4_0.pdf"
+        },
+        {
+          "source": "NASA-STD-8739.4A, Workmanship Standard for Crimping, Interconnecting Cables, Harnesses, and Wiring, Revision A with Change 4",
+          "ref": "nasa-8739.4a",
+          "where": "Fig. 9-3 (read from the figure)",
+          "page": "36",
+          "says": "the two half hitches are tied round the tape's own standing part between the running lockstitch and the last lockstitch",
+          "url": "https://standards.nasa.gov/sites/default/files/standards/NASA/A/4/nasa-std-87394a_w_change_4_0.pdf"
+        }
+      ],
+      "cues": [],
+      "not_drawn": "the knot's shape is drawn by the tutorial (web/js/lacing_tutorial.js, the shots' knots), not traced: NASA's figures are small line drawings and its text gives no steps; the two half hitches are drawn round the tape's own standing part, read from NASA Fig. 9-3 (no text gives steps)",
+      "uncited": "\"So the lacing can't work loose\" is the tutorial's reason; NASA gives the closing stitch's form (Fig. 9-3), not its purpose.",
+      "events": [
+        {
+          "at_rel": 0,
+          "t": 83.167,
+          "kind": "layer",
+          "what": "hose 1",
+          "layer": "hose",
+          "value": 1
+        },
+        {
+          "at_rel": 0,
+          "t": 83.167,
+          "kind": "layer",
+          "what": "context 1",
+          "layer": "context",
+          "value": 1
+        },
+        {
+          "at_rel": 0,
+          "t": 83.167,
+          "kind": "voice",
+          "what": "seal starts: \"Then two half hitches round the tape behind it lock the end, so the lacing can't work loose.\"",
+          "line": "seal",
+          "edge": "start"
+        },
+        {
+          "at_rel": 0.105,
+          "t": 83.767,
+          "kind": "camera",
+          "what": "key 1/6: focus {\"surface\":\"close\",\"a\":-10,\"w\":9,\"lift\":3}, surface az 11.31 el 16.39, fit 34 mm (moved to over 0.6 s either side of the scene's start)",
+          "key": 0,
+          "x": 0
+        },
+        {
+          "at_rel": 0.105,
+          "t": 83.767,
+          "kind": "layer",
+          "what": "hose reaches 0.45 (from 1, out over 0.6 s)",
+          "layer": "hose",
+          "value": 0.45
+        },
+        {
+          "at_rel": 0.105,
+          "t": 83.767,
+          "kind": "layer",
+          "what": "context reaches 0.2 (from 1, out over 0.6 s)",
+          "layer": "context",
+          "value": 0.2
+        },
+        {
+          "at_rel": 0.105,
+          "t": 83.767,
+          "kind": "knot",
+          "what": "a bight back over lockstitch 9: starts",
+          "w": 0,
+          "edge": "start",
+          "macro": "bight",
+          "parts": [
+            "a bight back over the lockstitch (w 0 - 0.021, 0.6 - 1.426 s)"
+          ]
+        },
+        {
+          "at_rel": 0.25,
+          "t": 84.592,
+          "kind": "camera",
+          "what": "key 2/6: focus {\"surface\":\"close\",\"a\":-10,\"w\":1.5,\"lift\":3}, surface az 11.31 el 16.39, fit 21 mm, eased smooth",
+          "key": 1,
+          "x": 0.021
+        },
+        {
+          "at_rel": 0.25,
+          "t": 84.592,
+          "kind": "knot",
+          "what": "a bight back over lockstitch 9: ends",
+          "w": 0.021,
+          "edge": "end"
+        },
+        {
+          "at_rel": 0.25,
+          "t": 84.592,
+          "kind": "knot",
+          "what": "half hitch 1, tied first, nearer the stitch: down over H, round under H, up over its own leg: starts",
+          "w": 0.021,
+          "edge": "start",
+          "macro": "halfHitch",
+          "parts": [
+            "half hitch 1: down over H (w 0.021 - 0.084, 1.426 - 1.91 s)",
+            "half hitch 1: round under H (w 0.084 - 0.179, 1.91 - 2.286 s)",
+            "half hitch 1: up over its own leg (w 0.179 - 0.329, 2.286 - 2.666 s)"
+          ]
+        },
+        {
+          "at_rel": 0.468,
+          "t": 85.832,
+          "kind": "camera",
+          "what": "key 3/6: focus {\"surface\":\"close\",\"a\":-10,\"w\":1.5,\"lift\":3}, surface az 11.31 el 16.39, fit 21 mm, eased smooth",
+          "key": 2,
+          "x": 0.329
+        },
+        {
+          "at_rel": 0.468,
+          "t": 85.832,
+          "kind": "knot",
+          "what": "half hitch 1, tied first, nearer the stitch: down over H, round under H, up over its own leg: ends",
+          "w": 0.329,
+          "edge": "end"
+        },
+        {
+          "at_rel": 0.51,
+          "t": 86.073,
+          "kind": "knot",
+          "what": "half hitch 2, 10 mm further along H: starts",
+          "w": 0.458,
+          "edge": "start",
+          "macro": "halfHitch",
+          "parts": [
+            "half hitch 2: down over H (w 0.458 - 0.718, 2.907 - 3.388 s)",
+            "half hitch 2: round under H (w 0.718 - 0.852, 3.388 - 3.767 s)",
+            "half hitch 2: up over its own leg (w 0.852 - 0.935, 3.767 - 4.147 s)"
+          ]
+        },
+        {
+          "at_rel": 0.536,
+          "t": 86.224,
+          "kind": "camera",
+          "what": "key 4/6: focus {\"surface\":\"close\",\"a\":-20,\"w\":1.5,\"lift\":3}, surface az 11.31 el 16.39, fit 21 mm, eased smooth",
+          "key": 3,
+          "x": 0.55
+        },
+        {
+          "at_rel": 0.69,
+          "t": 87.1,
+          "kind": "callout",
+          "what": "Two half hitches in (at 0.69 of the scene): \"Round the tape itself, they lock the end\" - NASA-STD-8739.4A Fig. 9-3, p. 36",
+          "term": "half-hitches",
+          "edge": "in",
+          "anchor": "half_hitches"
+        },
+        {
+          "at_rel": 0.728,
+          "t": 87.314,
+          "kind": "knot",
+          "what": "half hitch 2, 10 mm further along H: ends",
+          "w": 0.935,
+          "edge": "end"
+        },
+        {
+          "at_rel": 0.759,
+          "t": 87.493,
+          "kind": "camera",
+          "what": "key 5/6: focus {\"surface\":\"close\",\"a\":-20,\"w\":1.5,\"lift\":3}, surface az 11.31 el 16.39, fit 21 mm, eased smooth",
+          "key": 4,
+          "x": 0.96
+        },
+        {
+          "at_rel": 0.764,
+          "t": 87.52,
+          "kind": "knot",
+          "what": "the tie-off end: starts",
+          "w": 0.963,
+          "edge": "start",
+          "macro": "tieOff",
+          "parts": [
+            "the tie-off end (w 0.963 - 0.993, 4.353 - 4.778 s)"
+          ]
+        },
+        {
+          "at_rel": 0.838,
+          "t": 87.944,
+          "kind": "camera",
+          "what": "key 6/6: focus {\"surface\":\"close\",\"a\":-16,\"w\":11,\"lift\":3}, surface az 11.31 el 16.39, fit 24 mm, eased smooth",
+          "key": 5,
+          "x": 0.993
+        },
+        {
+          "at_rel": 0.838,
+          "t": 87.944,
+          "kind": "knot",
+          "what": "the tie-off end: ends",
+          "w": 0.993,
+          "edge": "end"
+        },
+        {
+          "at_rel": 0.86,
+          "t": 88.067,
+          "kind": "voice",
+          "what": "seal ends",
+          "line": "seal",
+          "edge": "end"
+        },
+        {
+          "at_rel": 1,
+          "t": 88.867,
+          "kind": "callout",
+          "what": "Two half hitches out (held 1.47 s, 0.73 s short to end in the scene)",
+          "term": "half-hitches",
+          "edge": "out",
+          "anchor": "half_hitches"
+        }
+      ]
+    },
+    {
+      "index": 12,
+      "id": "tie",
+      "purpose": "step",
+      "t_start": 88.867,
+      "t_end": 93.733,
+      "caption": "Pull snug, trim the end",
+      "spoken": "Pull them snug and trim the single tie-off end short.",
+      "audio_s": 3.488,
+      "numbers": [
+        {
+          "value": 150,
+          "unit": "mm",
+          "in": 5.91,
+          "what": "tape allowed per knot (tails trimmed) in the BOM's length",
+          "source": "web/js/hose_route.js LACING (twin: freecad/lr4.py LACING).tail"
+        }
+      ],
+      "sources": [
+        {
+          "source": "NASA-STD-8739.4A, Workmanship Standard for Crimping, Interconnecting Cables, Harnesses, and Wiring, Revision A with Change 4",
+          "ref": "nasa-8739.4a",
+          "where": "§9.2.2",
+          "page": "34",
+          "says": "\"Lacing tie-ends shall be trimmed.\"",
+          "url": "https://standards.nasa.gov/sites/default/files/standards/NASA/A/4/nasa-std-87394a_w_change_4_0.pdf"
+        },
+        {
+          "source": "NASA-STD-8739.4A, Workmanship Standard for Crimping, Interconnecting Cables, Harnesses, and Wiring, Revision A with Change 4",
+          "ref": "nasa-8739.4a",
+          "where": "Fig. 9-3 (read from the figure)",
+          "page": "36",
+          "says": "one tape throughout; its one free end is labelled \"TIE-OFF END\"",
+          "url": "https://standards.nasa.gov/sites/default/files/standards/NASA/A/4/nasa-std-87394a_w_change_4_0.pdf"
+        },
+        {
+          "source": "NASA-STD-8739.4A, Workmanship Standard for Crimping, Interconnecting Cables, Harnesses, and Wiring, Revision A with Change 4",
+          "ref": "nasa-8739.4a",
+          "where": "§20.5.1.d(4)",
+          "page": "96",
+          "says": "acceptance: \"Lacing terminated with a closing stitch and ends trimmed.\"",
+          "url": "https://standards.nasa.gov/sites/default/files/standards/NASA/A/4/nasa-std-87394a_w_change_4_0.pdf"
+        }
+      ],
+      "cues": [
+        {
+          "sfx": "swipe",
+          "t": 92.771,
+          "spoken": false,
+          "what": "the blade cuts an end (the wav starts 0.25 s before)"
+        }
+      ],
+      "not_drawn": "the knot's shape is drawn by the tutorial (web/js/lacing_tutorial.js, the shots' knots), not traced: NASA's figures are small line drawings and its text gives no steps; one tie-off end, trimmed; no square knot (NASA Fig. 9-3)",
+      "events": [
+        {
+          "at_rel": 0,
+          "t": 88.867,
+          "kind": "camera",
+          "what": "key 1/1: focus {\"surface\":\"close\",\"a\":-16,\"w\":11,\"lift\":3}, surface az 11.31 el 16.39, fit 24 mm (moved to over 0.6 s either side of the scene's start)",
+          "key": 0,
+          "x": 0
+        },
+        {
+          "at_rel": 0,
+          "t": 88.867,
+          "kind": "layer",
+          "what": "hose 0.45 (default 1)",
+          "layer": "hose",
+          "value": 0.45
+        },
+        {
+          "at_rel": 0,
+          "t": 88.867,
+          "kind": "layer",
+          "what": "context 0.2 (default 1)",
+          "layer": "context",
+          "value": 0.2
+        },
+        {
+          "at_rel": 0,
+          "t": 88.867,
+          "kind": "voice",
+          "what": "tie starts: \"Pull them snug and trim the single tie-off end short.\"",
+          "line": "tie",
+          "edge": "start"
+        },
+        {
+          "at_rel": 0.37,
+          "t": 90.667,
+          "kind": "callout",
+          "what": "Tie-off end in (on \"tie-off\"): \"The one short end left, trimmed\" - NASA-STD-8739.4A §9.2.2, pp. 34, 36",
+          "term": "tie-off-end",
+          "edge": "in",
+          "anchor": "tie_off_end"
+        },
+        {
+          "at_rel": 0.373,
+          "t": 90.681,
+          "kind": "knot",
+          "what": "the half hitches pulled snug, with the bight: starts",
+          "w": 0.05,
+          "edge": "start",
+          "macro": "pull"
+        },
+        {
+          "at_rel": 0.679,
+          "t": 92.173,
+          "kind": "knot",
+          "what": "the half hitches pulled snug, with the bight: ends",
+          "w": 0.55,
+          "edge": "end"
+        },
+        {
+          "at_rel": 0.717,
+          "t": 92.355,
+          "kind": "voice",
+          "what": "tie ends",
+          "line": "tie",
+          "edge": "end"
+        },
+        {
+          "at_rel": 0.74,
+          "t": 92.467,
+          "kind": "callout",
+          "what": "Tie-off end out (held 1.5 s)",
+          "term": "tie-off-end",
+          "edge": "out",
+          "anchor": "tie_off_end"
+        },
+        {
+          "at_rel": 0.751,
+          "t": 92.521,
+          "kind": "sfx",
+          "what": "swipe (the cut 0.25 s later)",
+          "sfx": "swipe",
+          "cut_t": 92.771
+        },
+        {
+          "at_rel": 0.76,
+          "t": 92.565,
+          "kind": "callout",
+          "what": "Closing stitch in (at 0.76 of the scene): \"Last lockstitch plus two half hitches\" - NASA-STD-8739.4A §9.2.6.a, pp. 34, 36",
+          "term": "closing-stitch",
+          "edge": "in",
+          "anchor": "closing_knot"
+        },
+        {
+          "at_rel": 0.802,
+          "t": 92.771,
+          "kind": "knot",
+          "what": "the tie-off end trimmed: starts",
+          "w": 0.8,
+          "edge": "start",
+          "macro": "trim"
+        },
+        {
+          "at_rel": 0.802,
+          "t": 92.771,
+          "kind": "knot",
+          "what": "the tie-off end trimmed: ends",
+          "w": 0.8,
+          "edge": "end"
+        },
+        {
+          "at_rel": 0.802,
+          "t": 92.771,
+          "kind": "cut",
+          "what": "the blade cuts the tie-off end",
+          "w": 0.8
+        },
+        {
+          "at_rel": 0.961,
+          "t": 93.546,
+          "kind": "callout",
+          "what": "Closing stitch out (held 0.68 s, 0.62 s short to end in the scene)",
+          "term": "closing-stitch",
+          "edge": "out",
+          "anchor": "closing_knot"
+        }
+      ]
+    },
+    {
+      "index": 13,
+      "id": "done",
+      "purpose": "confirm",
+      "t_start": 93.733,
+      "t_end": 120.467,
+      "caption": "One bundle, moving together",
+      "spoken": "Now watch the core travel: the hose, cord and sleeve flex together, held by every stitch along the run.",
+      "audio_s": 6.515,
+      "more": [
+        {
+          "id": "done_tip",
+          "t_start": 101.148,
+          "t_end": 107.568,
+          "spoken": "One last tip: lace with the hose already in its working bend, and keep the tape flat, never twisted.",
+          "audio_s": 6.42,
+          "sources": [
+            {
+              "source": "NAVSHIPS 900171, Electronic Installation Practices Manual, Chapter 9 Cabling, Section 7 Lacing and Binding, Change 2",
+              "ref": "navships-900171",
+              "where": "§7.10 Bends",
+              "page": "9-103",
+              "says": "\"When bends occur in cable runs, always make the bend before lacing, to keep the bend in place (Figure 9-65).\"",
+              "url": "https://www.hellschreiber.com/pdf-hell/article-hell-navships.pdf"
+            },
+            {
+              "source": "WireCare, Tying a marline hitch with lacing tape, web page",
+              "ref": "wirecare",
+              "where": "procedure, after the starting knot",
+              "page": null,
+              "says": "\"Keeping the lacing tape as flat and free of twists as possible\"",
+              "url": "https://www.wirecare.com/help/how_tos/marline-hitch-lacing-tape"
+            }
+          ]
+        }
+      ],
+      "numbers": [],
+      "sources": [
+        {
+          "source": "NAVSHIPS 900171, Electronic Installation Practices Manual, Chapter 9 Cabling, Section 7 Lacing and Binding, Change 2",
+          "ref": "navships-900171",
+          "where": "§7.2 Purpose of lacing and binding",
+          "page": "9-98",
+          "says": "\"When the conductors are properly laced, they support each other and make a single, neat cable.\"",
+          "url": "https://www.hellschreiber.com/pdf-hell/article-hell-navships.pdf"
+        }
+      ],
+      "cues": [],
+      "uncited": "\"Held by every stitch\" describes the picture; no source states it.",
+      "credits": {
+        "t_start": 109.467,
+        "t_end": 120.467,
+        "title": "Lacing the LowRider 4's cables",
+        "items": [
+          {
+            "role": "Code and 3D sandbox",
+            "text": "LR4 Sandbox",
+            "url": "https://github.com/jeyeager65/lr4-sandbox"
+          },
+          {
+            "role": "Lacing method",
+            "text": "NASA-STD-8739.4A (Change 4) §9.2, NASA Technical Standards System",
+            "url": "https://standards.nasa.gov/sites/default/files/standards/NASA/A/4/nasa-std-87394a_w_change_4_0.pdf"
+          },
+          {
+            "role": "Also drawn on",
+            "text": "NAVSHIPS 900171 · US Navy rate-training manual 14160 · WireCare · Wikipedia: Cable lacing"
+          },
+          {
+            "role": "Machine",
+            "text": "V1 Engineering LowRider 4, modelled from V1E's parts",
+            "url": "https://www.v1e.com"
+          },
+          {
+            "role": "Built with",
+            "text": "FreeCAD · three.js · Node.js · ffmpeg"
+          },
+          {
+            "role": "Voice",
+            "text": "Narration is a synthetic voice cloned from the creator's own voice, with his consent (Chatterbox TTS) · word timing: faster-whisper"
+          },
+          {
+            "role": "Music",
+            "text": "\"The Reaper\" by Jacob Lizotte (royalty-free licence)"
+          },
+          {
+            "role": "Made with",
+            "text": "Claude Code"
+          }
+        ]
+      },
+      "events": [
+        {
+          "at_rel": 0,
+          "t": 93.733,
+          "kind": "camera",
+          "what": "key 1/6: focus {\"uturn\":{\"back\":40,\"r\":110}}, world az -60 el 38, fit 140 mm (cut to, under the dip)",
+          "key": 0,
+          "x": 0
+        },
+        {
+          "at_rel": 0,
+          "t": 93.733,
+          "kind": "layer",
+          "what": "tape 0 (default 1)",
+          "layer": "tape",
+          "value": 0
+        },
+        {
+          "at_rel": 0,
+          "t": 93.733,
+          "kind": "layer",
+          "what": "ghost 0 (default 0.3)",
+          "layer": "ghost",
+          "value": 0
+        },
+        {
+          "at_rel": 0,
+          "t": 93.733,
+          "kind": "voice",
+          "what": "done starts: \"Now watch the core travel: the hose, cord and sleeve flex together, held by every stitch along the run.\"",
+          "line": "done",
+          "edge": "start"
+        },
+        {
+          "at_rel": 0.022,
+          "t": 94.333,
+          "kind": "pose",
+          "what": "the core starts out along X (to 280 mm and back)"
+        },
+        {
+          "at_rel": 0.159,
+          "t": 97.99,
+          "kind": "camera",
+          "what": "key 2/6: focus {\"uturn\":{\"back\":40,\"r\":110}}, world az 20 el 14, fit 120 mm",
+          "key": 1,
+          "x": 0.18
+        },
+        {
+          "at_rel": 0.244,
+          "t": 100.248,
+          "kind": "voice",
+          "what": "done ends",
+          "line": "done",
+          "edge": "end"
+        },
+        {
+          "at_rel": 0.247,
+          "t": 100.33,
+          "kind": "camera",
+          "what": "key 3/6: focus {\"uturn\":{\"back\":40,\"r\":110}}, world az 100 el 10, fit 150 mm",
+          "key": 2,
+          "x": 0.38
+        },
+        {
+          "at_rel": 0.277,
+          "t": 101.148,
+          "kind": "voice",
+          "what": "done_tip starts: \"One last tip: lace with the hose already in its working bend, and keep the tape flat, never twisted.\"",
+          "line": "done_tip",
+          "edge": "start"
+        },
+        {
+          "at_rel": 0.291,
+          "t": 101.5,
+          "kind": "pose",
+          "what": "the core at its furthest, 280 mm out"
+        },
+        {
+          "at_rel": 0.314,
+          "t": 102.125,
+          "kind": "camera",
+          "what": "key 4/6: focus {\"uturn\":{\"back\":50,\"r\":130}}, world az 180 el 8, fit 170 mm",
+          "key": 3,
+          "x": 0.55
+        },
+        {
+          "at_rel": 0.41,
+          "t": 104.697,
+          "kind": "camera",
+          "what": "key 5/6: focus {\"point\":[600,500,-250]}, world az 250 el 3, fit 620 mm",
+          "key": 4,
+          "x": 0.78
+        },
+        {
+          "at_rel": 0.518,
+          "t": 107.568,
+          "kind": "voice",
+          "what": "done_tip ends",
+          "line": "done_tip",
+          "edge": "end"
+        },
+        {
+          "at_rel": 0.559,
+          "t": 108.667,
+          "kind": "pose",
+          "what": "the core back home"
+        },
+        {
+          "at_rel": 0.589,
+          "t": 109.467,
+          "kind": "camera",
+          "what": "key 6/6: focus \"machine\", world az 282 el 6, fitFocus 0.85",
+          "key": 5,
+          "x": 1
+        },
+        {
+          "at_rel": 0.589,
+          "t": 109.467,
+          "kind": "credits",
+          "what": "in: the picture fades to the dark backdrop; \"Lacing the LowRider 4's cables\", then 8 credits (Code and 3D sandbox, Lacing method, Also drawn on, Machine, Built with, Voice, Music, Made with)",
+          "edge": "in"
+        },
+        {
+          "at_rel": 0.963,
+          "t": 119.467,
+          "kind": "credits",
+          "what": "out: the whole frame fades to black over 1 s",
+          "edge": "out"
+        }
+      ]
+    }
+  ]
+}

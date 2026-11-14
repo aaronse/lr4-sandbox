@@ -95,6 +95,7 @@ plates, front_wing_size 11.5 (1" EMT). Plates 830 x 90.5 (front) and 830 x 78.5 
 | Y stop screws | backed out 5 mm (`lr4.Y_STOP_OUT`) - sets Y home, clicks ~3 mm before the wheels hit the front holders | CHOICE - set on the machine |
 | Bearings | 608 (8 x 22 x 7) | datasheet; real size/tolerance may explain the 0.26 mm beam level difference |
 | Router colours | blue grip, charcoal head, black cap/switch/cord, grey dial | GUESS (screen only) |
+| Lacing tape | flat waxed polyester ~2.5 mm (or #6 waxed cord), drawn as a 1.2 mm round tape (`lr4.LACING['tape']`) | GUESS - the common size; spacing from NASA-STD-8739.4A Table 9-1 |
 
 ## Decisions
 
@@ -117,6 +118,30 @@ plates, front_wing_size 11.5 (1" EMT). Plates 830 x 90.5 (front) and 830 x 78.5 
 | 15 | Temp struts as a build option (`STRUTS = "temp"`): V1E's 4 Temp_Strut_v1 (front + bottom at each end) in the plates' own 2D frames (`lr4.TEMP_STRUT_FRAMES`); the end braces move to 180 mm from the next, the rest evenly between (V1E beam3), needs 4+ braces; PSU on the Max-end bottom temp strut, Jackpot3 box on the Min-end one. The configurator shows it as the Strut plates Temporary / Permanent toggle (2026-10-20) | keep the MDF brace pitch (temp strut screws would miss the inner braces) |
 
 | 17 | Table (Part 33, user 2026-10-23): a separate 3/4" MDF spoilboard (cutting area + margin) between two 3/4" MDF rail strips (rail mounts level with the spoilboard's bottom, so the work surface and the bit's reach don't change), on `TABLE = "sheet"` (MDF) or `"torsion"` (plywood egg-crate, no skins). The work surface stays at z 0..T: the base is below z 0, so the machine + size builds didn't move | the sheet as the spoilboard; rails on the base with a thicker spoilboard |
+| 18 | Cable lacing (2026-11-08; off the page since the 2026-11-12 upstream merge - upstream hangs the hose and cords as ropes - and kept in the tutorial only, docs/FORK.md): the router cord + cable sleeve laced to the vac hose with one continuous waxed tape where the hose moves - a starting stitch next to the core's last zip tie, running lock stitches every 68 mm round the U-turn, a closing stitch next to the sleeve's breakout, then the cord alone to a closing stitch where the hose leaves the table (`lr4.lacing`, `web/js/hose_route.js`; survey below) | zip ties along the run (lacing leaves no tie heads to catch and doesn't crush the jackets - Wikipedia, Make); lacing the cord + sleeve to each other only (the bundle would still ride loose on the hose) |
+
+## Cable lacing (survey, 2026-11-08)
+
+Sources: [Wikipedia, Cable lacing](https://en.wikipedia.org/wiki/Cable_lacing);
+[NASA-STD-8739.4A with Change 4](https://standards.nasa.gov/sites/default/files/standards/NASA/A/4/nasa-std-87394a_w_change_4_0.pdf)
+9.2, pp. 34-37 (the survey first read 8739.4 with Change 6, pp. 40-43, which 8739.4A supersedes: same text and figures,
+renumbered); NAVSHIPS 900171 section 7 (hellschreiber.com/pdf-hell/article-hell-navships.pdf); maker guide:
+[WireCare, Tying a marline hitch with lacing tape](https://www.wirecare.com/help/how_tos/marline-hitch-lacing-tape).
+Revision checked 2026-11-09: 8739.4A Change 4, pp. 34-37 (`docs/specs/lacing-tutorial-research/`). Its closing stitch
+(Fig. 9-3) is a last lockstitch plus two half hitches, one tie-off end trimmed (9.2.2); no square knot.
+
+| Rule | Source | In the model |
+|---|---|---|
+| Continuous lacing = running lockstitches (NASA); marline hitches, not half hitches (Wikipedia, citing BuWeps 1962: not NASA's words); "over and under" so one cut stitch doesn't unravel the lace | NASA 9.2.7, Fig. 9-5; Wikipedia; NAVSHIPS 7.8 | one wrap per lock stitch, the running part over the cables on top of the wraps |
+| Start with a starting stitch (a spot tie - clove hitch + square knot - with a running end) | NASA 9.2.4 / 9.2.5; WireCare step 1 (locked clove hitch) | 2 wraps (`wraps[0]`), 15 mm past the core's +X end |
+| Max distance between stitches: harness <= 6.4 mm: 19.1; <= 12.7: 38.1; <= 25.4: 50.8; over 25.4: 76.2 mm | NASA Table 9-1 | hose + cables ~90 mm: <= 76.2. Pitch 68, the last lock stitch >= 8 before the closing one, so every gap < 76 |
+| Close with a closing stitch at every major breakout and at the harness's end, next to the breakout; a stitch right before and after any breakout; start anew past it | NASA 9.2.6 / 9.2.8.b / 9.2.10 | closing stitch (2 wraps) 12 mm before the sleeve leaves the hose, a new starting stitch 12 mm after it; the cord's run closes 25 mm before the hose drops off the table |
+| Make bends before lacing; keep the tape flat, not twisted | NAVSHIPS 7.10; WireCare step 2 | the lacing follows the hose's swept route at each pose |
+| Tape length ~2.5 x the run (single), ~5 x (double) | NAVSHIPS 7.5; WireCare (2-2.5 x) | for thin wire bundles only: here each wrap goes round a 68 mm hose, so the BOM row is the modelled path + 150 mm per knot (~6.5 m for a 26 x 50 in machine) |
+| Waxed linen cord (traditional) or flat tape: nylon, polyester, Nomex; #6 cord for small / medium cables | Wikipedia; NAVSHIPS 7.4 | BOM: flat waxed polyester tape ~2.5 mm or #6 waxed cord (GUESS) |
+
+Not modelled: the knot itself (a stitch is drawn as its wrap), staking compound, the lacing's tension. The page's
+lacing moves with the hose; on a real machine the stitches stay put on the hose as it rolls through the U-turn.
 
 ## How the parts were placed (V1E publishes no assembly CAD)
 
