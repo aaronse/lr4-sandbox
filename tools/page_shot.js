@@ -1,6 +1,7 @@
 // Screenshot a page in headless Chrome over CDP (the sandbox page stalls under --virtual-time-budget, so no
-// --screenshot): waits for #status to hide (and for files loaded by ?parts= to settle), runs optional JS, saves PNGs.
+// --screenshot): waits for #status to hide (a page without one: for load complete) (and for files loaded by ?parts= to settle), runs optional JS, saves PNGs.
 //   node tools/page_shot.js <url> <out.png> [--size 1500x1000] [--eval "js" --shot out2.png]... [--mobile] [--gpu]
+//        [--timeout 600]   (s: then it exits 1 and Chrome goes with it - a stuck page never renders on unread)
 // Each --eval runs (awaited) after the load; a --shot after it takes another picture. Logs console errors.
 // Needs Chrome (CHROME env or the usual Windows / Mac / Linux path); Node 22+ (fetch + WebSocket built in).
 "use strict";
@@ -9,11 +10,12 @@ const { profile } = require("./chrome_profile.js");   // (its Chrome profile del
 
 const args = process.argv.slice(2);
 const url = args[0], steps = [{ shot: args[1] }];
-let size = [1500, 1000], mobile = false, gpu = false;   // --gpu: the real GPU (Full detail, as record_demo), not SwiftShader
+let size = [1500, 1000], mobile = false, gpu = false, timeout = 600;   // --gpu: the real GPU (Full detail, as record_demo), not SwiftShader
 for (let i = 2; i < args.length; i++) {
   if (args[i] === "--size") size = args[++i].split("x").map(Number);
   else if (args[i] === "--mobile") mobile = true;
   else if (args[i] === "--gpu") gpu = true;
+  else if (args[i] === "--timeout") timeout = Number(args[++i]);
   else if (args[i] === "--eval") steps.push({ js: args[++i] });
   else if (args[i] === "--shot") steps.push({ shot: args[++i] });
 }
@@ -24,6 +26,7 @@ const CHROME = process.env.CHROME || [
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 
 (async () => {
+  setTimeout(() => { console.error(`page_shot: over ${timeout} s - giving up`); process.exit(1); }, timeout * 1000).unref();   // (exit: chrome_profile kills Chrome)
   const P = profile("page_shot_"), prof = P.dir;
   const port = 9300 + Math.floor(Math.random() * 500);
   const angle = gpu ? ["--use-angle=d3d11", "--ignore-gpu-blocklist", "--enable-gpu-rasterization"]
@@ -61,8 +64,12 @@ const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
     await send("Page.navigate", { url });
     const val = async (expr) => (await send("Runtime.evaluate", { expression: expr, awaitPromise: true, returnByValue: true })).result.value;
     const t0 = Date.now();
+    let bare = 0;
     for (;;) {                                         // loaded = the status box hidden twice, 1 s apart
       await sleep(1000);
+      // a page with no #status (another repo's lab): loaded once complete twice in a row, not after the 180 s timeout
+      if (await val("!document.getElementById('status') && document.readyState === 'complete'")) { if (++bare >= 2) break; continue; }
+      bare = 0;
       if (await val("!!document.getElementById('status') && document.getElementById('status').hidden")) {
         await sleep(1500);
         if (await val("document.getElementById('status').hidden")) break;

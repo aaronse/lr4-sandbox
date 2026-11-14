@@ -2,14 +2,17 @@
 // FreeCAD model's (lr4_config.json's Router_Nut lo_ref / hi_ref, less the router's frame) and its cord tip on the size
 // build's cord route; the Carbide's measured sizes (overall 200, housing 64.8 x 85, cap 75 wide); the motor cap on the
 // turned part; the bit end (thread inside the nut, the collet under the shaft's end, the flats).
-//   node tests/test_router_body.js
+// The boolean (manifold-3d) checks are TASKS, run in worker threads beside the rest (R3: 9.7 s -> see the spec); their
+// checks are recorded and replayed in TASKS order, so the output is the serial run's.
+//   node tests/test_router_body.js [--serial]      (ROUTER_BODY_JOBS=N: workers, default one a task up to the cores - 1)
 "use strict";
+const { Worker, isMainThread, parentPort, workerData } = require("worker_threads");
 const B = require("../web/js/router_body.js");
 const R = require("../web/js/routers.js");
 const cfg = require("../web/data/lr4_config.json");
 
-let fails = 0, checks = 0;
-const ok = (cond, msg) => { checks++; if (!cond) { fails++; console.log("FAIL " + msg); } };
+let fails = 0, checks = 0, rec = null;            // rec: a task's [cond, msg]s while it runs
+const ok = (cond, msg) => { if (rec) return void rec.push([!!cond, msg]); checks++; if (!cond) { fails++; console.log("FAIL " + msg); } };
 const bbox = (m) => {
   const lo = [Infinity, Infinity, Infinity], hi = [-Infinity, -Infinity, -Infinity];
   for (let i = 0; i < m.pos.length; i += 3) for (let k = 0; k < 3; k++) { lo[k] = Math.min(lo[k], m.pos[i + k]); hi[k] = Math.max(hi[k], m.pos[i + k]); }
@@ -26,102 +29,107 @@ const volume = (m) => {                              // signed: > 0 when the fac
 const near = (a, b, tol) => a.every((v, k) => Math.abs(v - b[k]) <= tol);
 const f = (a) => a.map((v) => +v.toFixed(1)).join(",");
 const M = (id) => R.ROUTERS[id].model;               // cleaned: every look + default filled in
+const built = new Map();                             // (a preset's build without the booleans, once: build() is pure)
+const build0 = (m) => { if (!built.has(m)) built.set(m, B.build(m)); return built.get(m); };
 
-for (const id of Object.keys(R.ROUTERS)) {
-  const m = M(id), out = B.build(m), spin = m.kind === "spindle";
-  const parts = ["collet_nut", "collet", "shaft", "thread", "housing", "motor_cap", "strain_relief", "cord"].concat(spin ? ["trim"] : ["dial", "switch", "switch_off"]);
-  for (const k of parts) {
-    const p = out.parts[k];
-    ok(p.pos.length > 0 && p.pos.every(Number.isFinite), `${id} ${k}: built, finite`);
-    ok(volume(p) > 0, `${id} ${k}: faces out (volume ${volume(p).toFixed(0)})`);
+function syncChecks() {
+
+  for (const id of Object.keys(R.ROUTERS)) {
+    const m = M(id), out = build0(m), spin = m.kind === "spindle";
+    const parts = ["collet_nut", "collet", "shaft", "thread", "housing", "motor_cap", "strain_relief", "cord"].concat(spin ? ["trim"] : ["dial", "switch", "switch_off"]);
+    for (const k of parts) {
+      const p = out.parts[k];
+      ok(p.pos.length > 0 && p.pos.every(Number.isFinite), `${id} ${k}: built, finite`);
+      ok(volume(p) > 0, `${id} ${k}: faces out (volume ${volume(p).toFixed(0)})`);
+    }
+    ok(Object.keys(out.parts).every((k) => B.PARTS.includes(k)) && Object.keys(m.looks).every((k) => R.LOOK_PARTS.includes(k)), `${id}: parts + looks named`);
+    const padH = m.dial && m.dial.pad && m.dial.pad.d > 0 ? m.dial.pad.h : 0;   // a knob's raised pad stands over the head's top
+    ok(Math.abs(bbox(out.parts.motor_cap)[1][2] - B.overall(m) - padH) < 0.6, `${id}: top = overall ${B.overall(m)}${padH ? ` + the knob's pad ${padH}` : ""}`);
+    const th = bbox(out.parts.thread), nut = m.collet_nut;
+    ok(th[0][2] >= nut.below - 0.01 && th[1][2] <= nut.h + 0.01 && th[1][0] <= m.shaft.thread.d / 2 + 0.01, `${id}: the thread inside the nut (${f(th[0])} .. ${f(th[1])})`);
+    const co = bbox(out.parts.collet);
+    ok(co[0][2] > 0 && Math.abs(co[1][0] - m.collet.d / 2) < 0.05, `${id}: the collet from the nut's face up, ${m.collet.d} across its nut end`);
+    if (m.shaft.flats) {
+      const sh = out.parts.shaft, F = m.shaft.flats;
+      let ymax = 0;
+      for (let i = 0; i < sh.pos.length; i += 3) if (sh.pos[i + 2] > F.z + 0.1 && sh.pos[i + 2] < F.z + F.l - 0.1) ymax = Math.max(ymax, Math.abs(sh.pos[i + 1]));
+      ok(Math.abs(ymax - F.af / 2) < 0.01, `${id}: the shaft's flats ${F.af} across (${(2 * ymax).toFixed(2)})`);
+    }
   }
-  ok(Object.keys(out.parts).every((k) => B.PARTS.includes(k)) && Object.keys(m.looks).every((k) => R.LOOK_PARTS.includes(k)), `${id}: parts + looks named`);
-  const padH = m.dial && m.dial.pad && m.dial.pad.d > 0 ? m.dial.pad.h : 0;   // a knob's raised pad stands over the head's top
-  ok(Math.abs(bbox(out.parts.motor_cap)[1][2] - B.overall(m) - padH) < 0.6, `${id}: top = overall ${B.overall(m)}${padH ? ` + the knob's pad ${padH}` : ""}`);
-  const th = bbox(out.parts.thread), nut = m.collet_nut;
-  ok(th[0][2] >= nut.below - 0.01 && th[1][2] <= nut.h + 0.01 && th[1][0] <= m.shaft.thread.d / 2 + 0.01, `${id}: the thread inside the nut (${f(th[0])} .. ${f(th[1])})`);
-  const co = bbox(out.parts.collet);
-  ok(co[0][2] > 0 && Math.abs(co[1][0] - m.collet.d / 2) < 0.05, `${id}: the collet from the nut's face up, ${m.collet.d} across its nut end`);
-  if (m.shaft.flats) {
-    const sh = out.parts.shaft, F = m.shaft.flats;
-    let ymax = 0;
-    for (let i = 0; i < sh.pos.length; i += 3) if (sh.pos[i + 2] > F.z + 0.1 && sh.pos[i + 2] < F.z + F.l - 0.1) ymax = Math.max(ymax, Math.abs(sh.pos[i + 1]));
-    ok(Math.abs(ymax - F.af / 2) < 0.01, `${id}: the shaft's flats ${F.af} across (${(2 * ymax).toFixed(2)})`);
+
+  // the Kobalt vs the FreeCAD model (ref build), in the router's frame: the bit's centre, the nut's bottom
+  const rec = (n) => cfg.parts.find((p) => p.key === n);
+  // (Part 45b step 4: FreeCAD's router is this preset now - router_export.js - so its boxes aren't checked against it;
+  // the page data's Router_Nut until the next size refresh, Router_ColletNut after)
+  const bit = rec("Router_Bit"), nutR = rec("Router_ColletNut") || rec("Router_Nut");
+  const o = [(bit.lo_ref[0] + bit.hi_ref[0]) / 2, (bit.lo_ref[1] + bit.hi_ref[1]) / 2, nutR.lo_ref[2]];
+  const K = build0(M("kobalt"));
+  ok(near(K.cord.dir, [-Math.SQRT1_2, Math.SQRT1_2, 0], 1e-6), "Kobalt cord leaves bent 45 deg toward +y");
+  // js/page/router.js RT_BUILD_TIP = the page data's cord tip (the size builds' router: the default preset's,
+  // tools/router_export.js cord.tip since the 2026-11-01 refresh) - read from router.js itself
+  const BUILD_TIP = JSON.parse(/const RT_BUILD_TIP = (\[[^\]]+\])/.exec(require("fs").readFileSync(require("path").join(__dirname, "../web/js/page/router.js"), "utf8"))[1]);
+  const tipW = cfg.hose.cord.tip;
+  ok(near(K.cord.tip, BUILD_TIP, 0.05), `RT_BUILD_TIP = the default preset's cord tip (${f(BUILD_TIP)} vs ${f(K.cord.tip)})`);
+  ok(near(BUILD_TIP.map((v, i) => v + o[i]), tipW, 1.0), `RT_BUILD_TIP = lr4's cord_tip (${f(BUILD_TIP.map((v, i) => v + o[i]))} vs ${f(tipW)})`);
+  // the page's mount frame (router.js RT_MOUNTS.kobalt) = the build's bit axis + nut bottom
+  const mb = rec("Tool_Mount_B_Kobalt"), fo = [mb.lo_ref[0] + 49.4, mb.lo_ref[1] + 44.35, mb.lo_ref[2] - 36.5];
+  ok(near(fo, o, 0.05), `RT_MOUNTS.kobalt puts the router where the build's was (${f(fo)} vs ${f(o)})`);
+
+  // the Carbide: the Makita's body (user 2026-11-01) on its own ER11 end - its measured overall 200 kept (2026-10-28: 200,
+  // the cap 100 x 75 x 44, the housing 37 up from the nut's bottom)
+  const cm = M("carbide"), C = build0(cm), [hlo, hhi] = bbox(C.parts.motor_cap);
+  ok(Math.abs(hhi[1] - hlo[1] - 75) < 0.5, `Carbide motor cap 75 wide (${(hhi[1] - hlo[1]).toFixed(1)})`);
+  const hz = bbox(C.parts.housing);
+  ok(Math.abs(hz[0][2] - 37) < 1.5 && Math.abs(hz[1][0] - 32) < 0.01, `Carbide housing 64 across, ~37 up from the nut's bottom (${hz[0][2].toFixed(1)})`);
+  ok(B.overall(cm) === 200, `Carbide overall 200 (${B.overall(cm)})`);
+
+  // the motor cap: sized by its preset, sitting on the turned stack, its parts on it
+  for (const id of Object.keys(R.ROUTERS)) {
+    const m = M(id), h = m.motor_cap;
+    if (m.kind === "spindle") continue;
+    const out = build0(m), [lo, hi] = bbox(out.parts.motor_cap), x = B.expand(m), at = h.at || [0, 0];
+    ok(Math.abs(hi[0] - lo[0] - h.L) < 0.5 && Math.abs(hi[1] - lo[1] - h.W) < 0.5, `${id}: motor cap ${f([hi[0] - lo[0], hi[1] - lo[1]])} = L x W ${h.L} x ${h.W}`);
+    const pH = m.dial && m.dial.pad && m.dial.pad.d > 0 ? m.dial.pad.h : 0;
+    ok(Math.abs(hi[2] - lo[2] - h.H - pH) < 0.5, `${id}: motor cap ${(hi[2] - lo[2]).toFixed(1)} tall = H ${h.H}${pH ? ` + pad ${pH}` : ""}`);
+    ok(Math.abs(lo[2] - B.stackTop(m)) < 0.5, `${id}: cap sits on the turned part (bottom ${lo[2].toFixed(1)}, stack top ${B.stackTop(m)})`);
+    // the cap's ends at a height: a shaped cap's outline there (curved ends: the DeWalt's), else the box's +-L/2
+    const endsAt = (z) => (h.shape ? require("../web/js/cap_shape.js").ends(h.shape, z - x.cap.z[0]) : null) || [at[0] - h.L / 2, at[0] + h.L / 2];
+    const [cl] = endsAt(x.strain_relief.at[2]), [, sr] = endsAt(x.switch.at[2]);
+    ok(x.strain_relief.at[0] <= cl + 0.01, `${id}: cord leaves the -x end (${x.strain_relief.at[0].toFixed(2)}, the end ${cl.toFixed(2)})`);
+    ok(Math.abs(x.switch.at[0] - (sr + 0.75)) < 0.01 && out.rocker, `${id}: switch + rocker on the +x end (${x.switch.at[0].toFixed(2)}, the end ${sr.toFixed(2)})`);
+    if (m.shaft_lock) {
+      ok(out.z.lock && out.z.lock.travel === m.shaft_lock.travel, `${id}: shaft lock + its press (${m.shaft_lock.travel} mm)`);
+    }
   }
-}
+  const g = B.expand({ collet_nut: { af: 20, h: 10, below: 1 }, shaft: { d: 12, exposed: 0 }, housing: { d: 60, l: 90 },
+    motor_cap: { L: 80, W: 70, H: 60, top_r: 5, front_r: 20, back_r: 8, bot_r: 3 }, dial: { place: "end", d: 20, t: 6 } });
+  ok(g.cap.z[0] === 100 && g.cap.z[1] === 160 && g.cap.r[0] === 8 && g.cap.r[1] === 20 && g.cap.top_r === 5 && g.cap.bot_r === 3,
+    `motor cap: on the stack, back / front corner fillets, top / underneath ${JSON.stringify(g.cap)}`);
 
-// the Kobalt vs the FreeCAD model (ref build), in the router's frame: the bit's centre, the nut's bottom
-const rec = (n) => cfg.parts.find((p) => p.key === n);
-// (Part 45b step 4: FreeCAD's router is this preset now - router_export.js - so its boxes aren't checked against it;
-// the page data's Router_Nut until the next size refresh, Router_ColletNut after)
-const bit = rec("Router_Bit"), nutR = rec("Router_ColletNut") || rec("Router_Nut");
-const o = [(bit.lo_ref[0] + bit.hi_ref[0]) / 2, (bit.lo_ref[1] + bit.hi_ref[1]) / 2, nutR.lo_ref[2]];
-const K = B.build(M("kobalt"));
-ok(near(K.cord.dir, [-Math.SQRT1_2, Math.SQRT1_2, 0], 1e-6), "Kobalt cord leaves bent 45 deg toward +y");
-// js/page/router.js RT_BUILD_TIP = the page data's cord tip (the size builds' router: the default preset's,
-// tools/router_export.js cord.tip since the 2026-11-01 refresh) - read from router.js itself
-const BUILD_TIP = JSON.parse(/const RT_BUILD_TIP = (\[[^\]]+\])/.exec(require("fs").readFileSync(require("path").join(__dirname, "../web/js/page/router.js"), "utf8"))[1]);
-const tipW = cfg.hose.cord.tip;
-ok(near(K.cord.tip, BUILD_TIP, 0.05), `RT_BUILD_TIP = the default preset's cord tip (${f(BUILD_TIP)} vs ${f(K.cord.tip)})`);
-ok(near(BUILD_TIP.map((v, i) => v + o[i]), tipW, 1.0), `RT_BUILD_TIP = lr4's cord_tip (${f(BUILD_TIP.map((v, i) => v + o[i]))} vs ${f(tipW)})`);
-// the page's mount frame (router.js RT_MOUNTS.kobalt) = the build's bit axis + nut bottom
-const mb = rec("Tool_Mount_B_Kobalt"), fo = [mb.lo_ref[0] + 49.4, mb.lo_ref[1] + 44.35, mb.lo_ref[2] - 36.5];
-ok(near(fo, o, 0.05), `RT_MOUNTS.kobalt puts the router where the build's was (${f(fo)} vs ${f(o)})`);
-
-// the Carbide: the Makita's body (user 2026-11-01) on its own ER11 end - its measured overall 200 kept (2026-10-28: 200,
-// the cap 100 x 75 x 44, the housing 37 up from the nut's bottom)
-const cm = M("carbide"), C = B.build(cm), [hlo, hhi] = bbox(C.parts.motor_cap);
-ok(Math.abs(hhi[1] - hlo[1] - 75) < 0.5, `Carbide motor cap 75 wide (${(hhi[1] - hlo[1]).toFixed(1)})`);
-const hz = bbox(C.parts.housing);
-ok(Math.abs(hz[0][2] - 37) < 1.5 && Math.abs(hz[1][0] - 32) < 0.01, `Carbide housing 64 across, ~37 up from the nut's bottom (${hz[0][2].toFixed(1)})`);
-ok(B.overall(cm) === 200, `Carbide overall 200 (${B.overall(cm)})`);
-
-// the motor cap: sized by its preset, sitting on the turned stack, its parts on it
-for (const id of Object.keys(R.ROUTERS)) {
-  const m = M(id), h = m.motor_cap;
-  if (m.kind === "spindle") continue;
-  const out = B.build(m), [lo, hi] = bbox(out.parts.motor_cap), x = B.expand(m), at = h.at || [0, 0];
-  ok(Math.abs(hi[0] - lo[0] - h.L) < 0.5 && Math.abs(hi[1] - lo[1] - h.W) < 0.5, `${id}: motor cap ${f([hi[0] - lo[0], hi[1] - lo[1]])} = L x W ${h.L} x ${h.W}`);
-  const pH = m.dial && m.dial.pad && m.dial.pad.d > 0 ? m.dial.pad.h : 0;
-  ok(Math.abs(hi[2] - lo[2] - h.H - pH) < 0.5, `${id}: motor cap ${(hi[2] - lo[2]).toFixed(1)} tall = H ${h.H}${pH ? ` + pad ${pH}` : ""}`);
-  ok(Math.abs(lo[2] - B.stackTop(m)) < 0.5, `${id}: cap sits on the turned part (bottom ${lo[2].toFixed(1)}, stack top ${B.stackTop(m)})`);
-  // the cap's ends at a height: a shaped cap's outline there (curved ends: the DeWalt's), else the box's +-L/2
-  const endsAt = (z) => (h.shape ? require("../web/js/cap_shape.js").ends(h.shape, z - x.cap.z[0]) : null) || [at[0] - h.L / 2, at[0] + h.L / 2];
-  const [cl] = endsAt(x.strain_relief.at[2]), [, sr] = endsAt(x.switch.at[2]);
-  ok(x.strain_relief.at[0] <= cl + 0.01, `${id}: cord leaves the -x end (${x.strain_relief.at[0].toFixed(2)}, the end ${cl.toFixed(2)})`);
-  ok(Math.abs(x.switch.at[0] - (sr + 0.75)) < 0.01 && out.rocker, `${id}: switch + rocker on the +x end (${x.switch.at[0].toFixed(2)}, the end ${sr.toFixed(2)})`);
-  if (m.shaft_lock) {
-    ok(out.z.lock && out.z.lock.travel === m.shaft_lock.travel, `${id}: shaft lock + its press (${m.shaft_lock.travel} mm)`);
+  // a shaped motor cap (Part 46b): drawn from its three views, closed + out, the size the shape says; the dial, switch
+  // and strain relief on it; the cap's plan + top follow the shape (the transition to it, a dial on top)
+  {
+    const CS = require("../web/js/cap_shape.js"), km = M("kobalt"), c0 = km.motor_cap;
+    const shape = CS.STARTS.pear({ L: 100, W: 76, H: 58, at: 0, top_r: 10 });
+    const sm = R.clean({ name: "shaped", source: "manual", speeds: R.ROUTERS.kobalt.speeds, mount: "kobalt", model: Object.assign({}, km, { motor_cap: Object.assign({}, c0, { shape }) }) }).model;
+    const sb = B.build(sm), mc = sb.parts.motor_cap, [lo, hi] = bbox(mc), z = CS.size(sm.motor_cap.shape), z0 = B.stackTop(sm);
+    ok(!!sm.motor_cap.shape && sm.motor_cap.L === z.L && sm.motor_cap.H === z.H, `shaped cap: kept by clean(), its size from the shape (${sm.motor_cap.L} x ${sm.motor_cap.W} x ${sm.motor_cap.H})`);
+    ok(volume(mc) > 0 && Math.abs(hi[0] - lo[0] - z.L) < 0.2 && Math.abs(hi[1] - lo[1] - z.W) < 0.2 && Math.abs(lo[2] - z0) < 0.2 && Math.abs(hi[2] - z0 - z.H) < 0.4,   // (a window dial's strip: 0.3 proud)
+      `shaped cap: faces out, ${f(lo)} .. ${f(hi)} (on the stack at ${z0})`);
+    const ex = B.expand(sm);
+    ok(ex.switch.at[0] > hi[0] - 3 && ex.switch.at[0] < hi[0] + 2 && ex.strain_relief.at[0] < lo[0] + 3, `shaped cap: the switch on its front (${ex.switch.at[0].toFixed(1)}), the relief at its back (${ex.strain_relief.at[0].toFixed(1)})`);
+    const top = Object.assign({}, sm, { dial: Object.assign({}, sm.dial, { place: "top" }), transition: { l: 20, d: 70, shape: "cap", edge: "fillet", e: 3 } });
+    const tb = B.build(top), [dlo] = bbox(tb.parts.dial), [, thi] = bbox(tb.parts.transition);
+    ok(dlo[2] > z0 + 20 && thi[2] <= B.stackTop(top) + 0.01 && tb.parts.trim.idx.length > 0, `shaped cap: a dial on top sits in it (${dlo[2].toFixed(1)}), the transition lofts up to its plan`);
   }
-}
-const g = B.expand({ collet_nut: { af: 20, h: 10, below: 1 }, shaft: { d: 12, exposed: 0 }, housing: { d: 60, l: 90 },
-  motor_cap: { L: 80, W: 70, H: 60, top_r: 5, front_r: 20, back_r: 8, bot_r: 3 }, dial: { place: "end", d: 20, t: 6 } });
-ok(g.cap.z[0] === 100 && g.cap.z[1] === 160 && g.cap.r[0] === 8 && g.cap.r[1] === 20 && g.cap.top_r === 5 && g.cap.bot_r === 3,
-  `motor cap: on the stack, back / front corner fillets, top / underneath ${JSON.stringify(g.cap)}`);
 
-// a shaped motor cap (Part 46b): drawn from its three views, closed + out, the size the shape says; the dial, switch
-// and strain relief on it; the cap's plan + top follow the shape (the transition to it, a dial on top)
-{
-  const CS = require("../web/js/cap_shape.js"), km = M("kobalt"), c0 = km.motor_cap;
-  const shape = CS.STARTS.pear({ L: 100, W: 76, H: 58, at: 0, top_r: 10 });
-  const sm = R.clean({ name: "shaped", source: "manual", speeds: R.ROUTERS.kobalt.speeds, mount: "kobalt", model: Object.assign({}, km, { motor_cap: Object.assign({}, c0, { shape }) }) }).model;
-  const sb = B.build(sm), mc = sb.parts.motor_cap, [lo, hi] = bbox(mc), z = CS.size(sm.motor_cap.shape), z0 = B.stackTop(sm);
-  ok(!!sm.motor_cap.shape && sm.motor_cap.L === z.L && sm.motor_cap.H === z.H, `shaped cap: kept by clean(), its size from the shape (${sm.motor_cap.L} x ${sm.motor_cap.W} x ${sm.motor_cap.H})`);
-  ok(volume(mc) > 0 && Math.abs(hi[0] - lo[0] - z.L) < 0.2 && Math.abs(hi[1] - lo[1] - z.W) < 0.2 && Math.abs(lo[2] - z0) < 0.2 && Math.abs(hi[2] - z0 - z.H) < 0.4,   // (a window dial's strip: 0.3 proud)
-    `shaped cap: faces out, ${f(lo)} .. ${f(hi)} (on the stack at ${z0})`);
-  const ex = B.expand(sm);
-  ok(ex.switch.at[0] > hi[0] - 3 && ex.switch.at[0] < hi[0] + 2 && ex.strain_relief.at[0] < lo[0] + 3, `shaped cap: the switch on its front (${ex.switch.at[0].toFixed(1)}), the relief at its back (${ex.strain_relief.at[0].toFixed(1)})`);
-  const top = Object.assign({}, sm, { dial: Object.assign({}, sm.dial, { place: "top" }), transition: { l: 20, d: 70, shape: "cap", edge: "fillet", e: 3 } });
-  const tb = B.build(top), [dlo] = bbox(tb.parts.dial), [, thi] = bbox(tb.parts.transition);
-  ok(dlo[2] > z0 + 20 && thi[2] <= B.stackTop(top) + 0.01 && tb.parts.trim.idx.length > 0, `shaped cap: a dial on top sits in it (${dlo[2].toFixed(1)}), the transition lofts up to its plan`);
-}
-
-// the Makita collet (user's photo 2026-10-30): a cone nose, a barrel, a ring at the far end, 3 slits from the nose
-{
-  const mc = B.colletPart(M("makita"), 3.175);
-  let zlo = Infinity, zhi = -Infinity, rmax = 0;
-  for (let i = 0; i < mc.pos.length; i += 3) { zlo = Math.min(zlo, mc.pos[i + 2]); zhi = Math.max(zhi, mc.pos[i + 2]); rmax = Math.max(rmax, Math.hypot(mc.pos[i], mc.pos[i + 1])); }
-  ok(volume(mc) > 0 && Math.abs(zhi - zlo - 20) < 0.01 && Math.abs(rmax - 7) < 0.01, `Makita collet: closed + out, 20 long, Ø14 at the cone (${(zhi - zlo).toFixed(2)}, ${(2 * rmax).toFixed(2)})`);
+  // the Makita collet (user's photo 2026-10-30): a cone nose, a barrel, a ring at the far end, 3 slits from the nose
+  {
+    const mc = B.colletPart(M("makita"), 3.175);
+    let zlo = Infinity, zhi = -Infinity, rmax = 0;
+    for (let i = 0; i < mc.pos.length; i += 3) { zlo = Math.min(zlo, mc.pos[i + 2]); zhi = Math.max(zhi, mc.pos[i + 2]); rmax = Math.max(rmax, Math.hypot(mc.pos[i], mc.pos[i + 1])); }
+    ok(volume(mc) > 0 && Math.abs(zhi - zlo - 20) < 0.01 && Math.abs(rmax - 7) < 0.01, `Makita collet: closed + out, 20 long, Ø14 at the cone (${(zhi - zlo).toFixed(2)}, ${(2 * rmax).toFixed(2)})`);
+  }
 }
 
 // Part 46c: the pockets as real booleans (everything above ran without them: the patches). Every edge on two faces
@@ -135,12 +143,14 @@ const watertight = (m) => {
   }
   return [...e.values()].every((n) => n === 2);
 };
-CSG.init().then((loaded) => {
-  ok(loaded && CSG.ready(), "csg: manifold-3d loads (web/manifold/)");
-  const cut = B.build(M("makita"));
-  for (const k of ["motor_cap", "transition"]) ok(watertight(cut.parts[k]), `Makita ${k}: the brush pockets leave it closed`);
-  ok(volume(cut.parts.motor_cap) > 0, "Makita motor_cap: faces out after the brush pockets");
-  for (const open of [true, false]) {
+const TASKS = [
+  () => {
+    ok(loaded && CSG.ready(), "csg: manifold-3d loads (web/manifold/)");
+    const cut = B.build(M("makita"));
+    for (const k of ["motor_cap", "transition"]) ok(watertight(cut.parts[k]), `Makita ${k}: the brush pockets leave it closed`);
+    ok(volume(cut.parts.motor_cap) > 0, "Makita motor_cap: faces out after the brush pockets");
+  },
+  ...[true, false].map((open) => () => {
     const m = JSON.parse(JSON.stringify(M("kobalt")));
     m.dial = Object.assign({}, m.dial, { place: "window", win: { open } });
     const w = B.build(m), cap = w.parts.motor_cap, ex = B.expand(m), Wn = ex.dial.win;
@@ -153,18 +163,18 @@ CSG.init().then((loaded) => {
       if (Math.abs(z - Wn.z) < 0.01 && x >= Wn.x[0] - 0.01 && y >= Wn.y[0] - 0.01 && y <= Wn.y[1] + 0.01) floor++;
     }
     ok(floor >= 4 && box > 0, `Kobalt window (open ${open}): its floor at z ${Wn.z.toFixed(1)} in the head (${floor} points)`);
-  }
-  {                                                  // the window's corner (win.r, the Makita's U): rounded in plan, still
+  }),
+  () => {                                            // the window's corner (win.r, the Makita's U): rounded in plan, still
     const m = JSON.parse(JSON.stringify(M("makita"))), sq = JSON.parse(JSON.stringify(m));   // closed; less taken out than square
     sq.dial = Object.assign({}, m.dial, { win: Object.assign({}, m.dial.win, { r: 0 }) });
     const cr = B.build(m).parts.motor_cap, cs = B.build(sq).parts.motor_cap;
     ok(M("makita").dial.win.r === 8 && watertight(cr) && watertight(cs) && volume(cr) > volume(cs),
       `Makita window corner r 8: closed, takes ${((volume(cr) - volume(cs)) / 1000).toFixed(2)} cm3 less out than square`);
-  }
+  },
   // Part 46d: the wheel inside the head, its rim through a slot; a surround round it: none / sunk (+ out the top) /
   // raised, on the end and on top. Closed every way; sunk takes more out than none, raised adds; the rim `set` in from
   // the slot's face; a dark back in the pocket (trim)
-  for (const id of ["kobalt", "makita", "carbide"]) for (const place of ["end", "top"]) {
+  ...["kobalt", "makita", "carbide"].flatMap((id) => ["end", "top"].map((place) => () => {
     const vols = {};
     for (const [k, sur] of [["none", { kind: "none" }], ["sunk", { kind: "sunk", depth: 3, margin: 3, edge: "fillet", e: 1, out: "top" }], ["raised", { kind: "raised", depth: 2, margin: 3 }]]) {
       const m = JSON.parse(JSON.stringify(M(id)));
@@ -177,20 +187,20 @@ CSG.init().then((loaded) => {
       ok(Math.abs(rim + 0.3) < 0.05 && lo.every(Number.isFinite), `${id} dial ${place} ${k}: the rim 0.3 in from the slot's face (${rim.toFixed(2)})`);
     }
     ok(vols.sunk < vols.none && vols.none < vols.raised, `${id} dial ${place}: sunk < none < raised (${Object.values(vols).map((v) => (v / 1000).toFixed(2)).join(" / ")} cm3)`);
-  }
-  {
+  })),
+  () => {
     const m = JSON.parse(JSON.stringify(M("makita")));
     m.dial = Object.assign({}, m.dial, { place: "end" });   // (the Makita's own: in a window since 2026-10-31)
     const with_ = B.build(m).parts.trim.idx.length;
     m.dial = Object.assign({}, m.dial, { slot: false });
     ok(with_ > B.build(m).parts.trim.idx.length && B.expand(m).dial.open === undefined, "dial slot: a dark back in the pocket; slot: false = the old look (no opening)");
-  }
-  {                                                  // a beveled dial (user 2026-10-31, the Makita's): rim, a straight slope, a flat top
+  },
+  () => {                                            // a beveled dial (user 2026-10-31, the Makita's): rim, a straight slope, a flat top
     const b = B.build(M("makita")), prof = B.dialProfile({ d: 30, t: 8, bevel: { top: 0.6 } });
     ok(M("makita").dial.style === "bevel" && b.dial.bevel && b.dial.bevel.top === 0.6 && !b.dial.dome && prof.join() === "15,0,15,4,9,8,0,8",
       `dial style bevel: the Makita's, the profile rim -> slope -> flat top (${prof.join(" ")})`);
-  }
-  {                                                  // the dial's style (user 2026-10-30, an option): numbers on the rim / on a domed top
+  },
+  () => {                                            // the dial's style (user 2026-10-30, an option): numbers on the rim / on a domed top
     // (a Kobalt with a domed dial, through the cleaning: its own is bevelled since 2026-11-01)
     const kd = R.preset("kobalt"); kd.model.dial = Object.assign({}, kd.model.dial, { style: "dome", dome: { top: 0.45 } });
     const dm = R.clean(kd).model, dome = B.build(dm), m = JSON.parse(JSON.stringify(dm));
@@ -198,7 +208,37 @@ CSG.init().then((loaded) => {
     const rim = B.build(m), [, dh] = bbox(dome.parts.dial), [, rh] = bbox(rim.parts.dial);
     ok(dm.dial.style === "dome" && dome.dial.dome && dome.dial.dome.top === 0.45 && rim.dial.dome === null, "dial style: a dome kept by the cleaning; rim = no dome");
     ok(volume(dome.parts.dial) > 0 && volume(dome.parts.dial) < volume(rim.parts.dial) && Math.abs(dh[2] - rh[2]) < 0.01, "dial style: the dome closed + out, less than the plain wheel, the same height");
-  }
-  console.log(fails ? `${fails} of ${checks} failed` : `${checks}/${checks} checks passed`);
-  process.exit(fails ? 1 : 0);
-});
+  },
+];
+let loaded = false;
+const run = (i) => {                                 // one task, its checks recorded (a throw: the checks so far + the error)
+  rec = [];
+  const r = { i, recs: rec };
+  try { TASKS[i](); } catch (e) { r.err = (e && e.stack) || String(e); }
+  rec = null;
+  return r;
+};
+
+if (!isMainThread) {
+  const next = (i) => parentPort.postMessage(run(i));
+  CSG.init().then((l) => { loaded = l; parentPort.on("message", next); next(workerData.first); });
+} else {
+  const os = require("os"), cores = os.availableParallelism ? os.availableParallelism() : os.cpus().length;
+  const W = process.argv.includes("--serial") ? 0 : Math.min(TASKS.length, +process.env.ROUTER_BODY_JOBS || Math.max(1, cores - 1));
+  const results = new Array(TASKS.length), queue = TASKS.map((_, i) => i);
+  const pool = Promise.all(Array.from({ length: W }, () => new Promise((res, rej) => {
+    const w = new Worker(__filename, { workerData: { first: queue.shift() } });
+    w.on("message", (r) => { results[r.i] = r; if (queue.length) w.postMessage(queue.shift()); else w.terminate().then(res); });
+    w.on("error", rej);
+  })));
+  syncChecks();
+  pool.then(async () => {
+    if (!W) { loaded = await CSG.init(); for (let i = 0; i < TASKS.length; i++) results[i] = run(i); }
+    for (const r of results) {
+      for (const [c, msg] of r.recs) ok(c, msg);
+      if (r.err) { console.error(r.err); process.exit(1); }
+    }
+    console.log(fails ? `${fails} of ${checks} failed` : `${checks}/${checks} checks passed`);
+    process.exit(fails ? 1 : 0);
+  }, (e) => { console.error(e); process.exit(1); });
+}

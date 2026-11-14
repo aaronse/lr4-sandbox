@@ -14,7 +14,15 @@
 //   python tools/serve.py sandbox --no-open   (serves the repo on 127.0.0.1:8767, cross-origin isolated; the page loads parts/)
 //   node tools/record_demo.js <file.nc> [out.mp4] [--size 2560x1440] [--fps 30] [--job 75] [--pause 2] [--orbit 10]
 //        [--url http://127.0.0.1:8767/web/index.html?parts=/parts/] [--swiftshader] [--no-sound] [--volume 0.6] [--voice machine|robot] [--pendant] [--no-home] [--real 5]
-//        [--kmax 5] [--log events.txt]
+//        [--kmax 5] [--log events.txt] [--secs 10] [--timing] [--no-vsync] [--grab shot|overlap] [--lag 2] [--chrome-flag X]
+// --secs: stop after that many s of video (a test cut). --timing: each frame's cost split into the page's director (setT,
+// camera), FluidNC's top-up and the draw (the director's record clock), then the round trip, the grab (CDP JPEG
+// screenshot) and the pipe into ffmpeg; the means and 95th percentiles printed at the end.
+// --no-vsync: Chrome draws as fast as it can (--disable-gpu-vsync --disable-frame-rate-limit): the step's two animation
+// frames stop waiting for vsync (draw 25 -> 13 ms a frame at 720p on the AMD iGPU, 2026-11-08); the frames are the same.
+// --grab overlap (an experiment, not for a deliverable): Page.startScreencast instead of a screenshot a frame, the next
+// step asked before the last one's frame has come (at most --lag steps ahead); a step no frame came for is a drop,
+// counted and filled with the frame before (so the video is NOT exact when it reports drops).
 // --job: seconds of video for the job's moves (sets the playback speed; pauses and probes come on top).
 // --real: at the first cut of each section (after a message or an M0), this many seconds at 1x (real time, real
 // sound), then it eases up to the job's speed; a badge shows the speed ("1× real time", "62×"). 0 = off.
@@ -31,6 +39,23 @@
 const { spawn } = require("child_process"), fs = require("fs"), os = require("os"), path = require("path");
 const { profile } = require("./chrome_profile.js");   // (its Chrome profile deleted for sure)
 const DS = require("../web/js/demo_script.js");
+// <frames> the --timing table's and --grab overlap's helpers (tests/test_rec_frames.js runs this block; the same as
+// media-anim tools/capture/frames.mjs, the private sibling the shared capture tools moved to)
+// asks = each step's ask time (s, ascending), ts = a screencast frame's swap time (s) -> the step it shows (the last one
+// asked at or before ts), or -1 when it was composited before the first step
+function stepOf(asks, ts) {
+  let lo = 0, hi = asks.length - 1;
+  if (!asks.length || ts < asks[0]) return -1;
+  while (lo < hi) { const mid = (lo + hi + 1) >> 1; if (asks[mid] <= ts) lo = mid; else hi = mid - 1; }
+  return lo;
+}
+// ms samples -> [mean, p95], the first `skip` left out (the page warming up)
+function stats(xs, skip = 5) {
+  const v = xs.slice(skip).sort((a, b) => a - b);
+  return v.length ? [v.reduce((a, b) => a + b, 0) / v.length, v[Math.min(v.length - 1, Math.floor(v.length * 0.95))]] : [0, 0];
+}
+// </frames>
+const RF = { stepOf, stats };
 
 const args = process.argv.slice(2), opt = Object.assign({ url: "http://127.0.0.1:8767/web/index.html?parts=/parts/", gpu: true },
   JSON.parse(JSON.stringify(DS.DEFAULTS)));
@@ -38,7 +63,11 @@ const pos = [], given = new Set();
 for (let i = 0; i < args.length; i++) {
   const a = args[i];
   if (a === "--size") opt.size = args[++i].split("x").map(Number);
-  else if (["--fps", "--job", "--pause", "--orbit", "--volume", "--real", "--kmax"].includes(a)) opt[a.slice(2)] = Number(args[++i]);
+  else if (["--fps", "--job", "--pause", "--orbit", "--volume", "--real", "--kmax", "--secs", "--lag"].includes(a)) opt[a.slice(2)] = Number(args[++i]);
+  else if (a === "--timing") opt.timing = true;
+  else if (a === "--grab") opt.grab = args[++i];
+  else if (a === "--no-vsync") opt.novsync = true;
+  else if (a === "--chrome-flag") (opt.chromeFlags = opt.chromeFlags || []).push(args[++i]);
   else if (a === "--mode") opt.mode = args[++i].toLowerCase();
   else if (a === "--no-sound") opt.sound = false;
   else if (a === "--no-home") opt.home = false;
@@ -70,15 +99,32 @@ const CHROME = process.env.CHROME || [
   "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome", "/usr/bin/google-chrome", "/usr/bin/chromium"]
   .find((p) => fs.existsSync(p));
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
+// --timing's table: node's [round trip, grab, pipe, bytes] and the page's [director, nc, draw] per frame (the first 5
+// frames left out: the page warming up)
+function timingReport(node, page, flush, frames) {
+  const stat = (xs) => RF.stats(xs);
+  const row = (name, xs) => { const [m, p] = stat(xs); console.log(`  ${name.padEnd(34)} ${m.toFixed(1).padStart(7)} ${p.toFixed(1).padStart(7)}`); return m; };
+  console.log(`timing over ${frames} frames (ms a frame: mean, p95):`);
+  row("page: director (setT, camera)", page.map((q) => q[0]));
+  row("page: FluidNC top-up", page.map((q) => q[1]));
+  row("page: draw (2 animation frames)", page.map((q) => q[2]));
+  const step = row("round trip (next() -> drawn)", node.map((q) => q[0]));
+  const grab = row("grab (CDP screenshot, JPEG)", node.map((q) => q[1]));
+  const pipe = row("pipe (base64 -> ffmpeg stdin)", node.map((q) => q[2]));
+  console.log(`  ${"total".padEnd(34)} ${(step + grab + pipe).toFixed(1).padStart(7)}   (JPEG ${(stat(node.map((q) => q[3]))[0] / 1024).toFixed(0)} KB; ffmpeg's flush at the end ${flush.toFixed(0)} ms)`);
+}
 
 (async () => {
   const P = profile("record_demo_"), prof = P.dir;
   const port = 9300 + Math.floor(Math.random() * 500);
   const flags = opt.gpu ? ["--use-angle=d3d11", "--ignore-gpu-blocklist", "--enable-gpu-rasterization"]
     : ["--use-angle=swiftshader", "--enable-unsafe-swiftshader"];
+  flags.push(...(opt.chromeFlags || []));            // --chrome-flag: one more Chrome switch (repeatable)
+  if (opt.novsync) flags.push("--disable-gpu-vsync", "--disable-frame-rate-limit");   // --no-vsync: frames as fast as drawn
   const chrome = P.own(spawn(CHROME, ["--headless=new", ...flags, "--hide-scrollbars", `--remote-debugging-port=${port}`,
     `--user-data-dir=${prof}`, `--window-size=${opt.size[0]},${opt.size[1]}`, "about:blank"], { stdio: "ignore" }));
   let ws, id = 0, ffmpeg = null;
+  const cast = { frames: [], wake: null };          // --grab overlap: the screencast's frames as they come
   const pending = new Map();
   const send = (method, params = {}) => new Promise((res, rej) => {
     const n = ++id;
@@ -103,6 +149,11 @@ const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
     ws.addEventListener("message", (ev) => {
       const m = JSON.parse(ev.data);
       if (m.id && pending.has(m.id)) { const p = pending.get(m.id); pending.delete(m.id); m.error ? p.rej(new Error(m.error.message)) : p.res(m.result); }
+      else if (m.method === "Page.screencastFrame") {   // --grab overlap: acked at once (Chrome sends the next only then)
+        send("Page.screencastFrameAck", { sessionId: m.params.sessionId }).catch(() => {});
+        cast.frames.push({ data: m.params.data, ts: m.params.metadata.timestamp });
+        if (cast.wake) { const w = cast.wake; cast.wake = null; w(); }
+      }
       else if (m.method === "Runtime.exceptionThrown") console.log("[page exception]", m.params.exceptionDetails.exception?.description || m.params.exceptionDetails.text);
     });
     await send("Runtime.enable");
@@ -121,20 +172,85 @@ const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
     ffmpeg = spawn("ffmpeg", ["-y", "-loglevel", "error", "-f", "image2pipe", "-framerate", String(opt.fps), "-c:v", "mjpeg", "-i", "-",
       "-c:v", "libx264", "-preset", "medium", "-crf", "18", "-pix_fmt", "yuv420p", "-movflags", "+faststart", vid], { stdio: ["pipe", "inherit", "inherit"] });
     let frames = 0, t0 = Date.now();
+    const ms = () => Number(process.hrtime.bigint()) / 1e6, tm = [];   // --timing: [step, grab, pipe] ms a frame
+    let ta = ms();
+    // --grab shot (the default): Page.captureScreenshot of each drawn frame
+    const shot = async () => (await send("Page.captureScreenshot", { format: "jpeg", quality: 92 })).data;
+    // --grab overlap: the screencast's frames come ~65 ms after the draw, so the next step goes ahead without waiting for
+    // them (at most LAG steps ahead); each frame is matched to its step by its swap time (between that step's ask and the
+    // next's); a step no frame landed for is a drop, counted (and filled by the frame before it, so the timing holds)
+    async function overlapLoop() {
+      const LAG = opt.lag || 2, asks = [], got = new Map();
+      let n = 0, wrote = 0, drops = 0, newest = -1;
+      const assign = () => {
+        for (const f of cast.frames.splice(0)) {
+          const i = RF.stepOf(asks, f.ts);         // composited after that step's ask, before the next's
+          if (i < 0) continue;                       // before the first step
+          got.set(i, f.data); newest = Math.max(newest, i);
+        }
+      };
+      const flush = async (upto) => {                // frames < upto in order (a missing one: the last written again)
+        let last = null;
+        for (; wrote < upto; wrote++) {
+          let d = got.get(wrote);
+          if (!d) { drops++; d = got.get(wrote - 1) || last; if (opt.timing) console.log(`drop: frame ${wrote}`); }
+          if (!d) continue;
+          last = d; got.delete(wrote - 1);
+          if (!ffmpeg.stdin.write(Buffer.from(d, "base64"))) await new Promise((q) => ffmpeg.stdin.once("drain", q));
+        }
+      };
+      let tPrev = ms();
+      for (let r = (asks.push(Date.now() / 1000), await val("LR4Director.recStart()")); ;) {
+        print(r.log);
+        if (r.error) throw new Error("the director: " + r.error);
+        if (r.done) { asks.pop(); break; }
+        n++;
+        if (opt.timing) { const t = ms(); tm.push([t - tPrev, 0, 0, 0]); tPrev = t; }
+        if (opt.secs && n >= opt.secs * opt.fps) break;
+        if (n % (opt.fps * 5) === 0) console.log(`${(n / opt.fps).toFixed(0)} s of video, ${((Date.now() - t0) / n).toFixed(0)} ms a frame`);
+        for (const t1 = Date.now(); ;) {             // at most LAG steps ahead of the frames come
+          assign();
+          if (n - 1 - newest <= LAG || Date.now() - t1 > 1500) break;
+          await Promise.race([new Promise((w) => { cast.wake = w; }), sleep(50)]);
+        }
+        await flush(newest);                         // all before the newest frame are in (or dropped)
+        asks.push(Date.now() / 1000);
+        r = await val("LR4Director.next()");
+      }
+      for (const t1 = Date.now(); newest < n - 1 && Date.now() - t1 < 1500;) { await sleep(50); assign(); }
+      await flush(n);
+      console.log(`overlap: ${n} frames, ${drops} dropped (filled with the frame before)`);
+      return n;
+    }
+    if (opt.grab === "overlap") {
+      await send("Page.startScreencast", { format: "jpeg", quality: 92, maxWidth: opt.size[0], maxHeight: opt.size[1], everyNthFrame: 1 });
+      await sleep(500);                              // its first frame is the page as it stood (stamped now): not a step's
+      cast.frames.splice(0);
+    }
     // the director's frames, one at a time: drawn -> grabbed -> next
-    for (let r = await val("LR4Director.recStart()"); ; r = await val("LR4Director.next()")) {
+    if (opt.grab === "overlap") frames = await overlapLoop();
+    else for (let r = await val("LR4Director.recStart()"); ; r = await val("LR4Director.next()")) {
+      const tb = ms();
       print(r.log);
       if (r.error) throw new Error("the director: " + r.error);
       if (r.done) break;
-      const { data } = await send("Page.captureScreenshot", { format: "jpeg", quality: 92 });
+      const data = await shot();
+      const tc = ms();
       if (!ffmpeg.stdin.write(Buffer.from(data, "base64"))) await new Promise((q) => ffmpeg.stdin.once("drain", q));
+      const td = ms();
+      if (opt.timing) tm.push([tb - ta, tc - tb, td - tc, data.length * 0.75]);
+      ta = td;
+      if (opt.secs && frames + 1 >= opt.secs * opt.fps) { frames++; break; }
       if (++frames % (opt.fps * 5) === 0) {
         const per = (Date.now() - t0) / frames, st = r.st;
         console.log(`${(frames / opt.fps).toFixed(0)} s of video, ${per.toFixed(0)} ms a frame${st.total ? `, job ${(100 * st.t / st.total).toFixed(0)} %` : ""}`);
       }
     }
+    if (opt.grab === "overlap") await send("Page.stopScreencast");
     ffmpeg.stdin.end();
+    const te = ms();
     await new Promise((r) => ffmpeg.on("close", r));
+    if (opt.timing) timingReport(tm, await val("LR4Director.timing()"), ms() - te, frames);
     const note = async (s) => { console.log(s); await val(`LR4Director.note(${JSON.stringify(s)})`); };
     if (opt.sound) {                                 // the sound of those frames -> WAV -> AAC alongside the video
       await note("sound: " + JSON.stringify(await val("LR4Demo.soundStats()")));

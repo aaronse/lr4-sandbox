@@ -24,8 +24,10 @@ window.LR4Director = (() => {
       await sleep(1000);
       if (el("status") && el("status").hidden) {
         await sleep(1500);
-        // (?parts=) the top bar's Parts chip says "Parts N/N ✓" (or there is none)
-        if (el("status").hidden && (el("parts-chip").hidden || /✓/.test(el("parts-chip").textContent))) return true;
+        // (?parts=) the top bar's Parts chip says "Parts N/N ✓" (or there is none); without ?parts= the page runs with
+        // what it has (missing parts as grey boxes: a machine without the part files can still record)
+        const want = new URLSearchParams(location.search).has("parts");
+        if (el("status").hidden && (!want || el("parts-chip").hidden || /✓/.test(el("parts-chip").textContent))) return true;
       }
       if (Date.now() - t0 > timeout) throw new Error("page didn't load: " + el("status").innerText);
     }
@@ -33,18 +35,25 @@ window.LR4Director = (() => {
 
   // ---- the clocks ----
   function recordClock() {                           // tools/record_demo.js: frozen, a frame at a time, each one handed over
-    let vt = 0;
-    const c = { kind: "record", out: null, go: null,
+    let vt = 0, tGo = 0;
+    // timing (record_demo.js --timing): per frame, wall ms (Date.now: the page's performance.now is the frozen clock)
+    // in the director (from the last grab's go to this frame: its setT and camera), FluidNC's top-up, and the draw (the
+    // two animation frames); the recorder adds the grab and the pipe
+    const c = { kind: "record", out: null, go: null, timing: null,
       install() { vt = performance.now(); performance.now = () => vt; },
       async frame(cam, ms, nc) {
+        const t0 = Date.now();
         // FluidNC to this frame's machine time, then the clock step with no draw between (a draw seeing the new pose
         // before the clock moved would hear it as a jump, and the frame itself as a stop)
         if (nc) await D.ncUntil(...nc);
         if (cam) { camera.position.set(...cam[0]); controls.target.set(...cam[1]); }
         vt += ms;
+        const t1 = Date.now();
         await raf2();                                // a tick with the step, then a draw
         const st = D.job();
+        if (c.timing) c.timing.push([tGo ? t0 - tGo : 0, t1 - t0, Date.now() - t1]);
         await new Promise((go) => { c.go = go; hand({ frame: true, st }); });   // grabbed: on to the next
+        tGo = Date.now();
         return st;
       } };
     return c;
@@ -127,7 +136,7 @@ window.LR4Director = (() => {
     document.body.classList.toggle("rec-ui", videoKind(script) === "ui");   // ui (Part 43c): the whole page, as it is
     if (videoKind(script) === "ui") LR4ShowMode("design");   // from Configure, as a first visit (shown, not saved: the mode is kept per browser)
     if (!o.live && videoKind(script) === "ui") controls.enableDamping = false;
-    else if (!o.live) D.recording(true);             // the 3D view, whole window
+    else if (!o.live) { D.recording(true); if (el("welcome")) el("welcome").hidden = true; }   // the 3D view, whole window (no parts dialog)
     else if (videoKind(script) === "machine" && el("v-only").getAttribute("aria-pressed") !== "true") { el("v-only").click(); resize(); }   // live: ⛶ view only
     await sleep(500);
     const introAll = DS.hasOwnIntro(script) ? script.intro : DS.defaultIntro(o);
@@ -642,6 +651,7 @@ window.LR4Director = (() => {
     // one -> { frame, st, log } | { done, log } | { error, log }
     recStart() {
       RUN.clock = recordClock();
+      if (RUN.o.timing) RUN.clock.timing = [];
       const first = new Promise((r) => { RUN.clock.out = r; });
       direct().then(() => hand({ done: true }), (e) => hand({ error: String(e && e.stack || e) }));
       return first;
@@ -653,6 +663,7 @@ window.LR4Director = (() => {
       return p;
     },
     frames: () => (RUN ? RUN.frames : 0),
+    timing: () => (RUN && RUN.clock && RUN.clock.timing) || [],   // record_demo.js --timing: [director, nc, draw] ms a frame
     note(s) { if (RUN) ev("log " + s); },              // a line the recorder printed, into the event log
   };
 })();

@@ -132,6 +132,7 @@
     const rest = stockRest({ x: [s.x0, s.x1], y: [s.y0, s.y1] });
     Imperfect.follow(HAND.sim, rest);
     HAND.mesh = jobStockMesh(HAND.sim, fr, undefined, rest && rest.at);
+    HAND.mesh.userData.statsName = "Hand stock (height field)";
     scene.add(HAND.mesh);
     meshUpdate(HAND.sim, HAND.mesh, true);
     handShow();
@@ -153,6 +154,7 @@
     else spoilFresh(SPOIL.sim);                      // until this size's kept board comes back (if any)
     SPOIL.key = key;
     SPOIL.mesh = jobStockMesh(SPOIL.sim, fr, MDF_RGB);
+    SPOIL.mesh.userData.statsName = "Spoilboard surface (height field)";
     spoilRef();
     scene.add(SPOIL.mesh);
     meshUpdate(SPOIL.sim, SPOIL.mesh, true);

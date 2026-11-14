@@ -85,11 +85,16 @@
     return keep;
   }
   // testing (?parts=<folder URL>): the files not kept yet fetched from the folder, before the build (so it builds once)
+  // A file the folder lacks is skipped, not fatal (the lacing renders' reduced set has no Jackpot box, Peter "open" or
+  // other mounts: one 404 used to drop every file - fork, kept across the 0.70.12 merge)
   async function devFiles(dev) {
     const want = [...needed.keys(), ...optional].filter((p) => !(userFiles.get(p) && userFiles.get(p).ok));
     if (!want.length) return;
+    const bufs = await Promise.all(want.map((p) => fetch(dev + p).then((q) => (q.ok ? q.arrayBuffer() : null)).catch(() => null)));
+    const items = want.map((p, i) => ({ name: p, buf: bufs[i] })).filter((it) => it.buf);
+    if (items.length < want.length) console.warn(`?parts=${dev}: ${want.length - items.length} of ${want.length} files not there`);
     try {
-      await readFiles(want.map((p) => ({ name: p, read: () => fetch(dev + p).then((q) => q.ok ? q.arrayBuffer() : Promise.reject(new Error(p + " " + q.status))) })));
+      if (items.length) await readFiles(items);
     } catch (e) { console.error(e); }
     renderFiles();
   }

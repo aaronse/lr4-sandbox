@@ -62,7 +62,8 @@ was tested with.
 
 Unzip each download into its folder under `parts/` (the table above), for example `parts/lr4/YZ_Plate_Min_V1.stl`.
 `python tools/check_parts.py` lists what's missing or differs. `parts/` is git-ignored, and a pre-commit check
-(`tools/check_no_parts.py`) stops part files from being committed.
+(`tools/check_no_parts.py`) stops part files from being committed: install it once per clone with
+`python tools/check_no_parts.py --install` (CI runs it too).
 
 ## Using the page
 
@@ -276,6 +277,9 @@ python tools/serve.py sandbox 48x96          # the page on 127.0.0.1:8767; optio
 
 It serves the repo with the cross-origin isolation headers and opens the page with `?parts=/parts/`, so it loads
 the files in your `parts/` folder (if you have one) without dropping them.
+
+Add `?stats` to the page's URL for a mesh stats panel: frames a second, draw calls and triangles drawn, and tables of
+the groups and meshes by triangles; click a row to outline it and frame the camera on it.
 
 ## Making videos from G-code
 
