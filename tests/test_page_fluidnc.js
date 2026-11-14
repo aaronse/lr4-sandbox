@@ -60,7 +60,11 @@ function watchdog(val) {
   t.unref();
 }
 
+// One headless browser at a time across tools and sessions: the browser lock first (media-anim's, vendored), waiting
+// up to BROWSER_LOCK_WAIT s (default 600) and printing its holder; close() releases it.
 async function chromePage(cport, o = {}) {           // o.gpu: the real GPU (live help videos), not SwiftShader
+  const L = await require("../tools/lib/media-anim/media-anim-browser.min.js").acquire({ owner: `${path.basename(process.argv[1])} (chromePage)`,
+    wait: Number(process.env.BROWSER_LOCK_WAIT || 600) });
   const P = require("../tools/chrome_profile.js").profile("fluidnc_test_"), prof = P.dir;   // (deleted for sure, even on exit)
   // LR4_TEST_GPU=1: every page test on the real GPU (SwiftShader draws the ~5M-triangle scene on the CPU, every frame)
   if (process.env.LR4_TEST_GPU === "1") o = Object.assign({}, o, { gpu: true });
@@ -120,7 +124,7 @@ async function chromePage(cport, o = {}) {           // o.gpu: the real GPU (liv
   await send("Runtime.enable");
   await send("Page.enable");
   watchdog(val);
-  const close = async () => { ws.close(); await P.drop(); };
+  const close = async () => { ws.close(); await P.drop(); L.release(); };
   return { send, val, close, mute: (v) => { mute = !!v; } };
 }
 

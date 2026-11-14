@@ -16,6 +16,8 @@
 # at most 256 KB; anything else is refused. Every other path is read-only. LR4_SHOTS_FILE=<path> puts another file
 # behind that URL, for GET and POST (tests/test_serve.js: a copy in .cache/velocity/serve/, so the real one is never
 # touched); unset, it is the real file.
+# Dev events (devlog, when DEVLOG_LIB names its folder) go to .logs/events.jsonl: start and stop, every 4xx / 5xx, a
+# request slower than SLOW_MS (not a video's 206 chunks), a handler exception. `node <DEVLOG_LIB>/devlog.mjs errors`.
 import functools
 import json
 import http.server
@@ -24,7 +26,14 @@ import re
 import socket
 import sys
 import threading
+import time
 import webbrowser
+
+try:                                              # dev events in .logs/ (devlog, loaded from DEVLOG_LIB); off without it
+    sys.path.append(os.environ["DEVLOG_LIB"])
+    import devlog
+except (KeyError, ImportError):
+    devlog = None
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 RANGE_CHUNK_CAP = 8 * 1024 * 1024    # browsers send open-ended bytes=X- on each seek and abort once buffered
@@ -32,6 +41,7 @@ WRITABLE = "/docs/specs/lacing-tutorial.shots.json"   # the one URL a POST may r
 SHOTS_ENV = "LR4_SHOTS_FILE"         # set: the file behind WRITABLE (GET and POST) is this one instead (relative: to the repo)
 SHOTS_FILE = os.path.abspath(os.path.join(ROOT, os.environ[SHOTS_ENV])) if os.environ.get(SHOTS_ENV) else None
 WRITE_CAP = 256 * 1024
+SLOW_MS = 1000                       # a request slower than this is a devlog event
 
 
 class LimitedReader:
@@ -61,6 +71,19 @@ class Isolated(http.server.SimpleHTTPRequestHandler):
         self.send_header("Cache-Control", "no-cache")   # always check for a newer file (edited scripts show on reload)
         self.send_header("Accept-Ranges", "bytes")
         super().end_headers()
+
+    def handle_one_request(self):              # devlog: time the whole request, body included
+        self._t0, self._code = time.perf_counter(), None
+        super().handle_one_request()
+        if devlog and self._code:
+            ms = round((time.perf_counter() - self._t0) * 1000)
+            if self._code >= 400 or (ms > SLOW_MS and self._code != 206):
+                devlog.emit("serve", "http", f"{self.command or '-'} {getattr(self, 'path', '').split('?', 1)[0]}", self._code, "status",
+                            ms=ms, client=self.client_address[0])
+
+    def log_request(self, code="-", size="-"):
+        self._code = int(code) if str(code).isdigit() or hasattr(code, "value") else None
+        super().log_request(code, size)
 
     def translate_path(self, path):            # LR4_SHOTS_FILE: WRITABLE reads the file a POST writes
         if SHOTS_FILE and path.split("?", 1)[0].split("#", 1)[0] == WRITABLE:
@@ -164,6 +187,9 @@ class Server(http.server.ThreadingHTTPServer):
     def handle_error(self, request, client_address):
         if isinstance(sys.exc_info()[1], (ConnectionResetError, ConnectionAbortedError, BrokenPipeError)):
             return                             # a paused video or a closed tab: not a server fault
+        if devlog:
+            e = sys.exc_info()[1]
+            devlog.emit("serve", "error", "handler", error=f"{type(e).__name__}: {e}")
         super().handle_error(request, client_address)
 
 
@@ -201,7 +227,10 @@ if __name__ == "__main__":
             print(f"  videos (seekable):     http://{ip}:{port}/.exports/", flush=True)
     if not no_open:
         threading.Timer(0.5, webbrowser.open, (url,)).start()
-    try:
-        server.serve_forever()
-    except KeyboardInterrupt:
-        pass
+    if devlog:
+        devlog.emit("serve", "start", which, port, "port", lan=LAN, pid=os.getpid())
+    with devlog.run("serve") if devlog else open(os.devnull):       # the stop: uptime, ok
+        try:
+            server.serve_forever()
+        except KeyboardInterrupt:
+            pass

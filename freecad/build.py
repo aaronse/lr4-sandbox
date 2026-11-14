@@ -29,6 +29,11 @@ LIB = HERE                                        # fclib is vendored in freecad
 for p in (LIB, HERE):
     if p not in sys.path:
         sys.path.insert(0, p)
+try:                                              # dev events in .logs/ (devlog, loaded from DEVLOG_LIB); off without it
+    sys.path.append(os.environ["DEVLOG_LIB"])
+    import devlog                                 # noqa: E402
+except (KeyError, ImportError):
+    devlog = None
 import fclib  # noqa: E402
 fclib.reload()
 import FreeCAD as App                             # noqa: E402
@@ -138,6 +143,8 @@ def stage(name):
     global _t1
     now = _time.time()
     print(f"[time] {name}: {now - _t1:.1f} s (total {now - _t0:.0f} s)", flush=True)
+    if devlog:
+        devlog.emit("build", "perf", "stage." + name, round(now - _t1, 2), "s")
     _t1 = now
 
 
@@ -998,7 +1005,9 @@ if not lr4.B_RANGE[0] <= b <= lr4.B_RANGE[1]:
 if CHECK if CHECK is not None else not App.GuiUp:
     import check
     importlib.reload(check)
-    check.run(m, cache=os.path.join(ROOT, "build", "check_cache.json"))
+    bad = check.run(m, cache=os.path.join(ROOT, "build", "check_cache.json"))
+    if devlog:
+        devlog.emit("build", "check", "overlap", len(bad), "pairs", ok=not bad, pairs=bad[:20])
     stage("overlap check")
 
 bom = os.path.join(ROOT, "build", "bom.md")

@@ -123,6 +123,12 @@ function get(port, url, headers = {}) {
     ok((await get(lport, "/.git/HEAD", { Range: "bytes=0-3" })).status === 404, "--lan: .git refused for a Range too");
     ok((await get(lport, "/.logs/events.jsonl")).status === 404, "--lan: .logs refused");
     ok((await get(lport, `/.exports/${path.basename(exp)}/a.txt`)).status === 200, "--lan: .exports served (the drafts)");
+    if (process.env.DEVLOG_LIB) {
+      const ev = fs.readFileSync(path.join(logDir, ".logs", "events.jsonl"), "utf8").trim().split(/\r?\n/).map((l) => JSON.parse(l));
+      ok(ev.some((e) => e.tool === "serve" && e.kind === "start"), "devlog: the start event");
+      ok(ev.some((e) => e.kind === "http" && e.value === 404 && e.name === "GET /.git/HEAD"), "devlog: a 404 is an http event");
+      ok(!ev.some((e) => e.kind === "http" && e.value < 400 && e.data.ms <= 1000), "devlog: a fast 2xx is not logged");
+    }
     // a save from another computer: refused (this machine's LAN address stands in for one)
     const ip = Object.values(require("os").networkInterfaces()).flat().find((i) => i && i.family === "IPv4" && !i.internal);
     if (ip) {

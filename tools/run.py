@@ -10,6 +10,12 @@ import subprocess
 import sys
 import tempfile
 
+try:                                              # dev events in .logs/ (devlog, loaded from DEVLOG_LIB); off without it
+    sys.path.append(os.environ["DEVLOG_LIB"])
+    import devlog
+except (KeyError, ImportError):
+    devlog = None
+
 CODE = """import sys, traceback
 p = {path!r}
 try:
@@ -18,7 +24,7 @@ except SystemExit:
     raise
 except BaseException:
     traceback.print_exc()
-    open({marker!r}, 'w').close()
+    open({marker!r}, 'w').write(traceback.format_exc().strip().splitlines()[-1])   # the run event's error
 """
 
 
@@ -53,8 +59,11 @@ if __name__ == "__main__":
     fd, marker = tempfile.mkstemp(suffix=".failed")
     os.close(fd)
     os.remove(marker)
-    r = subprocess.run([find_freecadcmd(), "-c", CODE.format(path=path, marker=marker)])
-    if os.path.exists(marker):
-        os.remove(marker)
-        sys.exit(1)
-    sys.exit(r.returncode)
+    with devlog.run(os.path.splitext(os.path.basename(path))[0]) if devlog else open(os.devnull) as ctx:
+        r = subprocess.run([find_freecadcmd(), "-c", CODE.format(path=path, marker=marker)])
+        if os.path.exists(marker):
+            if devlog:
+                ctx.data["error"] = open(marker).read()
+            os.remove(marker)
+            sys.exit(1)
+        sys.exit(r.returncode)

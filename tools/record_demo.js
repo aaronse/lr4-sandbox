@@ -15,6 +15,9 @@
 //   node tools/record_demo.js <file.nc> [out.mp4] [--size 2560x1440] [--fps 30] [--job 75] [--pause 2] [--orbit 10]
 //        [--url http://127.0.0.1:8767/web/index.html?parts=/parts/] [--swiftshader] [--no-sound] [--volume 0.6] [--voice machine|robot] [--pendant] [--no-home] [--real 5]
 //        [--kmax 5] [--log events.txt] [--secs 10] [--timing] [--no-vsync] [--grab shot|overlap] [--lag 2] [--chrome-flag X]
+//        [--wait 600]
+// --wait: s to wait for the browser lock (media-anim's lib/browser_lock.js, vendored: one headless browser at a time
+// across tools and sessions; it prints the holder; 0 fails at once). The video holds it up to 6 h.
 // --secs: stop after that many s of video (a test cut). --timing: each frame's cost split into the page's director (setT,
 // camera), FluidNC's top-up and the draw (the director's record clock), then the round trip, the grab (CDP JPEG
 // screenshot) and the pipe into ffmpeg; the means and 95th percentiles printed at the end.
@@ -38,6 +41,7 @@
 "use strict";
 const { spawn } = require("child_process"), fs = require("fs"), os = require("os"), path = require("path");
 const { profile } = require("./chrome_profile.js");   // (its Chrome profile deleted for sure)
+const lock = require("./lib/media-anim/media-anim-browser.min.js");
 const DS = require("../web/js/demo_script.js");
 // <frames> the --timing table's and --grab overlap's helpers (tests/test_rec_frames.js runs this block; the same as
 // media-anim tools/capture/frames.mjs, the private sibling the shared capture tools moved to)
@@ -63,7 +67,7 @@ const pos = [], given = new Set();
 for (let i = 0; i < args.length; i++) {
   const a = args[i];
   if (a === "--size") opt.size = args[++i].split("x").map(Number);
-  else if (["--fps", "--job", "--pause", "--orbit", "--volume", "--real", "--kmax", "--secs", "--lag"].includes(a)) opt[a.slice(2)] = Number(args[++i]);
+  else if (["--fps", "--job", "--pause", "--orbit", "--volume", "--real", "--kmax", "--secs", "--lag", "--wait"].includes(a)) opt[a.slice(2)] = Number(args[++i]);
   else if (a === "--timing") opt.timing = true;
   else if (a === "--grab") opt.grab = args[++i];
   else if (a === "--no-vsync") opt.novsync = true;
@@ -115,6 +119,8 @@ function timingReport(node, page, flush, frames) {
 }
 
 (async () => {
+  try { await lock.acquire({ owner: `record_demo ${path.basename(gcodePath)}`, wait: opt.wait ?? 600, hold: 6 * 3600 }); }
+  catch (e) { console.error(`record_demo: ${e.message}`); process.exit(1); }
   const P = profile("record_demo_"), prof = P.dir;
   const port = 9300 + Math.floor(Math.random() * 500);
   const flags = opt.gpu ? ["--use-angle=d3d11", "--ignore-gpu-blocklist", "--enable-gpu-rasterization"]

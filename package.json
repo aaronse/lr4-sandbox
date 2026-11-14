@@ -1,0 +1,9 @@
+{
+  "name": "lr4-sandbox",
+  "private": true,
+  "description": "Forwards to tests/package.json, so npm test works from the repo root too (CI runs it in tests/)",
+  "scripts": {
+    "test": "npm --prefix tests test",
+    "test:local": "npm --prefix tests run test:local"
+  }
+}

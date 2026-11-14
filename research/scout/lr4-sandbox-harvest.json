@@ -1,0 +1,241 @@
+{
+  "schemaVersion": "work-harvest-v1",
+  "repo": "lr4-sandbox",
+  "range": "b3fdc16..main (+ropepath)",
+  "generatedAt": "2026-11-11",
+  "generatedBy": "claude-opus-5-5",
+  "stateOfProjectDoc": "docs/state/2026-11-11-lr4-sandbox-STATE-OF-PROJECT.md",
+  "built": [
+    {
+      "item": "Cable lacing in the model and page (page 0.67.0): lr4.lacing / LACING, hose_route.js lacing(), hoseRoute / cordRoute moved out of hose_bom.js, Python twin test",
+      "label": "real",
+      "evidenceRefs": ["freecad/lr4.py:1129", "freecad/lr4.py:1144", "web/js/hose_route.js:2-3", "web/js/hose_route.js:237", "tests/test_hose_route.js:1-4", "CHANGELOG.md:6-14", "0a709be", "ece7ff4"],
+      "numbers": "npm test 39/39 on main, 18.3 s (measured 2026-11-11)"
+    },
+    {
+      "item": "Lacing in the FreeCAD build (Cable_Lacing mesh) and the BOM tape row (~6.5 m at 26 x 50 in)",
+      "label": "claimed",
+      "evidenceRefs": ["0a709be", "CHANGELOG.md:10-12"],
+      "numbers": "no FreeCAD build on record in the fork: parts/ has no STLs on this PC, web/data/ untouched since b3fdc16"
+    },
+    {
+      "item": "Lacing tutorial picture as a pure function of t: web/js/lacing/ (17 modules), facade lacing_tutorial.js, page/lacing_anim.js; storyboard and shots as JSON data",
+      "label": "real",
+      "evidenceRefs": ["web/js/lacing_tutorial.js:1-12", "docs/specs/lacing-tutorial.md@ropepath:530-553", "d0de1a8", "100dd80"],
+      "numbers": "tests/test_lacing_tutorial.js 1,458 lines by section; lacing_anim.js 442 lines"
+    },
+    {
+      "item": "tools/lacing_voice.js pipeline CLI: tts, sync, transcript, chapters/sidebar/zoomtube, scenes diff/check/accept, render (scene cache), clip, still, iterate, brief, parts",
+      "label": "real",
+      "evidenceRefs": ["docs/specs/lacing-tutorial.md@ropepath:30-45", "docs/specs/lacing-tutorial.md@ropepath:511-528", "bdca544", "5d9cd9d", "d958a61"],
+      "numbers": "748 lines. Claimed: iterate 12.1 s with nothing changed, 63.2 s for one camera key; cold scene render 394-407 s on the iGPU; warm 3.5 s"
+    },
+    {
+      "item": "Drafts 2-15 of a 137.8 s voiced lacing tutorial at 720p; draft 15 unlisted on YouTube and on the V1E forum",
+      "label": "claimed",
+      "evidenceRefs": ["docs/specs/lacing-tutorial.history.md@ropepath:7-20", "docs/specs/lacing-tutorial.history.md@ropepath:1430-1449", "docs/specs/lacing-tutorial.history.md@ropepath:1576-1600", "docs/specs/lacing-tutorial.md@ropepath:588-592", "abe7573", "239a6f5"],
+      "numbers": "d2: 99 ms a frame on the iGPU, 3.2 min for 64.87 s. d12: 516.9 s cold with real parts. d13: 79.0 s for 3,469 frames on 7 nvidia slots. d14b: 4,133 frames in 149.4 s. d15: 4,133 frames in 141.9 s, 44.3 MB. Video files are git-ignored and were not opened by this scout"
+    },
+    {
+      "item": "Generated knot run for draft 15 (plan.js runOf over media-mesh body.ofTubes + rope.lace + rope.taut)",
+      "label": "real",
+      "evidenceRefs": ["f0434df", "c6a9172", "822120e", "docs/specs/lacing-tutorial.md@ropepath:610-634"],
+      "numbers": "branch only: lr4 ropepath and media-mesh ropepath 8c8c3b1 are unmerged. knotLace 17 ms a new pose for run 0, 27 for both (claimed). Worktree npm test 2 of 39 fail (measured), both worktree-only causes: CRLF checkout, junctioned .exports"
+    },
+    {
+      "item": "Test velocity: parallel npm test runner, sectioned lacing tests, worker threads for booleans and clearance",
+      "label": "real",
+      "evidenceRefs": ["d03154f", "5e72229", "ddc64d4", "docs/specs/lacing-tutorial.md@ropepath:752-762"],
+      "numbers": "claimed 81 -> 7-8 s; measured today 18.3 s on main (one run, load unknown)"
+    },
+    {
+      "item": "Extraction: media-anim lib (11 files) and tools (capture, anim, audio, publish, fps, timelog, browser lock); media-mesh lib (vec3, curve, knot, bundle, rope + knotdet, clearance) and tools/reduce.mjs; vendored by tools/sync_media.js with --check in npm test",
+      "label": "real",
+      "evidenceRefs": ["tools/sync_media.js:1-20", "E:/git/media-anim/README.md:7-8", "E:/git/media-anim/BACKLOG-INDEX.md:9", "E:/git/media-mesh/README.md:3-12", "7578417", "c08efbd"],
+      "numbers": "MA-5 claims lr4's outputs byte-identical after the move (not re-verified)"
+    },
+    {
+      "item": "Render FPS study on the iGPU: lever table measured, decisions D1 / D2",
+      "label": "real",
+      "evidenceRefs": ["docs/specs/render-fps.md:90-138", "docs/specs/render-fps.md:140-156"],
+      "numbers": "as-is 23.1 / 12.2 fps (720p / 1080p wide mean); MSAA off + 1024 shadows + DPR 0.7071: 51.8 / 28.6. The winners were never applied to scene.js (scene.js:28, 270, 318 unchanged)"
+    },
+    {
+      "item": "Mesh stats panel (?stats) and no redraw while the clock is stopped",
+      "label": "real",
+      "evidenceRefs": ["README.md:272", "c17fa76", "5e07111", "web/js/page/job.js:5"],
+      "numbers": "unreleased: VERSION still 0.67.0, no CHANGELOG entry"
+    },
+    {
+      "item": "Dev events (devlog) from serve.py / run.py / build.py",
+      "label": "real",
+      "evidenceRefs": ["tools/serve.py:19-33", "88667d7", "b3f6634"],
+      "numbers": ""
+    },
+    {
+      "item": "Stage timelog for the video work",
+      "label": "real",
+      "evidenceRefs": ["docs/specs/lacing-tutorial.timelog.jsonl", "ace26f2"],
+      "numbers": "1,445.9 min logged, 128.5 avoidable (9 %); build 498.4, tooling 481.6, scene 140.5, check 123.6, render 54.3 min"
+    }
+  ],
+  "learnings": [
+    {
+      "claim": "On the AMD iGPU the page's wide shots are fill-bound. Drawing 60 % fewer triangles left fps unchanged; half the pixels doubled it. Only resolution and MSAA moved 1080p by more than noise, and VSM shadows cost 51 %.",
+      "evidenceRefs": ["docs/specs/render-fps.md:9-10", "docs/specs/render-fps.md:122-133"],
+      "scope": "general",
+      "surprise": "Mesh reduction was expected to buy frame rate; it pays only after fill cost is cut."
+    },
+    {
+      "claim": "Iteration time on an agent-made video goes to agent build and tooling, not rendering. Of 1,446 logged minutes, rendering was 54. In drafts 9-11, each stage took 20-60 min of subagent build against ~3 min of rendering.",
+      "evidenceRefs": ["docs/specs/lacing-tutorial.history.md@ropepath:947-962", "docs/specs/lacing-tutorial.timelog.jsonl"],
+      "scope": "general",
+      "surprise": "Rendering was treated as the bottleneck (render-fps.md was opened for it). The timelog moved the effort to changed-scene diffs, the scene cache and numeric stills checks."
+    },
+    {
+      "claim": "An agent's knot claim checked only on stills was wrong for four drafts. The closing half hitches were tucked under their own leg, which makes no knot, through drafts 9-12. Checking against NASA Fig. 9-3 and a slid-off knot determinant caught it.",
+      "evidenceRefs": ["docs/specs/lacing-tutorial.md@ropepath:643-648", "a91ebad"],
+      "scope": "general",
+      "surprise": "Stills review by an agent was taken as verification of topology."
+    },
+    {
+      "claim": "Turning stills-round judgements into numeric test rules (an anchor on a drawn strand, a knot's projected px, a card's coverage) replaced most screenshot rounds; `--only stills` runs in 2.6 s with no browser.",
+      "evidenceRefs": ["docs/specs/lacing-tutorial.history.md@ropepath:977-980", "6bd79f2"],
+      "scope": "general",
+      "surprise": ""
+    },
+    {
+      "claim": "A per-scene render cache keyed on what each scene reads, plus a multi-slot GPU render server, took a full 4,133-frame draft from 394-517 s cold on one iGPU browser to 141.9 s on 7 RTX 3090 slots. A one-scene review takes ~112 s, a warm re-render 3.5 s.",
+      "evidenceRefs": ["docs/specs/lacing-tutorial.md@ropepath:523", "docs/specs/lacing-tutorial.md@ropepath:527", "docs/specs/lacing-tutorial.history.md@ropepath:1598"],
+      "scope": "general",
+      "surprise": "render-fps.md D2 decided to stay on the iGPU and not try the 3090 (render-fps.md:144). The render server reversed that in practice, and the doc still says D2."
+    },
+    {
+      "claim": "Agents waiting on long jobs with foreground poll loops wasted 203 min across 5 sessions (166 loops). fab perf still lists polling as the top waste in this repo's longest sessions (1.8 h, 1.5 h). The rule is now run_in_background plus a lock that queues.",
+      "evidenceRefs": ["CLAUDE.md:49-50", "b0459d4"],
+      "scope": "general",
+      "surprise": ""
+    },
+    {
+      "claim": "Two sessions editing the same files in one checkout forced hunk-by-hunk staging. A worktree per session fixes it, at the cost of linking git-ignored parts/ and .cache/. Draft 15 then hit worktree-only test failures from CRLF checkout and junctions.",
+      "evidenceRefs": ["docs/specs/lacing-tutorial.md@ropepath:663-665", "docs/specs/lacing-tutorial.md@ropepath:598-604"],
+      "scope": "general",
+      "surprise": ""
+    },
+    {
+      "claim": "Building a feature on a parent repo's model without checking the parent let the fork drift onto a deleted design. Upstream replaced the static cord route with a rope simulation 1-4 days after the fork point. The lacing was built 2026-11-08 on the static route, and nothing in the fork's docs records upstream's state.",
+      "evidenceRefs": ["a30c88f", "upstream/main:freecad/lr4.py:942", "freecad/lr4.py:958", "web/js/hose_route.js:96", "CLAUDE.md:27"],
+      "scope": "general",
+      "surprise": "The fork's docs treat lr4.py's cord_route as the live twin to keep in step; upstream deleted it in Part 53c."
+    },
+    {
+      "claim": "Generating the whole knotted run on a body beat splicing knots into a precomputed run. The splice showed kinks and gaps; the maintainer chose the generic rope path, which is draft 15.",
+      "evidenceRefs": ["docs/specs/lacing-tutorial.md@ropepath:610-614", "288f152", "f0434df"],
+      "scope": "general",
+      "surprise": "The splice (d14) was the first, cheaper-looking route."
+    }
+  ],
+  "reusable": [
+    {
+      "asset": "Scene render cache, changed-scene golden diff and the iterate loop (media-anim tools/capture/scenes.mjs, step.mjs, tools/anim/golden.mjs, pipeline.mjs)",
+      "where": "E:/git/media-anim/tools/",
+      "alreadyExtracted": true,
+      "reuseTargets": ["weed-muncher-video", "media-gen", "any repo"],
+      "why": "Any page whose picture is a pure function of t gets frame-exact per-scene segments and a one-scene re-render instead of a full re-render."
+    },
+    {
+      "asset": "Browser lock (one headless Chrome at a time, per-GPU resources, wait without taking)",
+      "where": "E:/git/media-anim/lib/browser_lock.js (vendored at tools/lib/media-anim/)",
+      "alreadyExtracted": true,
+      "reuseTargets": ["any repo"],
+      "why": "Parallel agent sessions crashing the PC with several browsers is the failure it prevents (the 2026-11-08 reboot)."
+    },
+    {
+      "asset": "Stage timelog and report (avoidable minutes, subagent tokens per stage)",
+      "where": "E:/git/media-anim/tools/anim/timelog.mjs",
+      "alreadyExtracted": true,
+      "reuseTargets": ["llm-fab", "craftcraft", "any repo"],
+      "why": "It is what turned the video work's velocity rounds into ranked, measured items. llm-fab's fab perf sees tokens, not stages."
+    },
+    {
+      "asset": "Knot strand geometry: rope.knotGen, marline, tighten, expand; knot determinant; clearance grid; knot-terms.md",
+      "where": "E:/git/media-mesh/lib/",
+      "alreadyExtracted": true,
+      "reuseTargets": ["weed-muncher-video", "any repo"],
+      "why": "Tested knot and lacing geometry for any rope, cable or knot explainer."
+    },
+    {
+      "asset": "Rope on a body: body.ofTubes, rope.lace, rope.taut (draft 15's generated run)",
+      "where": "media-mesh branch ropepath (8c8c3b1); lr4 branch ropepath plan.js runOf",
+      "alreadyExtracted": false,
+      "reuseTargets": ["upstream jeyeager65/lr4-sandbox (cable runs)", "any repo"],
+      "why": "Lacing or taut cable runs over arbitrary tube bundles. It is unmerged on media-mesh main until the draft 15 review passes."
+    },
+    {
+      "asset": "Mesh reducer with measured error (weld + meshoptimizer ErrorAbsolute + face-sampled Hausdorff report)",
+      "where": "E:/git/media-mesh/tools/reduce.mjs",
+      "alreadyExtracted": true,
+      "reuseTargets": ["cnc-browser", "v1e-vnext", "any repo"],
+      "why": "Measured 42.3 -> 5.1 MB, 910,856 -> 81,002 triangles for the LR4 render set (claimed), with a stated error for each part."
+    },
+    {
+      "asset": "Parallel node test runner (6 at a time, a file split by its sections, serial chains kept)",
+      "where": "tests/run_tests.js (47 lines)",
+      "alreadyExtracted": false,
+      "reuseTargets": ["any repo"],
+      "why": "It took npm test from 81 s to under 20 s here. It stays in lr4 only because CI has no siblings (open decision D2)."
+    }
+  ],
+  "shareable": [
+    {
+      "what": "The lacing tutorial video (draft 15, 137.8 s, 720p, voiced, NASA-STD-8739.4A cited)",
+      "audience": "LowRider 4 builders, the V1E forum",
+      "form": "video",
+      "readiness": "needs-polish",
+      "blocker": "The maintainer's draft 15 review: U-turn ring fan, the tape 2.55 mm into the sleeve at carried poses, knots 3-5 overlapping at 115 s. 1080p waits on approval. It is already unlisted at https://youtu.be/-B1061TznS0 and posted at https://forum.v1e.com/t/lowrider-4-sandbox-virtual-in-browser/55073/54."
+    },
+    {
+      "what": "Cable lacing as a page feature, offered upstream to jeyeager65/lr4-sandbox",
+      "audience": "Jason Yeager (upstream author); LR4 Sandbox users",
+      "form": "repo",
+      "readiness": "needs-permission",
+      "blocker": "Three things block it. Upstream deleted cord_route and draws the cord as a rope sim (a30c88f), so the lacing must be re-based on cable_sim.js. A trial merge has 7 conflicting files, and the 0.67.0 versions collide. The push gate needs the maintainer's go and MA-5's history rewrite."
+    },
+    {
+      "what": "How 15 drafts of an agent-made technical video happened in 4 days: where the time went (timelog, fab perf), what made iteration fast, what went wrong (knot topology on stills, polling)",
+      "audience": "Agent-tooling builders, makers making tutorials",
+      "form": "blog",
+      "readiness": "needs-polish",
+      "blocker": "The numbers exist (timelog report, history velocity rounds); the video it describes is not yet accepted."
+    },
+    {
+      "what": "Lacing survey and knot vocabulary (NASA-STD-8739.4A spacing, marline vs half hitch, lockstitch terms)",
+      "audience": "V1E docs readers; anyone lacing a hose bundle",
+      "form": "forum post",
+      "readiness": "needs-polish",
+      "blocker": "Content exists in docs/PLAN.md:123-144 and media-mesh lib/knot-terms.md. It needs a short write-up for a non-agent reader. Citing NASA figures is fine; reproducing them needs a check."
+    },
+    {
+      "what": "media-anim + media-mesh as public repos with the /tutorial-animation skill as the how-to",
+      "audience": "Developers building explainer animations from 3D scenes",
+      "form": "template",
+      "readiness": "needs-polish",
+      "blocker": "MA-5 shows ◐ in media-anim BACKLOG-INDEX. media-anim main is 3 commits ahead of origin. Whether those repos are public is unverified (sync_media.js:2-3 calls them private siblings)."
+    }
+  ],
+  "incomeSignals": [
+    {
+      "idea": "Agent-made technical explainer videos from a CAD or 3D scene, sold as a service to maker-kit companies",
+      "evidence": "A 137.8 s voiced, cited tutorial built from the machine's own model. 15 drafts in 4 days, and a full re-render in 141.9 s on 7 GPU slots. The pipeline already sits in media-anim and media-mesh, outside lr4.",
+      "whoPays": "Kit and machine makers (V1E and peers) who need assembly or upgrade videos",
+      "blockers": "No accepted draft yet, and no 1080p. Each client's part files are theirs (here V1E's, kept out of git). Unverified: whether V1E's approval covers the fork's video. The cloned voice is the maintainer's own."
+    },
+    {
+      "idea": "Sponsored or affiliate build-upgrade content for the LowRider 4: lacing tape and kit, with the BOM row as the hook",
+      "evidence": "The page's BOM already prices the build from V1E's store first (README.md:117-120) and now carries a lacing tape row. The forum post exists.",
+      "whoPays": "V1E (store sales) or a tape supplier",
+      "blockers": "Unverified V1E interest or permission. The page feature is unpublished (push gate, MA-5, upstream divergence). The upstream author owns the page's direction and copyright (LICENSE: MIT, Jason Yeager)."
+    }
+  ],
+  "caveats": "The scout opened no video, still or contact sheet; every render time and draft property comes from the history and spec (claimed). npm test was run once each on main and ropepath, with unknown machine load. Upstream/main is as of the last fetch (2026-11-10 20:15); upstream may be further ahead. Whether origin (aaronse/lr4-sandbox) holds anything is unknown; there is no remote-tracking ref. The fab perf session list covers the last 5 days and includes this scout's parent session. Its 1.71 B tokens are mostly cache reads, an inference since cache share is not shown. The baseline (Jason's 128 commits) was not assessed beyond README and LICENSE. Income signals are thin: nothing in the repo shows demand beyond one forum post, so they are capability-led, not demand-led."
+}

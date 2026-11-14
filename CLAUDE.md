@@ -5,6 +5,8 @@ across many FreeCAD builds. See README.md for the layout. FreeCAD 1.1, Python 3,
 
 ## Start here
 
+- **This is a fork** (origin aaronse/lr4-sandbox, upstream jeyeager65/lr4-sandbox). Before editing a file upstream
+  owns, bumping `VERSION`, or merging upstream: `docs/FORK.md` (what the fork adds, where, and the merge steps).
 - If `private/RESUME.md` exists (maintainer's git-ignored notes), read it first: state, open items, publish steps.
   Then `docs/PLAN.md` (settings, measurements, decisions). `private/LOG.md` is the history: grep it, don't read it.
 - Big projects are worked in numbered parts (`private/CONFIGURATOR.md` "Work in parts"): "do part N" means read
@@ -33,7 +35,7 @@ across many FreeCAD builds. See README.md for the layout. FreeCAD 1.1, Python 3,
   Z up.
 - **Versions:** a user-visible page change bumps `VERSION` in `web/js/page/job.js` and gets a CHANGELOG.md entry; a new
   feature or a moved control also gets its README.md line (and a new screenshot in `docs/img/` if one shows it).
-  CI (`.github/workflows/ci.yml`) runs only what works without part files: the guard, a Python compile, `npm test`.
+  CI (`.github/workflows/ci.yml`) runs only what works without part files: the guard, a Python compile, `npm test` (in `tests/`; the root `package.json` forwards to it).
 
 ## Running
 
@@ -46,12 +48,29 @@ across many FreeCAD builds. See README.md for the layout. FreeCAD 1.1, Python 3,
   `python pipeline/fit_config.py` -> `node tests/test_config_model.js` (must print "all N sizes match";
   it fails when there are no size builds to compare).
 - Page: `python tools/serve.py sandbox`.
+- Browser lock: `page_shot.js`, `record_demo.js`, the page tests and media-anim's stills / draft take one lock (vendored
+  `tools/lib/media-anim/media-anim-browser.min.js`) and wait up to 600 s, printing the holder; `--wait 0` fails at once (tests: `BROWSER_LOCK_WAIT`).
+- Waiting on a long job (a render, a draft, the lock, npm test): start it with the Bash tool's `run_in_background` and
+  let its exit notify you; never a foreground `sleep` / `until grep` / `while ps` loop (`fab perf reflect` 2026-11-10:
+  166 such loops, 203 min, across 5 sessions). Let the lock do the queueing (`node tools/lib/media-anim/media-anim-browser.min.js run --wait 600 -- <cmd>`); to wait for a free browser without taking it,
+  `node tools/lib/media-anim/media-anim-browser.min.js wait --wait 600` in the background.
+- Dev events (`docs/specs/dev-events.md`): `.logs/events.jsonl` (git-ignored). `serve.py`, `tools/run.py` and `build.py` write them when `DEVLOG_LIB`
+  names the devlog folder: server 4xx / 5xx / errors, one `run` per FreeCAD script, build stages, the overlap check.
+  When something breaks run `node $DEVLOG_LIB/devlog.mjs errors` first; `check` before handing off a server or build change.
 - Page tests: `tests/test_page_*.js` drive headless Chrome (several need `parts/`; the FluidNC ones take minutes).
   Screenshots: `node tools/page_shot.js <url> <out.png> [--eval js --shot out2.png]...`.
 - Videos: `python tools/serve.py sandbox --no-open`, then `node tools/record_demo.js <file.gcode> [out.mp4]` in the
   background (~6 min for 2 min of 1080p). The `(Video ...)` comment spec is the header of `web/js/demo_script.js` (the director: `web/js/page/director.js`);
   README's table follows it, so update both. Example: `docs/examples/feature_demo.gcode`. Send the video to the
-  maintainer rather than analysing it; over 30 MB, send a CRF 30 copy.
+  maintainer rather than analysing it. The maintainer watches on this PC: give the path, make no smaller copy.
+- Files the pipeline makes live in the repo folder, git-ignored, so the maintainer sees what the agents see: drafts and
+  contact sheets in `.exports/<pipeline>_drafts/`, every intermediate file (research downloads, stills rounds, notes,
+  measuring and one-off scripts) in `.cache/<pipeline>/`, never a tool's temp directory. Brief subagents to write there
+  too. The lacing tutorial's map (commands, outputs, measured times) is in `docs/specs/lacing-tutorial.md` "Pipeline".
+- Changing the lacing tutorial: start at `docs/specs/lacing-tutorial.md` "Agent quickstart" (what to read, what to run
+  after each kind of change). Brief subagents with it, not the whole spec; the drafts' record is
+  `lacing-tutorial.history.md`. To see a changed scene, render just it: `node tools/lacing_voice.js render <out> --scenes <id>`
+  (`scenes diff` prints the line; ~2 min for the goal, reused by the full render), never the whole video.
 
 ## Keeping context small
 
