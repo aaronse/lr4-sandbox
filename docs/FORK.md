@@ -57,10 +57,15 @@ on upstream's hose code, which upstream rewrote as ropes (Parts 52-53). Decision
   tools are now loaded by their new paths (`audio/probe.ts`, `pipeline/golden.ts`, `capture/scenes.ts`, ...: `.ts`, run by Node 24).
   `web/js/lib/jensen/` is gone (the head is in the characters bundle). A scene render cache made before this has other keys (the
   renderer's file list names the runtime bundle): its segments miss once.
-- **Push.** Main is 168 commits ahead of origin/main (2026-11-13), a fast-forward. Push only on the owner's go. Two holds:
-  the 2026-11-09 ruling (media-anim MA-5's history rewrite), and F5: the unpushed commits carry media-mesh's and
-  media-anim's full source in `web/js/lib/`, so this history is rewritten (squashed, or those files replaced by the
-  bundles in every commit) before the next push, or the source is public for good.
+- **Push.** The history was rebuilt on 2026-11-14 (media-anim MA-12) from the final tree, never replayed: three commits
+  on upstream `ceaee06`, each one reviewable on its own: (1) recording and dev-server fixes and `?stats`, (2) the lacing
+  tutorial with the vendored bundles, (3) the fork's tooling and notes; then this paragraph. Commit 1 is an upstream
+  pull request as it stands, commits 1-2 a second. The rebuilt tree equals the old one (`git diff` empty), no object
+  holds media-* source (only the `.min.js` bundles), and the golden dump, `run_tests` and `sync_media.js --check` match.
+  The old history is the local tag `pre-ma12-main` and the bundles in `C:\backup\lr4-sandbox-2026-11-14*`: it carries
+  media-mesh's and media-anim's source, so **never push that tag**, and never `git push --all`, `--tags` or `--mirror`
+  from this clone. Push named refs only: `git push origin main`, a fast-forward of `origin/main`. Push only on the
+  owner's go. Main's commits after this one are ordinary; squash a run of them before a push when they are noise.
 
 ## Fork-only files
 
